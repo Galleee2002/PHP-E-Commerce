@@ -1,11 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>La Mesa Lúdica | Tienda de Juegos de Mesa</title>
+    <meta name="description" content="Tienda online de juegos de mesa modernos para familias, amigos y jugadores expertos.">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Proyecto PHP</h1>
+    <header>
+        <p>Envíos a todo el país en 48/72 hs</p>
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="index.php?seccion=home" aria-current="page">Inicio</a></li>
+                <li><a href="index.php?seccion=listado">Listado</a></li>
+                <li><a href="index.php?seccion=detalle">Detalle</a></li>
+                <li><a href="index.php?seccion=contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section aria-labelledby="titulo-home">
+            <h1 id="titulo-home">La Mesa Lúdica: tu e-commerce de juegos de mesa</h1>
+            <p>
+                En esta tienda vas a encontrar juegos de estrategia, party games y títulos cooperativos
+                para todas las edades. Nuestro objetivo es ayudarte a elegir el juego ideal según
+                cantidad de jugadores, duración de partida y nivel de dificultad.
+            </p>
+            <p>
+                Si es tu primera visita, en el listado podés explorar recomendaciones destacadas y
+                acceder al detalle de cada producto para conocer mecánicas, edad sugerida y precio.
+            </p>
+            <p>
+                <a href="index.php?seccion=listado">Explorar catálogo completo</a>
+            </p>
+        </section>
+
+        <section aria-labelledby="porque-elegirnos">
+            <h2 id="porque-elegirnos">¿Por qué comprar con nosotros?</h2>
+
+            <article>
+                <h3>Selección curada</h3>
+                <p>
+                    Publicamos juegos elegidos por temática, rejugabilidad y calidad de componentes,
+                    para que cada compra tenga valor real en mesa.
+                </p>
+            </article>
+
+            <article>
+                <h3>Orientación para nuevos jugadores</h3>
+                <p>
+                    Cada ficha incluye una explicación simple para entender rápidamente de qué se trata
+                    el juego y para quién está recomendado.
+                </p>
+            </article>
+
+            <article>
+                <h3>Compra clara y segura</h3>
+                <p>
+                    Mostramos información clave de forma transparente: precio, dificultad, rango de edad
+                    y tiempo estimado de partida.
+                </p>
+            </article>
+        </section>
+
+        <section aria-labelledby="categorias-destacadas">
+            <h2 id="categorias-destacadas">Categorías destacadas</h2>
+            <article>
+                <h3>Estrategia</h3>
+                <p>Ideal para quienes disfrutan planificar jugadas y optimizar recursos.</p>
+            </article>
+            <article>
+                <h3>Cooperativos</h3>
+                <p>Experiencias para jugar en equipo y superar desafíos en conjunto.</p>
+            </article>
+            <article>
+                <h3>Familiares y Party</h3>
+                <p>Opciones rápidas y divertidas para reuniones y eventos sociales.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>La Mesa Lúdica - Programación II - Primer Parcial</p>
+        <p>Consultas: <a href="index.php?seccion=contacto">Formulario de contacto</a></p>
+    </footer>
 </body>
 </html>
