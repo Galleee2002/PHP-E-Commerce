@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "nombre": "Catan",
+    "precio": 52999,
+    "categoria": "Estrategia",
+    "descripcion_corta": "Comercio, expansion y negociacion en una isla.",
+    "descripcion": "Un clasico moderno donde cada jugador desarrolla poblados y rutas para sumar puntos.",
+    "imagen": "imgs/catan.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Dixit",
+    "precio": 38999,
+    "categoria": "Familiar",
+    "descripcion_corta": "Cartas ilustradas para imaginar y contar historias.",
+    "descripcion": "Ideal para grupos y familias, combina creatividad, pistas y deduccion.",
+    "imagen": "imgs/dixit.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Carcassonne",
+    "precio": 41999,
+    "categoria": "Estrategia",
+    "descripcion_corta": "Construccion de mapa con losetas y control de territorios.",
+    "descripcion": "Juego accesible y profundo donde cada decision impacta en la puntuacion final.",
+    "imagen": "imgs/carcassonne.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Pandemic",
+    "precio": 55999,
+    "categoria": "Cooperativo",
+    "descripcion_corta": "Trabajo en equipo para salvar al mundo.",
+    "descripcion": "Todos los jugadores colaboran para contener brotes y encontrar curas a tiempo.",
+    "imagen": "imgs/pandemic.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "7 Wonders",
+    "precio": 49999,
+    "categoria": "Estrategia",
+    "descripcion_corta": "Construccion de civilizaciones por draft de cartas.",
+    "descripcion": "Partidas dinamicas con multiples caminos para ganar y gran rejugabilidad.",
+    "imagen": "imgs/7wonders.jpg"
+  }
+]

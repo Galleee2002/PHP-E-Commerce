@@ -1,4 +1,12 @@
 <?php
+$productos = [];
+
+include_once __DIR__ . '/includes/productos.php';
+
+if (function_exists('cargarProductos')) {
+	$productos = cargarProductos();
+}
+
 $seccionesPermitidas = [
 	'home' => __DIR__ . '/vistas/home.php',
 	'listado' => __DIR__ . '/vistas/listado.php',
