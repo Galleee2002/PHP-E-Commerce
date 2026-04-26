@@ -129,20 +129,20 @@ El detalle se alimenta del mismo origen de datos que listado y responde al id de
 
 ## Fase 5 - Seccion Contacto (integrada al sitio)
 ### Objetivo
-Incorporar formulario de contacto util para la tematica del e-commerce.
+Incorporar un formulario de recomendacion de juegos de mesa que ayude al usuario a encontrar un producto adecuado segun su perfil de juego.
 
 ### Tareas
-1. Diseñar formulario con campos utiles (nombre, email, asunto, mensaje).
+1. Diseñar formulario de recomendacion con campos clave para juegos de mesa (cantidad de jugadores, rango de edad, duracion estimada de partida, nivel de dificultad, estilo de juego).
 2. Asociar cada input con su label (accesibilidad).
-3. Integrar visualmente con la identidad del sitio.
-4. (Opcional valor agregado) validar campos y/o guardar consultas en archivo local.
+3. Procesar los datos del formulario para devolver una sugerencia clara al usuario (juego recomendado o categoria recomendada).
+4. Integrar visualmente el formulario y el resultado con la identidad del sitio.
 
 ### Entregables
-- vistas/contacto.php funcional a nivel UI/UX.
-- Form integrado y coherente con la pagina.
+- vistas/contacto.php funcional con formulario de recomendacion para juegos de mesa.
+- Resultado visible para el usuario con sugerencia util segun los datos ingresados.
 
 ### Criterio de cierre
-La seccion contacto tiene uso claro para el visitante y cumple la estructura semantica.
+La seccion contacto permite al visitante completar su perfil de juego y recibir una sugerencia util, manteniendo estructura semantica y simplicidad academica.
 
 ---
 
