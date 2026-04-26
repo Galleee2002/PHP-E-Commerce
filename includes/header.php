@@ -9,7 +9,6 @@
 </head>
 <body>
     <header>
-        <p>Envios a todo el pais en 48/72 hs</p>
         <nav aria-label="Navegacion principal">
             <ul>
                 <li><a href="index.php?seccion=home"<?= $seccionActual === 'home' ? ' aria-current="page"' : '' ?>>Inicio</a></li>

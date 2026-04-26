@@ -1,47 +1,56 @@
 [
   {
     "id": 1,
-    "nombre": "Catan",
-    "precio": 52999,
+    "nombre": "T.E.G.",
+    "precio": 46999,
     "categoria": "Estrategia",
-    "descripcion_corta": "Comercio, expansion y negociacion en una isla.",
-    "descripcion": "Un clasico moderno donde cada jugador desarrolla poblados y rutas para sumar puntos.",
-    "imagen": "imgs/catan.jpg"
+    "descripcion_corta": "Plan tactico y conquista de territorios para jugar en grupo.",
+    "descripcion": "Juego de estrategia por turnos donde cada jugador busca dominar el mapa con decisiones de ataque y defensa.",
+    "imagen": "imgs/teg.webp"
   },
   {
     "id": 2,
-    "nombre": "Dixit",
-    "precio": 38999,
-    "categoria": "Familiar",
-    "descripcion_corta": "Cartas ilustradas para imaginar y contar historias.",
-    "descripcion": "Ideal para grupos y familias, combina creatividad, pistas y deduccion.",
-    "imagen": "imgs/dixit.jpg"
+    "nombre": "Monopoly",
+    "precio": 39999,
+    "categoria": "Clasico",
+    "descripcion_corta": "Compra, venta y negociacion de propiedades para toda la familia.",
+    "descripcion": "Juego clasico donde el objetivo es administrar dinero, comprar calles y dejar sin fondos a los rivales.",
+    "imagen": "imgs/monopoly.webp"
   },
   {
     "id": 3,
-    "nombre": "Carcassonne",
-    "precio": 41999,
-    "categoria": "Estrategia",
-    "descripcion_corta": "Construccion de mapa con losetas y control de territorios.",
-    "descripcion": "Juego accesible y profundo donde cada decision impacta en la puntuacion final.",
-    "imagen": "imgs/carcassonne.jpg"
+    "nombre": "Rompecabezas Starry Sky",
+    "precio": 21999,
+    "categoria": "Rompecabezas",
+    "descripcion_corta": "Puzzle de 1000 piezas para disfrutar solo o en familia.",
+    "descripcion": "Rompecabezas inspirado en una obra clasica, ideal para practicar paciencia y concentracion.",
+    "imagen": "imgs/rompecabezas.webp"
   },
   {
     "id": 4,
-    "nombre": "Pandemic",
-    "precio": 55999,
-    "categoria": "Cooperativo",
-    "descripcion_corta": "Trabajo en equipo para salvar al mundo.",
-    "descripcion": "Todos los jugadores colaboran para contener brotes y encontrar curas a tiempo.",
-    "imagen": "imgs/pandemic.jpg"
+    "nombre": "No Lo Testeamos Ni Un Poco",
+    "precio": 27999,
+    "categoria": "Cartas",
+    "descripcion_corta": "Juego de cartas caotico y rapido para reuniones con amigos.",
+    "descripcion": "Partidas dinamicas con cartas impredecibles, ideal para grupos que buscan humor y diversion.",
+    "imagen": "imgs/no_lo_testeamos_ni_un_poco.webp"
   },
   {
     "id": 5,
-    "nombre": "7 Wonders",
-    "precio": 49999,
-    "categoria": "Estrategia",
-    "descripcion_corta": "Construccion de civilizaciones por draft de cartas.",
-    "descripcion": "Partidas dinamicas con multiples caminos para ganar y gran rejugabilidad.",
-    "imagen": "imgs/7wonders.jpg"
+    "nombre": "Burako",
+    "precio": 25999,
+    "categoria": "Cartas",
+    "descripcion_corta": "Version de buraco para 2 o mas jugadores.",
+    "descripcion": "Juego de combinaciones y estrategia liviana donde gana quien administra mejor sus cartas.",
+    "imagen": "imgs/burako.webp"
+  },
+  {
+    "id": 6,
+    "nombre": "Clue",
+    "precio": 32999,
+    "categoria": "Misterio",
+    "descripcion_corta": "Descubri al culpable, el arma y el lugar antes que los demas.",
+    "descripcion": "Juego de deduccion y misterio donde tenes que reunir pistas y razonar para resolver el crimen.",
+    "imagen": "imgs/clue.webp"
   }
 ]
