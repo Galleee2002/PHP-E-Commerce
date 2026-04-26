@@ -12,10 +12,10 @@
         <p>Envios a todo el pais en 48/72 hs</p>
         <nav aria-label="Navegacion principal">
             <ul>
-                <li><a href="index.php?seccion=home" aria-current="page">Inicio</a></li>
-                <li><a href="index.php?seccion=listado">Listado</a></li>
-                <li><a href="index.php?seccion=detalle">Detalle</a></li>
-                <li><a href="index.php?seccion=contacto">Contacto</a></li>
+                <li><a href="index.php?seccion=home"<?= $seccionActual === 'home' ? ' aria-current="page"' : '' ?>>Inicio</a></li>
+                <li><a href="index.php?seccion=listado"<?= $seccionActual === 'listado' ? ' aria-current="page"' : '' ?>>Listado</a></li>
+                <li><a href="index.php?seccion=detalle"<?= $seccionActual === 'detalle' ? ' aria-current="page"' : '' ?>>Detalle</a></li>
+                <li><a href="index.php?seccion=contacto"<?= $seccionActual === 'contacto' ? ' aria-current="page"' : '' ?>>Contacto</a></li>
             </ul>
         </nav>
     </header>
