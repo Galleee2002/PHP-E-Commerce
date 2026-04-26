@@ -2,24 +2,30 @@
 $idProducto = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $productoSeleccionado = null;
 
-foreach ($productos as $producto) {
-    if ($producto->id === $idProducto) {
-        $productoSeleccionado = $producto;
-        break;
+if ($idProducto > 0) {
+    foreach ($productos as $producto) {
+        if ($producto->id === $idProducto) {
+            $productoSeleccionado = $producto;
+            break;
+        }
     }
 }
 ?>
 
 <section aria-labelledby="titulo-detalle">
     <h1 id="titulo-detalle">Detalle del producto</h1>
-    <?php if ($productoSeleccionado === null): ?>
-        <p>El producto solicitado no existe o no fue seleccionado.</p>
+    <?php if ($idProducto <= 0): ?>
+        <p>No se selecciono ningun producto para mostrar.</p>
+    <?php elseif ($productoSeleccionado === null): ?>
+        <p>El producto solicitado no existe.</p>
     <?php else: ?>
-        <article>
-            <h2><?= htmlspecialchars($productoSeleccionado->nombre) ?></h2>
-            <p><strong>Categoria:</strong> <?= htmlspecialchars($productoSeleccionado->categoria) ?></p>
-            <p><strong>Precio:</strong> $<?= number_format($productoSeleccionado->precio, 0, ',', '.') ?></p>
-            <p><?= htmlspecialchars($productoSeleccionado->descripcion) ?></p>
+        <article class="detalle-producto">
+            <img src="<?= $productoSeleccionado->imagen ?>" alt="<?= $productoSeleccionado->nombre ?>">
+            <h2><?= $productoSeleccionado->nombre ?></h2>
+            <p><strong>Categoria:</strong> <?= $productoSeleccionado->categoria ?></p>
+            <p><strong>Precio:</strong> $<?= $productoSeleccionado->precio ?></p>
+            <p><?= $productoSeleccionado->descripcionCorta ?></p>
+            <p><?= $productoSeleccionado->descripcion ?></p>
         </article>
     <?php endif; ?>
     <p>
