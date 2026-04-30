@@ -1,0 +1,54 @@
+:root {
+    --color-primary: #a31212;
+    --color-primary-dark: #7a0d0d;
+    --color-accent: #c62828;
+    --color-beige-light: #f5e6d3;
+    --color-beige-medium: #ead2b3;
+    --color-yellow-soft: #f2b544;
+    --color-warm-white: #fff8f0;
+    --color-text-soft: #6b5e57;
+    --color-soft-black: #2b1e1e;
+    --color-warm-white-40: rgba(255, 248, 240, 0.4);
+    --color-warm-white-10: rgba(255, 248, 240, 0.1);
+    --color-primary-dark-15: rgba(122, 13, 13, 0.15);
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.25rem;
+    --radius-2xl: 1rem;
+    --max-content: 72rem;
+    --space-header-y: 1.25rem;
+    --breakpoint-md: 48rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.page {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-beige-light);
+    color: var(--color-soft-black);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+    line-height: 1.5;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
