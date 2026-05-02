@@ -23,6 +23,10 @@ El sitio debe ser visualmente profesional y coherente con la temática elegida, 
 - Diseño Adaptable: Asegúrate de que las imágenes no desborden sus contenedores utilizando max-width: 100%.
 - Organización Visual: Utiliza clases de utilidad para márgenes y rellenos (paddings) para que la interfaz sea limpia y legible.
 
+### Código sin comentarios
+
+En los archivos de código del proyecto entregado (PHP, HTML, CSS y JavaScript, si aplica) no deben incluirse comentarios del lenguaje: ningún comentario de bloque o de línea en PHP o JavaScript, ningún comentario en hojas CSS, ni comentarios en marcado HTML. El código debe leerse por sí mismo con nombres de variables y clases claros; las explicaciones van en la documentación de entrega, datos.txt o la defensa oral.
+
 ---
 
 ## 2. Lógica y Arquitectura (PHP)
