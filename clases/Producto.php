@@ -1,6 +1,6 @@
 <?php
 
-const PRODUCTOS_JSON_ARCHIVO = './data/productos.json';
+const PRODUCTOS_JSON_ARCHIVO = __DIR__ . '/../data/productos.json';
 
 class Producto
 {
@@ -15,7 +15,14 @@ class Producto
     public function todas(): array
     {
         $json = file_get_contents(PRODUCTOS_JSON_ARCHIVO);
+        if ($json === false) {
+            return [];
+        }
+
         $datos = json_decode($json, true);
+        if (!is_array($datos)) {
+            return [];
+        }
 
         $productos = [];
 
