@@ -9,17 +9,29 @@
 
 <section class="home-categories home-section" aria-labelledby="categorias-destacadas">
     <h2 class="home-block-title" id="categorias-destacadas">Categorias destacadas</h2>
-    <article class="home-article">
-        <h3 class="home-article__title">Estrategia</h3>
-        <p class="home-article__text">Ideal para quienes disfrutan planificar jugadas y optimizar recursos.</p>
+    <article class="home-category-card" style="background-image: url('imgs/rompecabezas.png');">
+        <a class="home-category-card__link" href="index.php?seccion=detalle&id=3">
+            <div class="home-category-card__content">
+                <h3 class="home-category-card__title">Rompecabezas</h3>
+                <p class="home-category-card__text">Piezas, paciencia y concentración en cada desafío.</p>
+            </div>
+        </a>
     </article>
-    <article class="home-article">
-        <h3 class="home-article__title">Cooperativos</h3>
-        <p class="home-article__text">Experiencias para jugar en equipo y superar desafios en conjunto.</p>
+    <article class="home-category-card" style="background-image: url('imgs/misterio.png');">
+        <a class="home-category-card__link" href="index.php?seccion=detalle&id=6">
+            <div class="home-category-card__content">
+                <h3 class="home-category-card__title">Misterio</h3>
+                <p class="home-category-card__text">Seguí las pistas y resolvé el caso antes que nadie.</p>
+            </div>
+        </a>
     </article>
-    <article class="home-article">
-        <h3 class="home-article__title">Familiares y Party</h3>
-        <p class="home-article__text">Opciones rapidas y divertidas para reuniones y eventos sociales.</p>
+    <article class="home-category-card" style="background-image: url('imgs/estrategia.png');">
+        <a class="home-category-card__link" href="index.php?seccion=detalle&id=1">
+            <div class="home-category-card__content">
+                <h3 class="home-category-card__title">Estrategia</h3>
+                <p class="home-category-card__text">Pensá cada jugada y dominá la partida.</p>
+            </div>
+        </a>
     </article>
 </section>
 
