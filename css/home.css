@@ -6,11 +6,15 @@
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: 2rem;
+    margin-top: -2rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-2xl);
+    justify-content: flex-start;
+    border-radius: 0;
     overflow: hidden;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding-left: 2rem;
 }
 
 .hero__overlay {
@@ -25,8 +29,8 @@
 .hero__content {
     position: relative;
     z-index: 1;
-    text-align: center;
-    color: var(--color-warm-white);
+    text-align: left;
+    color: var(--color-beige-light);
     max-width: 600px;
     padding: 2rem;
 }
@@ -35,21 +39,21 @@
     margin: 0;
     font-size: 3.5rem;
     font-weight: 700;
-    color: var(--color-warm-white);
+    color: var(--color-beige-light);
     margin-bottom: 1rem;
 }
 
 .hero__description {
     margin: 0;
-    font-size: 1.125rem;
-    color: var(--color-warm-white);
+    font-size: 0.95rem;
+    color: var(--color-beige-light);
     line-height: 1.6;
     margin-bottom: 1.5rem;
 }
 
 .btn--light {
-    border-color: var(--color-warm-white);
-    background-color: var(--color-warm-white);
+    border-color: var(--color-beige-light);
+    background-color: var(--color-beige-light);
     color: var(--color-primary-dark);
     font-weight: 600;
 }
@@ -161,6 +165,7 @@
 @media (max-width: 47.9375rem) {
     .hero {
         height: 40vh;
+        padding-left: 1rem;
     }
 
     .hero__title {
