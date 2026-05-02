@@ -1,4 +1,4 @@
-<section class="hero" style="background-image: url('imgs/fotobanner.jpg');">
+<section class="hero" style="background-image: url('imgs/fotobanner.png');">
     <div class="hero__overlay"></div>
     <div class="hero__content">
         <h1 class="hero__title">Los mejores juegos de mesa, en un solo lugar</h1>
