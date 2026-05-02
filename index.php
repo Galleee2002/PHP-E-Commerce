@@ -1,11 +1,7 @@
 <?php
-$productos = [];
+require_once __DIR__ . '/clases/Producto.php';
 
-include_once __DIR__ . '/includes/productos.php';
-
-if (function_exists('cargarProductos')) {
-	$productos = cargarProductos();
-}
+$productos = (new Producto())->todas();
 
 $seccionesPermitidas = [
 	'home' => __DIR__ . '/vistas/home.php',
