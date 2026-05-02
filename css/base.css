@@ -1,4 +1,6 @@
 :root {
+    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Roboto', sans-serif;
     --color-primary: #a31212;
     --color-primary-dark: #7a0d0d;
     --color-accent: #c62828;
@@ -37,8 +39,20 @@ body.page {
     min-height: 100vh;
     background-color: var(--color-beige-light);
     color: var(--color-soft-black);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+    font-family: var(--font-body);
+    font-weight: 400;
     line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.brand__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
 }
 
 .sr-only {
@@ -89,7 +103,6 @@ body.page {
 
 .brand__name {
     font-size: 1.5rem;
-    font-weight: 700;
     letter-spacing: 0.05em;
 }
 
@@ -215,15 +228,31 @@ body.page {
     .site-nav {
         flex-direction: column;
         align-items: stretch;
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+
+    .brand {
+        align-self: center;
+        padding: 0.25rem 0.5rem;
     }
 
     .brand__logo {
-        height: 3.5rem;
-        width: 3.5rem;
+        height: 3.25rem;
+        width: 3.25rem;
+    }
+
+    .nav-list {
+        width: 100%;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 0.25rem 0;
     }
 
     .search-form {
-        align-self: flex-start;
+        align-self: stretch;
+        width: 100%;
+        max-width: 100%;
     }
 
     .site-main {
@@ -233,6 +262,41 @@ body.page {
 
 @media (max-width: 39.9375rem) {
     .nav-list {
-        gap: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+
+    .nav-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 1rem;
+        font-size: 0.975rem;
+    }
+
+    .search-form__input {
+        padding: 0.625rem 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .search-form__submit {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+@media (max-width: 30rem) {
+    .brand__logo {
+        height: 2.9rem;
+        width: 2.9rem;
+    }
+
+    .brand__name {
+        font-size: 1.125rem;
+    }
+
+    .site-nav {
+        padding: 0.75rem;
     }
 }
