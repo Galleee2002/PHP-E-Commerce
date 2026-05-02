@@ -1,4 +1,4 @@
-<section class="panel" aria-labelledby="titulo-listado">
+<section aria-labelledby="titulo-listado">
     <h1 class="page-title" id="titulo-listado">Listado de productos</h1>
     <section aria-label="Catalogo de juegos" class="product-grid">
         <?php foreach (($productos ?? []) as $producto): ?>
