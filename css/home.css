@@ -32,12 +32,12 @@
     text-align: left;
     color: var(--color-beige-light);
     max-width: 600px;
-    padding: 2rem;
+    padding: 5rem;
 }
 
 .hero__title {
     margin: 0;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--color-beige-light);
     margin-bottom: 1rem;
