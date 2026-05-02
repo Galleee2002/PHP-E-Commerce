@@ -1,3 +1,12 @@
+<section class="hero" style="background-image: url('imgs/fotobanner.jpg');">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+        <h1 class="hero__title">Galmir</h1>
+        <p class="hero__description">Tu tienda online de juegos de mesa. Descubre una selección curada de juegos para todas las edades y ocasiones. Desde juegos de estrategia hasta party games, encuentra el juego perfecto para tus próximas reuniones.</p>
+        <a class="btn btn--light" href="index.php?seccion=listado">Explora nuestros juegos</a>
+    </div>
+</section>
+
 <section class="panel home-section" aria-labelledby="titulo-home">
     <h1 class="page-title" id="titulo-home">La Mesa Ludica: tu e-commerce de juegos de mesa</h1>
     <p class="lead">
