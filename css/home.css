@@ -205,6 +205,80 @@
     border-top-color: var(--color-primary-dark-15);
 }
 
+.home-faq {
+    background-color: #A31212;
+    border-radius: 0;
+    padding: 24px 16px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+    margin-bottom: 0;
+}
+
+.home-faq__inner {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.home-faq__title {
+    margin: 0 0 20px;
+    color: #F2B544;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.home-faq__item {
+    border-top: 1px solid rgba(245, 230, 211, 0.35);
+    padding: 14px 0;
+}
+
+.home-faq__item:last-child {
+    border-bottom: 1px solid rgba(245, 230, 211, 0.35);
+}
+
+.home-faq__question {
+    list-style: none;
+    cursor: pointer;
+    color: #F5E6D3;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.home-faq__question:hover {
+    color: #F2B544;
+}
+
+.home-faq__question::-webkit-details-marker {
+    display: none;
+}
+
+.home-faq__question::after {
+    content: "+";
+    flex-shrink: 0;
+    font-size: 24px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.home-faq__item[open] .home-faq__question::after {
+    content: "\2212";
+}
+
+.home-faq__answer {
+    margin: 12px 0 0;
+    color: #F5E6D3;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 70ch;
+}
+
 @media (min-width: 768px) {
     .hero {
         min-height: 420px;
@@ -255,6 +329,50 @@
         border: 1px solid var(--color-primary-dark-15);
         border-radius: var(--radius-xl);
         background-color: rgba(255, 248, 240, 0.65);
+    }
+
+    .home-faq {
+        padding: 40px 32px;
+    }
+
+    .home-faq__title {
+        font-size: 30px;
+        margin-bottom: 28px;
+    }
+
+    .home-faq__item {
+        padding: 18px 0;
+    }
+
+    .home-faq__question {
+        font-size: 18px;
+    }
+
+    .home-faq__answer {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 479px) {
+    .home-faq {
+        padding: 20px 14px;
+    }
+
+    .home-faq__title {
+        font-size: 22px;
+    }
+
+    .home-faq__question {
+        font-size: 15px;
+        gap: 12px;
+    }
+
+    .home-faq__question::after {
+        font-size: 22px;
+    }
+
+    .home-faq__answer {
+        font-size: 14px;
     }
 }
 

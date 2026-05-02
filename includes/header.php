@@ -43,4 +43,4 @@ $seccionActual ??= 'home';
             </form>
         </nav>
     </header>
-    <main class="site-main">
+    <main class="site-main<?= $seccionActual === 'home' ? ' site-main--home' : '' ?>">

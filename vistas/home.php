@@ -22,3 +22,39 @@
         <p class="home-article__text">Opciones rapidas y divertidas para reuniones y eventos sociales.</p>
     </article>
 </section>
+
+<section class="home-faq home-section" aria-labelledby="preguntas-frecuentes">
+    <div class="home-faq__inner">
+        <h2 class="home-faq__title" id="preguntas-frecuentes">Preguntas frecuentes</h2>
+
+        <details class="home-faq__item">
+            <summary class="home-faq__question">¿Como elijo el juego ideal para mi grupo?</summary>
+            <p class="home-faq__answer">Te recomendamos revisar la cantidad de jugadores, la duracion promedio y el nivel de dificultad para encontrar una opcion que encaje con tu mesa.</p>
+        </details>
+
+        <details class="home-faq__item">
+            <summary class="home-faq__question">¿Hay juegos para disfrutar en familia con chicos?</summary>
+            <p class="home-faq__answer">Si, contamos con titulos familiares pensados para distintas edades, con reglas simples y partidas dinamicas para compartir sin complicaciones.</p>
+        </details>
+
+        <details class="home-faq__item">
+            <summary class="home-faq__question">¿Que categoria recomiendan para jugadores principiantes?</summary>
+            <p class="home-faq__answer">Las categorias familiares y party suelen ser el mejor punto de partida porque tienen reglas accesibles, tiempos cortos y mucha interaccion.</p>
+        </details>
+
+        <details class="home-faq__item">
+            <summary class="home-faq__question">¿Los juegos cooperativos son buenos para grupos grandes?</summary>
+            <p class="home-faq__answer">Depende del titulo, pero muchos cooperativos funcionan muy bien en grupos porque invitan a conversar, planear juntos y tomar decisiones en equipo.</p>
+        </details>
+
+        <details class="home-faq__item">
+            <summary class="home-faq__question">¿Puedo encontrar juegos de estrategia con partidas cortas?</summary>
+            <p class="home-faq__answer">Claro, hay opciones de estrategia con reglas compactas y partidas agiles, ideales para quienes buscan decisiones interesantes sin sesiones extensas.</p>
+        </details>
+
+        <details class="home-faq__item">
+            <summary class="home-faq__question">¿Como descubro novedades o juegos recomendados?</summary>
+            <p class="home-faq__answer">Explora nuestras categorias destacadas y el listado completo para comparar estilos de juego, tematicas y propuestas recomendadas segun tu interes.</p>
+        </details>
+    </div>
+</section>
