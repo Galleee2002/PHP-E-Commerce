@@ -1,5 +1,5 @@
-@import url("base.css");
-@import url("home.css");
-@import url("contacto.css");
+@import url("base.css?v=20260502");
+@import url("home.css?v=20260502");
+@import url("contacto.css?v=20260502");
 @import url("listado.css?v=20260502");
-@import url("detalle.css");
+@import url("detalle.css?v=20260502");
