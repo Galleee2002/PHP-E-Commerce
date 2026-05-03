@@ -12,6 +12,24 @@ class Producto
     private string $descripcion = '';
     private string $imagen = '';
 
+    public function __construct(
+        int $id = 0,
+        string $nombre = '',
+        float $precio = 0.0,
+        string $categoria = '',
+        string $descripcionCorta = '',
+        string $descripcion = '',
+        string $imagen = ''
+    ) {
+        $this->id = $id;
+        $this->nombre = $nombre;
+        $this->precio = $precio;
+        $this->categoria = $categoria;
+        $this->descripcionCorta = $descripcionCorta;
+        $this->descripcion = $descripcion;
+        $this->imagen = $imagen;
+    }
+
     public function todas(): array
     {
         $json = file_get_contents(PRODUCTOS_JSON_ARCHIVO);
