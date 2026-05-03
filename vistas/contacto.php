@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../clases/Producto.php';
+
+$productos = (new Producto())->todas();
+
 $jugadores = $_POST['jugadores'] ?? '';
 $edad = $_POST['edad'] ?? '';
 $duracion = $_POST['duracion'] ?? '';
