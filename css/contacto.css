@@ -1,10 +1,14 @@
-.panel {
-  max-width: 600px;
-  margin: 0 auto;
+.panel.panel--wide {
+  /* Más ancho y más alto: ocupar más espacio horizontal y vertical */
+  max-width: 1200px;
+  width: calc(100% - 100px);
+  margin: 24px auto;
+  min-height: 720px;
   border-radius: var(--radius-2xl);
   border: 1px solid var(--color-primary-dark);
   background-color: var(--color-warm-white);
-  padding: 16px;
+  /* reducir padding inferior para acercar el botón al borde */
+  padding: 28px 32px 12px 32px;
 }
 
 .page-title {
@@ -96,6 +100,12 @@
 .contact-form__actions {
   display: flex;
   align-items: center;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+.contact-form__actions .btn {
+  margin-bottom: 0;
 }
 
 .recommendation {
@@ -180,7 +190,9 @@
 
 @media (min-width: 1024px) {
   .panel {
-    padding: 32px;
+    /* Aún más espacio en pantallas grandes */
+    padding: 40px;
+    min-height: 520px;
   }
 
   .contact-form {

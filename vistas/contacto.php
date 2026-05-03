@@ -46,7 +46,7 @@ if ($formularioEnviado) {
 }
 ?>
 
-<section class="panel" aria-labelledby="titulo-contacto">
+<section class="panel panel--wide" aria-labelledby="titulo-contacto">
     <h1 class="page-title" id="titulo-contacto">Recomendador de juegos</h1>
     <p class="lead">
         Completá tu perfil de juego y te sugerimos una opción del catálogo.
