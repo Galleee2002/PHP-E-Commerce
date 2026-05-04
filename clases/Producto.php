@@ -72,6 +72,17 @@ class Producto
         return null;
     }
 
+    public static function buscarPorNombre(array $lista, string $nombre): ?self
+    {
+        foreach ($lista as $producto) {
+            if ($producto->getNombre() === $nombre) {
+                return $producto;
+            }
+        }
+
+        return null;
+    }
+
     public function getId(): int
     {
         return $this->id;

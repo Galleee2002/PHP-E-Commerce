@@ -7,14 +7,14 @@ $seccionActual ??= 'home';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Mesa Ludica | Tienda de Juegos de Mesa</title>
+    <title>Galmir | Tienda de Juegos de Mesa</title>
     <meta name="description" content="Tienda online de juegos de mesa modernos para familias, amigos y jugadores expertos.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260502">
+    <link rel="stylesheet" href="css/estilos.css?v=20260512">
 </head>
-
+    
 <body class="page">
     <header class="site-header">
         <nav class="site-nav" aria-label="Navegacion principal">

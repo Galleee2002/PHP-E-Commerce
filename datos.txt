@@ -1,0 +1,9 @@
+Carrera: Diseño Web y Programación
+Materia: Programación II
+Cuatrimestre: 3er Cuatrimestre
+Año: 2026
+Turno: Noche
+Comisión: DWN3AP
+Apellido y nombre: Milagros Sol Kuringhian / Gael Garcia Nuñez
+Docente: Santiago Gallino
+Carácter de la entrega: 1er Parcial

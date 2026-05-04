@@ -1,8 +1,4 @@
 <?php
-require_once __DIR__ . '/../clases/Producto.php';
-
-$productos = (new Producto())->todas();
-
 $jugadores = $_POST['jugadores'] ?? '';
 $edad = $_POST['edad'] ?? '';
 $duracion = $_POST['duracion'] ?? '';
@@ -11,36 +7,26 @@ $estilo = $_POST['estilo'] ?? '';
 $formularioEnviado = $_SERVER['REQUEST_METHOD'] === 'POST';
 $productoRecomendado = null;
 $motivoRecomendacion = '';
-
-function productoPorNombre(array $productos, string $nombre): ?Producto
-{
-    foreach ($productos as $producto) {
-        if ($producto->getNombre() === $nombre) {
-            return $producto;
-        }
-    }
-
-    return null;
-}
+$listaProductos = $productos ?? [];
 
 if ($formularioEnviado) {
     if ($estilo === 'misterio') {
-        $productoRecomendado = productoPorNombre($productos, 'Clue');
+        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'Clue');
         $motivoRecomendacion = 'Tiene deduccion, pistas y una dinamica ideal para quienes disfrutan resolver casos.';
     } elseif ($estilo === 'estrategia' && $dificultad === 'alta') {
-        $productoRecomendado = productoPorNombre($productos, 'T.E.G.');
+        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'T.E.G.');
         $motivoRecomendacion = 'Es una buena opcion para grupos que buscan planificar, competir y sostener una partida mas desafiante.';
     } elseif ($estilo === 'negociacion') {
-        $productoRecomendado = productoPorNombre($productos, 'Monopoly');
+        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'Monopoly');
         $motivoRecomendacion = 'Combina administracion, compra de propiedades y negociacion entre jugadores.';
     } elseif ($estilo === 'rompecabezas' || $jugadores === '1') {
-        $productoRecomendado = productoPorNombre($productos, 'Rompecabezas Starry Sky');
+        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'Rompecabezas Starry Sky');
         $motivoRecomendacion = 'Funciona muy bien para jugar solo o compartir una actividad tranquila y concentrada.';
     } elseif ($estilo === 'cartas' && $dificultad === 'media') {
-        $productoRecomendado = productoPorNombre($productos, 'Burako');
+        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'Burako');
         $motivoRecomendacion = 'Tiene estrategia liviana, combinaciones de cartas y partidas faciles de retomar.';
     } else {
-        $productoRecomendado = productoPorNombre($productos, 'No Lo Testeamos Ni Un Poco');
+        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'No Lo Testeamos Ni Un Poco');
         $motivoRecomendacion = 'Es rapido, simple de explicar y funciona muy bien para reuniones con amigos o familia.';
     }
 }
@@ -49,7 +35,7 @@ if ($formularioEnviado) {
 <section class="contact-page" aria-labelledby="titulo-contacto">
     <div class="contact-page__hero">
         <h1 class="contact-page__title" id="titulo-contacto">Ponte en contacto con nosotros</h1>
-        <p class="contact-page__lead">¿Tienes dudas, sugerencias o quieres colaborar con Galmir? Completa el formulario y te respinderemos lo antes posible..</p>
+        <p class="contact-page__lead">¿Tienes dudas, sugerencias o quieres colaborar con Galmir? Completa el formulario y te responderemos lo antes posible.</p>
 
       
     </div>
@@ -61,7 +47,7 @@ if ($formularioEnviado) {
                     <p class="recommendation__eyebrow">Juego recomendado</p>
                     <h2 class="recommendation__title" id="titulo-recomendacion"><?= $productoRecomendado->getNombre() ?></h2>
                     <p class="recommendation__text"><?= $motivoRecomendacion ?></p>
-                    <p class="recommendation__meta"><strong>Categoria:</strong> <?= $productoRecomendado->getCategoria() ?></p>
+                    <p class="recommendation__meta"><strong>Categoría:</strong> <?= $productoRecomendado->getCategoria() ?></p>
                     <p class="recommendation__meta"><strong>Precio:</strong> $<?= number_format($productoRecomendado->getPrecio(), 0, ',', '.') ?></p>
                     <a class="contact-btn contact-btn--accent" href="index.php?seccion=detalle&id=<?= urlencode((string) $productoRecomendado->getId()) ?>">Ver detalle</a>
                 </div>

@@ -165,9 +165,14 @@ h6,
   border-bottom-color: var(--color-yellow-soft);
 }
 
+.nav-link:active {
+  color: var(--color-yellow-soft);
+  border-bottom-color: var(--color-yellow-soft);
+}
+
 .nav-link--current {
-  border-bottom-color: var(--color-accent);
-  color: var(--color-accent);
+  border-bottom-color: var(--color-yellow-soft);
+  color: var(--color-yellow-soft);
 }
 
 .nav-link--current:hover {

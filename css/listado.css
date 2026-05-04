@@ -38,10 +38,15 @@
   border-color: var(--color-accent);
   background-color: var(--color-accent);
   color: var(--color-warm-white);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .btn--accent:hover {
   background-color: var(--color-primary-dark);
+  color: var(--color-yellow-soft);
 }
 
 .listado .product-grid {

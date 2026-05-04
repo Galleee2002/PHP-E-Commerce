@@ -139,12 +139,14 @@
   transition:
     transform 0.2s ease,
     background-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    color 0.2s ease;
 }
 
 .contact-btn img {
   width: 0.95rem;
   height: 0.95rem;
+  transition: filter 0.2s ease;
 }
 
 .contact-btn--accent {
@@ -153,8 +155,18 @@
   color: var(--color-warm-white);
 }
 
+.contact-btn--accent img {
+  filter: brightness(0) invert(1);
+}
+
 .contact-btn--accent:hover {
   background-color: var(--color-primary-dark);
+  color: var(--color-yellow-soft);
+}
+
+.contact-btn--accent:hover img {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(45%) saturate(700%)
+    hue-rotate(1deg) brightness(104%) contrast(92%);
 }
 
 .recommendation {

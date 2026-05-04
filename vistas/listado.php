@@ -5,7 +5,7 @@
             <article class="product-card">
                 <img class="product-card__img" src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>">
                 <h2 class="product-card__title"><?= $producto->getNombre() ?></h2>
-                <p class="product-card__meta"><strong>Categoria:</strong> <?= $producto->getCategoria() ?></p>
+                <p class="product-card__meta"><strong>Categoría:</strong> <?= $producto->getCategoria() ?></p>
                 <p class="product-card__meta product-card__meta--tight"><strong>Precio:</strong> $<?= number_format($producto->getPrecio(), 0, ',', '.') ?></p>
                 <p class="product-card__desc"><?= $producto->getDescripcionCorta() ?></p>
                 <p class="product-card__actions">
