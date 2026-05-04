@@ -35,6 +35,46 @@
     </article>
 </section>
 
+<section class="home-benefits home-section" aria-label="Beneficios de comprar con nosotros">
+    <div class="home-benefits__grid">
+        <article class="home-benefit-card">
+            <div class="home-benefit-card__content">
+                <p class="home-benefit-card__eyebrow">Acompañamiento experto</p>
+                <div class="home-benefit-card__heading">
+                    <div class="home-benefit-card__icon" aria-hidden="true">
+                        <img src="imgs/message.svg" alt="">
+                    </div>
+                    <h3 class="home-benefit-card__title">Asesoramiento personalizado</h3>
+                </div>
+                <p class="home-benefit-card__text">Te ayudamos a elegir el juego ideal segun la edad, cantidad de jugadores y estilo de partida.</p>
+            </article>
+
+        <article class="home-benefit-card">
+            <div class="home-benefit-card__content">
+                <p class="home-benefit-card__eyebrow">Transacciones confiables</p>
+                <div class="home-benefit-card__heading">
+                    <div class="home-benefit-card__icon" aria-hidden="true">
+                        <img src="imgs/payment.svg" alt="">
+                    </div>
+                    <h3 class="home-benefit-card__title">Pago seguro</h3>
+                </div>
+                <p class="home-benefit-card__text">Tus datos se gestionan de forma protegida para que compres con confianza en cada pedido.</p>
+            </article>
+
+        <article class="home-benefit-card">
+            <div class="home-benefit-card__content">
+                <p class="home-benefit-card__eyebrow">Logistica eficiente</p>
+                <div class="home-benefit-card__heading">
+                    <div class="home-benefit-card__icon" aria-hidden="true">
+                        <img src="imgs/shipment.svg" alt="">
+                    </div>
+                    <h3 class="home-benefit-card__title">Entrega rapida</h3>
+                </div>
+                <p class="home-benefit-card__text">Despachamos tus compras con agilidad para que disfrutes tus juegos sin esperar de mas.</p>
+            </article>
+    </div>
+</section>
+
 <section class="home-faq home-section" aria-labelledby="preguntas-frecuentes">
     <div class="home-faq__inner">
         <h2 class="home-faq__title" id="preguntas-frecuentes">Preguntas frecuentes</h2>
