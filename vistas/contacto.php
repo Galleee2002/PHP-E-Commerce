@@ -1,136 +1,98 @@
-<?php
-$jugadores = $_POST['jugadores'] ?? '';
-$edad = $_POST['edad'] ?? '';
-$duracion = $_POST['duracion'] ?? '';
-$dificultad = $_POST['dificultad'] ?? '';
-$estilo = $_POST['estilo'] ?? '';
-$formularioEnviado = $_SERVER['REQUEST_METHOD'] === 'POST';
-$productoRecomendado = null;
-$motivoRecomendacion = '';
-$listaProductos = $productos ?? [];
-
-if ($formularioEnviado) {
-    if ($estilo === 'misterio') {
-        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'Clue');
-        $motivoRecomendacion = 'Tiene deduccion, pistas y una dinamica ideal para quienes disfrutan resolver casos.';
-    } elseif ($estilo === 'estrategia' && $dificultad === 'alta') {
-        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'T.E.G.');
-        $motivoRecomendacion = 'Es una buena opcion para grupos que buscan planificar, competir y sostener una partida mas desafiante.';
-    } elseif ($estilo === 'negociacion') {
-        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'Monopoly');
-        $motivoRecomendacion = 'Combina administracion, compra de propiedades y negociacion entre jugadores.';
-    } elseif ($estilo === 'rompecabezas' || $jugadores === '1') {
-        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'Rompecabezas Starry Sky');
-        $motivoRecomendacion = 'Funciona muy bien para jugar solo o compartir una actividad tranquila y concentrada.';
-    } elseif ($estilo === 'cartas' && $dificultad === 'media') {
-        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'Burako');
-        $motivoRecomendacion = 'Tiene estrategia liviana, combinaciones de cartas y partidas faciles de retomar.';
-    } else {
-        $productoRecomendado = Producto::buscarPorNombre($listaProductos, 'No Lo Testeamos Ni Un Poco');
-        $motivoRecomendacion = 'Es rapido, simple de explicar y funciona muy bien para reuniones con amigos o familia.';
-    }
-}
-?>
-
 <section class="contact-page" aria-labelledby="titulo-contacto">
     <div class="contact-page__hero">
-        <h1 class="contact-page__title" id="titulo-contacto">Ponte en contacto con nosotros</h1>
-        <p class="contact-page__lead">¿Tienes dudas, sugerencias o quieres colaborar con Galmir? Completa el formulario y te responderemos lo antes posible.</p>
-
-      
+        <div class="contact-page__hero-copy">
+            <h1 class="contact-page__title" id="titulo-contacto">¿Tenes alguna duda o consulta?
+                Escribinos y te responderemos a la brevedad</h1>
+            <p class="contact-page__lead">Completa el formulario con tus datos y contanos en qué te podemos ayudar.</p>
+        </div>
+        <div class="contact-page__hero-art">
+            <img src="imgs/formulario.png" alt="Ilustración del formulario de contacto">
+        </div>
     </div>
 
     <div class="contact-page__content">
-        <?php if ($formularioEnviado && $productoRecomendado !== null): ?>
-            <article class="recommendation" aria-labelledby="titulo-recomendacion">
-                <div class="recommendation__body">
-                    <p class="recommendation__eyebrow">Juego recomendado</p>
-                    <h2 class="recommendation__title" id="titulo-recomendacion"><?= $productoRecomendado->getNombre() ?></h2>
-                    <p class="recommendation__text"><?= $motivoRecomendacion ?></p>
-                    <p class="recommendation__meta"><strong>Categoría:</strong> <?= $productoRecomendado->getCategoria() ?></p>
-                    <p class="recommendation__meta"><strong>Precio:</strong> $<?= number_format($productoRecomendado->getPrecio(), 0, ',', '.') ?></p>
-                    <a class="contact-btn contact-btn--accent" href="index.php?seccion=detalle&id=<?= urlencode((string) $productoRecomendado->getId()) ?>">Ver detalle</a>
-                </div>
-                <img class="recommendation__img" src="<?= $productoRecomendado->getImagen() ?>" alt="<?= $productoRecomendado->getNombre() ?>">
-            </article>
-        <?php endif; ?>
-
-        <form class="contact-form" action="index.php?seccion=contacto" method="post">
+        <form class="contact-form" action="#" method="post" novalidate>
             <div class="contact-form__grid">
                 <div class="contact-field">
-                    <label class="contact-field__label" for="jugadores">Cantidad de jugadores</label>
+                    <label class="contact-field__label" for="nombre">
+                        <img class="contact-field__label-icon" src="imgs/nombre.png" alt="" aria-hidden="true">
+                        <span>Nombre</span>
+                    </label>
                     <div class="contact-field__control">
-                        <img class="contact-field__icon" src="imgs/cantidad-de-jugadores.svg" alt="" aria-hidden="true">
-                        <select id="jugadores" name="jugadores" required>
-                            <option value="">Elegí una opción</option>
-                            <option value="1" <?= $jugadores === '1' ? 'selected' : '' ?>>1 jugador</option>
-                            <option value="2-4" <?= $jugadores === '2-4' ? 'selected' : '' ?>>2 a 4 jugadores</option>
-                            <option value="5+" <?= $jugadores === '5+' ? 'selected' : '' ?>>5 o más jugadores</option>
+                        <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required>
+                    </div>
+                </div>
+
+                <div class="contact-field">
+                    <label class="contact-field__label" for="email">
+                        <img class="contact-field__label-icon" src="imgs/correo-electronico.png" alt="" aria-hidden="true">
+                        <span>Email</span>
+                    </label>
+                    <div class="contact-field__control">
+                        <input id="email" name="email" type="email" placeholder="tu@email.com" required>
+                    </div>
+                </div>
+
+                <div class="contact-field">
+                    <label class="contact-field__label" for="asunto">
+                       <img class="contact-field__label-icon" src="imgs/asunto.png" alt="" aria-hidden="true">
+                        <span>Asunto</span>
+                    </label>
+                    <div class="contact-field__control">
+                        <select id="asunto" name="asunto" required>
+                            <option value="">Elegí un asunto</option>
+                            <option value="consulta">Consulta general</option>
+                            <option value="soporte">Soporte técnico</option>
+                            <option value="sugerencia">Sugerencia</option>
+                            <option value="otro">Otro</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="contact-field">
-                    <label class="contact-field__label" for="edad">Rango de edad</label>
+                    <label class="contact-field__label" for="motivo">
+                        <img class="contact-field__label-icon" src="imgs/motivo-de-contacto.png" alt="" aria-hidden="true">
+                        <span>Motivo de contacto</span>
+                    </label>
                     <div class="contact-field__control">
-                        <img class="contact-field__icon" src="imgs/rango-de-edad.svg" alt="" aria-hidden="true">
-                        <select id="edad" name="edad" required>
-                            <option value="">Elegí una opción</option>
-                            <option value="ninos" <?= $edad === 'ninos' ? 'selected' : '' ?>>Niños</option>
-                            <option value="familia" <?= $edad === 'familia' ? 'selected' : '' ?>>Familia</option>
-                            <option value="adultos" <?= $edad === 'adultos' ? 'selected' : '' ?>>Adultos</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="contact-field">
-                    <label class="contact-field__label" for="duracion">Duración estimada</label>
-                    <div class="contact-field__control">
-                        <img class="contact-field__icon" src="imgs/reloj.svg" alt="" aria-hidden="true">
-                        <select id="duracion" name="duracion" required>
-                            <option value="">Elegí una opción</option>
-                            <option value="corta" <?= $duracion === 'corta' ? 'selected' : '' ?>>Hasta 30 minutos</option>
-                            <option value="media" <?= $duracion === 'media' ? 'selected' : '' ?>>30 a 60 minutos</option>
-                            <option value="larga" <?= $duracion === 'larga' ? 'selected' : '' ?>>Más de 60 minutos</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="contact-field">
-                    <label class="contact-field__label" for="dificultad">Nivel de dificultad</label>
-                    <div class="contact-field__control">
-                        <img class="contact-field__icon" src="imgs/nivel-de-dificultad.svg" alt="" aria-hidden="true">
-                        <select id="dificultad" name="dificultad" required>
-                            <option value="">Elegí una opción</option>
-                            <option value="baja" <?= $dificultad === 'baja' ? 'selected' : '' ?>>Baja</option>
-                            <option value="media" <?= $dificultad === 'media' ? 'selected' : '' ?>>Media</option>
-                            <option value="alta" <?= $dificultad === 'alta' ? 'selected' : '' ?>>Alta</option>
+                        <select id="motivo" name="motivo" required>
+                            <option value="">Elegí un motivo</option>
+                            <option value="pedido">Problema con pedido</option>
+                            <option value="informacion">Necesito más información</option>
+                            <option value="colaboracion">Propuesta o colaboración</option>
+                            <option value="otro">Otro motivo</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="contact-field contact-field--full">
-                    <label class="contact-field__label" for="estilo">Estilo de juego</label>
+                    <label class="contact-field__label" for="mensaje">
+                        <img class="contact-field__label-icon" src="imgs/mensaje.png" alt="" aria-hidden="true">
+                        <span>Mensaje</span>
+                    </label>
                     <div class="contact-field__control">
-                        <img class="contact-field__icon" src="imgs/estilo-de-juegos.svg" alt="" aria-hidden="true">
-                        <select id="estilo" name="estilo" required>
-                            <option value="">Elegí una opción</option>
-                            <option value="cartas" <?= $estilo === 'cartas' ? 'selected' : '' ?>>Cartas</option>
-                            <option value="estrategia" <?= $estilo === 'estrategia' ? 'selected' : '' ?>>Estrategia</option>
-                            <option value="misterio" <?= $estilo === 'misterio' ? 'selected' : '' ?>>Misterio</option>
-                            <option value="negociacion" <?= $estilo === 'negociacion' ? 'selected' : '' ?>>Negociación</option>
-                            <option value="rompecabezas" <?= $estilo === 'rompecabezas' ? 'selected' : '' ?>>Rompecabezas</option>
-                        </select>
+                        <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje..." required></textarea>
                     </div>
                 </div>
             </div>
 
             <div class="contact-form__actions">
-                <button class="contact-btn contact-btn--accent" type="submit">
-                    <img src="imgs/recibir-recomendacion.svg" alt="" aria-hidden="true">
-                    <span>Recibir recomendación</span>
+                <button class="contact-btn contact-btn--accent" type="button" id="contacto-enviar">
+                    <span>Enviar mensaje</span>
                 </button>
             </div>
         </form>
     </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('.contact-form');
+    var enviar = document.getElementById('contacto-enviar');
+    enviar.addEventListener('click', function () {
+      if (form.reportValidity()) {
+        alert('Tu mensaje se envió con éxito. ¡Gracias por contactarnos!');
+      }
+    });
+  });
+</script>
