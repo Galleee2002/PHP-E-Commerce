@@ -26,14 +26,14 @@
   line-height: 0.95;
   letter-spacing: -0.04em;
   color: var(--color-soft-black);
-  max-width: 10ch;
+  text-align: center;
 }
 
 .contact-page__lead {
   margin: 1rem 0 0;
-  max-width: 26rem;
   color: var(--color-text-soft);
   font-size: 1rem;
+  text-align: center;
 }
 
 .contact-page__content {
@@ -232,7 +232,7 @@
 
 @media (min-width: 768px) {
   .contact-page {
-    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.2fr);
+    grid-template-columns: 1fr 1fr;
     gap: 1.75rem;
   }
 

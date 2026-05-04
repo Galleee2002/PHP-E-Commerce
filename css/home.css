@@ -275,9 +275,19 @@
 
 .home-benefit-card__icon img {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
+}
+
+.home-benefit-card__icon--large {
+    width: 54px;
+    height: 54px;
+}
+
+.home-benefit-card__icon--large img {
+    width: 30px;
+    height: 30px;
 }
 
 .home-benefit-card__content {

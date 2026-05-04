@@ -65,7 +65,7 @@
             <div class="home-benefit-card__content">
                 <p class="home-benefit-card__eyebrow">Logistica eficiente</p>
                 <div class="home-benefit-card__heading">
-                    <div class="home-benefit-card__icon" aria-hidden="true">
+                    <div class="home-benefit-card__icon home-benefit-card__icon--large" aria-hidden="true">
                         <img src="imgs/shipment.svg" alt="">
                     </div>
                     <h3 class="home-benefit-card__title">Entrega rapida</h3>
