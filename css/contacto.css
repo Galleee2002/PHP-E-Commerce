@@ -113,6 +113,13 @@
   color: var(--color-soft-black);
 }
 
+.contact-field__label-icon {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .contact-field__control {
   position: relative;
 }
@@ -161,7 +168,7 @@
   padding-left: 2.4rem;
 }
 
-.contact-field__control::after {
+.contact-field__control--select::after {
   content: "";
   position: absolute;
   right: 0.9rem;
