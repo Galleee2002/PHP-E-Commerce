@@ -1,0 +1,14 @@
+---
+description: Reglas del 2º parcial — seguir docs/RULES.md
+alwaysApply: true
+---
+
+# Reglas del proyecto
+
+Antes de implementar, modificar o revisar código en este repositorio:
+
+1. Lee y aplica **`docs/RULES.md`** (guía del 2.º parcial de Programación II).
+2. Respeta los patrones del ejemplo del docente en `Clase_Ejemplo_Parcial_2/proyecto/`.
+3. Base de datos: `dw3_kuringhian_garcia`; entornos: solo XAMPP o MAMP.
+
+El hook `.cursor/hooks/inject-rules.sh` carga el contenido completo de `docs/RULES.md` al iniciar cada sesión.
