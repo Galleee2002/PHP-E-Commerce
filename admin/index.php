@@ -16,19 +16,19 @@ $seccionActual = $_GET['seccion'] ?? 'ingresar';
 
 if ($seccionActual === 'salir') {
     Usuario::cerrarSesion();
-    header('Location: index.php?seccion=ingresar');
+    header('Location: ?seccion=ingresar');
     exit;
 }
 
 $requiereSesion = $seccionActual !== 'ingresar';
 
 if ($seccionActual === 'ingresar' && Usuario::estaLogueado()) {
-    header('Location: index.php?seccion=productos');
+    header('Location: ?seccion=productos');
     exit;
 }
 
 if ($requiereSesion && !Usuario::estaLogueado()) {
-    header('Location: index.php?seccion=ingresar');
+    header('Location: ?seccion=ingresar');
     exit;
 }
 

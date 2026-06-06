@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($usuario !== null) {
         Usuario::iniciarSesion($usuario);
-        header('Location: index.php?seccion=productos');
+        header('Location: ?seccion=productos');
         exit;
     }
 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p role="alert"><?= htmlspecialchars($errorLogin, ENT_QUOTES, 'UTF-8') ?></p>
     <?php endif; ?>
 
-    <form action="index.php?seccion=ingresar" method="post">
+    <form action="?seccion=ingresar" method="post">
         <p>
             <label for="email">Email</label>
             <input type="email" id="email" name="email" value="<?= htmlspecialchars($emailIngresado, ENT_QUOTES, 'UTF-8') ?>" required>
