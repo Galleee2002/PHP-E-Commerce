@@ -1,75 +1,58 @@
 <?php
 
-const PRODUCTOS_JSON_ARCHIVO = __DIR__ . '/../data/productos.json';
+require_once __DIR__ . '/DBConexion.php';
 
 class Producto
 {
-    private int $id = 0;
+    private int $producto_id = 0;
     private string $nombre = '';
     private float $precio = 0.0;
     private string $categoria = '';
-    private string $descripcionCorta = '';
+    private string $descripcion_corta = '';
     private string $descripcion = '';
     private string $imagen = '';
 
-    public function __construct(
-        int $id = 0,
-        string $nombre = '',
-        float $precio = 0.0,
-        string $categoria = '',
-        string $descripcionCorta = '',
-        string $descripcion = '',
-        string $imagen = ''
-    ) {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->precio = $precio;
-        $this->categoria = $categoria;
-        $this->descripcionCorta = $descripcionCorta;
-        $this->descripcion = $descripcion;
-        $this->imagen = $imagen;
-    }
-
     public function todas(): array
     {
-        $json = file_get_contents(PRODUCTOS_JSON_ARCHIVO);
-        if ($json === false) {
-            return [];
-        }
+        $db = (new DBConexion)->getConexion();
 
-        $datos = json_decode($json, true);
-        if (!is_array($datos)) {
-            return [];
-        }
+        $consulta = "
+            SELECT p.producto_id, p.nombre, p.precio, p.descripcion_corta, p.descripcion, p.imagen,
+                   GROUP_CONCAT(c.nombre ORDER BY c.nombre SEPARATOR ', ') AS categoria
+            FROM productos p
+            LEFT JOIN productos_tienen_categorias ptc ON p.producto_id = ptc.producto_fk
+            LEFT JOIN categorias c ON ptc.categoria_fk = c.categoria_id
+            GROUP BY p.producto_id
+            ORDER BY p.fecha_alta DESC
+        ";
 
-        $productos = [];
+        $stmt = $db->query($consulta);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
 
-        foreach ($datos as $item) {
-            $producto = new self;
-            $producto->setId((int) $item['id']);
-            $producto->setNombre((string) $item['nombre']);
-            $producto->setPrecio((float) $item['precio']);
-            $producto->setCategoria((string) $item['categoria']);
-            $producto->setDescripcionCorta((string) $item['descripcion_corta']);
-            $producto->setDescripcion((string) $item['descripcion']);
-            $producto->setImagen((string) $item['imagen']);
-            $productos[] = $producto;
-        }
-
-        return $productos;
+        return $stmt->fetchAll();
     }
 
     public function porId(int $id): ?self
     {
-        $productos = $this->todas();
+        $db = (new DBConexion)->getConexion();
 
-        foreach ($productos as $producto) {
-            if ($producto->getId() == $id) {
-                return $producto;
-            }
-        }
+        $consulta = "
+            SELECT p.producto_id, p.nombre, p.precio, p.descripcion_corta, p.descripcion, p.imagen,
+                   GROUP_CONCAT(c.nombre ORDER BY c.nombre SEPARATOR ', ') AS categoria
+            FROM productos p
+            LEFT JOIN productos_tienen_categorias ptc ON p.producto_id = ptc.producto_fk
+            LEFT JOIN categorias c ON ptc.categoria_fk = c.categoria_id
+            WHERE p.producto_id = :id
+            GROUP BY p.producto_id
+        ";
 
-        return null;
+        $stmt = $db->prepare($consulta);
+        $stmt->execute(['id' => $id]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
+
+        $producto = $stmt->fetch();
+
+        return $producto === false ? null : $producto;
     }
 
     public static function buscarPorNombre(array $lista, string $nombre): ?self
@@ -85,12 +68,12 @@ class Producto
 
     public function getId(): int
     {
-        return $this->id;
+        return $this->producto_id;
     }
 
     public function setId(int $id): void
     {
-        $this->id = $id;
+        $this->producto_id = $id;
     }
 
     public function getNombre(): string
@@ -125,12 +108,12 @@ class Producto
 
     public function getDescripcionCorta(): string
     {
-        return $this->descripcionCorta;
+        return $this->descripcion_corta;
     }
 
     public function setDescripcionCorta(string $descripcionCorta): void
     {
-        $this->descripcionCorta = $descripcionCorta;
+        $this->descripcion_corta = $descripcionCorta;
     }
 
     public function getDescripcion(): string

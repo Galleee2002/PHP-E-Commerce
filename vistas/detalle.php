@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../clases/Producto.php";
 
-$idProducto = $_GET["id"] ?? 0;
+$idProducto = (int) ($_GET["id"] ?? 0);
 $productoSeleccionado = (new Producto)->porId($idProducto);
 ?>
 
@@ -32,7 +32,7 @@ $productoSeleccionado = (new Producto)->porId($idProducto);
             <header class="detail-article__intro">
                 <div class="detail-article__title-row">
                     <h1 class="detail-article__title"><?= $productoSeleccionado->getNombre() ?></h1>
-                    <p class="detail-article__price">$<?= $productoSeleccionado->getPrecio() ?></p>
+                    <p class="detail-article__price">$<?= number_format($productoSeleccionado->getPrecio(), 0, ',', '.') ?></p>
                 </div>
                 <p class="detail-article__category">
                     <span class="detail-article__category-label">Categoría</span>
@@ -42,7 +42,7 @@ $productoSeleccionado = (new Producto)->porId($idProducto);
 
             <section class="detail-article__section detail-article__section--description">
                 <h2 class="detail-article__section-title">Descripción</h2>
-                <p class="detail-article__text">Monopoly es un clásico juego de mesa de estrategia económica en el que los jugadores compiten por convertirse en el más rico mediante la compra, venta e intercambio de propiedades. A lo largo de la partida, los participantes recorren el tablero lanzando dados, adquieren calles, construyen casas y hoteles, y cobran alquileres a quienes caen en sus terrenos.</p>
+                <p class="detail-article__text"><?= $productoSeleccionado->getDescripcion() ?></p>
             </section>
 
             <div class="detail-actions">
