@@ -1,6 +1,10 @@
 <?php
 
-/** Stub Fase 4 — Fase 5 implementará el ABM. Variables de sesión disponibles para las vistas. */
+/**
+ * B3 — Listado admin (backend).
+ * $productos: Producto[] cargado en admin/index.php vía Producto::todas().
+ * Disponible para el frontend: getId(), getNombre(), getPrecio(), getCategoria(), etc.
+ */
 
 $usuarioId = Usuario::idEnSesion();
 $usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';

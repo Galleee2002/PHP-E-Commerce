@@ -1,12 +1,43 @@
 <?php
 
-/** Stub Fase 5 — baja de producto (DELETE). Solo placeholder de ruta protegida. */
+/**
+ * B6 — Baja de producto (backend).
+ * GET: ?seccion=producto-borrar&id=N — pantalla de confirmación (frontend).
+ * POST: producto_id — ejecuta Producto::eliminar() y redirige al listado.
+ */
 
+$producto = null;
 $idProducto = (int) ($_GET['id'] ?? 0);
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $idProducto = (int) ($_POST['producto_id'] ?? $idProducto);
+
+    if ($idProducto <= 0) {
+        header('Location: index.php?seccion=productos');
+        exit;
+    }
+
+    (new Producto())->eliminar($idProducto);
+
+    header('Location: index.php?seccion=productos');
+    exit;
+}
+
+if ($idProducto <= 0) {
+    header('Location: index.php?seccion=productos');
+    exit;
+}
+
+$producto = (new Producto())->porId($idProducto);
+
+if ($producto === null) {
+    header('Location: index.php?seccion=productos');
+    exit;
+}
+
 ?>
-<!-- TODO (Fase 5): procesar baja con POST/confirmación -->
+<!-- TODO (frontend + Fase 5): confirmación de baja con form POST -->
 <section>
-    <h1>Borrar producto #<?= $idProducto ?></h1>
+    <h1>Borrar producto #<?= (int) $producto->getId() ?></h1>
     <p><a href="index.php?seccion=productos">Volver al listado</a></p>
 </section>
