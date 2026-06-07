@@ -17,7 +17,7 @@ $seccionActual ??= 'home';
     
 <body class="page">
     <header class="site-header">
-        <nav class="site-nav" aria-label="Navegacion principal">
+        <nav class="site-nav" aria-label="Navegación principal">
             <a class="brand" href="index.php?seccion=home">
                 <img class="brand__logo" src="imgs/logo-2.png" alt="Logo de Galmir">
                 <span class="brand__name">Galmir</span>

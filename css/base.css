@@ -269,13 +269,13 @@ h6,
 
 .site-footer p {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 500;
 }
 
 .site-footer__secondary {
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 0.875em;
   color: var(--color-beige-medium);
 }
 

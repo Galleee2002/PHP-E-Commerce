@@ -7,7 +7,7 @@
 
 .page-title {
   margin: 0;
-  font-size: 28px;
+  font-size: 1.75em;
   font-weight: 700;
   color: var(--color-soft-black);
 }
@@ -26,7 +26,7 @@
   align-items: center;
   border-radius: var(--radius-lg);
   padding: 10px 16px;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
@@ -85,7 +85,7 @@
 
 .listado .product-card__title {
   margin: 14px 0 0;
-  font-size: 20px;
+  font-size: 1.25em;
   line-height: 1.2;
   min-height: calc(1.2em * 2);
   display: -webkit-box;
@@ -97,7 +97,7 @@
 .listado .product-card__meta {
   margin: 0;
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 0.875em;
   color: var(--color-text-soft);
 }
 
@@ -108,7 +108,7 @@
 .listado .product-card__desc {
   margin: 0;
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 0.875em;
   line-height: 1.45;
   min-height: calc(1.45em * 3);
   display: -webkit-box;
@@ -137,7 +137,7 @@
 
 @media (min-width: 768px) {
   .page-title {
-    font-size: 36px;
+    font-size: 2.25em;
   }
 }
 
@@ -155,7 +155,7 @@
   }
 
   .page-title {
-    font-size: 40px;
+    font-size: 2.5em;
   }
 }
 

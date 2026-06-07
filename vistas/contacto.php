@@ -5,7 +5,7 @@
             <p class="contact-page__lead">¿Tenés dudas, sugerencias o querés colaborar con Galmir? Completá el formulario y te responderemos lo antes posible.</p>
         </div>
         <div class="contact-page__hero-art">
-            <img src="imgs/formulario.png" alt="Ilustración del formulario de contacto">
+            <img src="imgs/formulario.png" alt="">
         </div>
     </div>
 
@@ -77,7 +77,7 @@
 
             <div class="contact-form__actions">
                 <button class="contact-btn contact-btn--accent" type="button" id="contacto-enviar">
-                    <img class="contact-field__label-icon" src="imgs/enviar-mensaje.png" alt="Icono de enviar mensaje" aria-hidden="true">
+                    <img class="contact-field__label-icon" src="imgs/enviar-mensaje.png" alt="" aria-hidden="true">
                     <span>Enviar mensaje</span>
                 </button>
             </div>
