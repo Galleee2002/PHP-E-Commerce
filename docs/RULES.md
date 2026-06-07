@@ -12,17 +12,17 @@ Guía de implementación para completar el **2.º parcial** de Programación II 
 
 | Fase | Descripción | Estado |
 |------|-------------|--------|
-| 1 | Base de datos (tablas, seed, `.sql`) | ✅ Hecho — falta **DER** |
+| 1 | Base de datos (tablas, seed, `.sql`) | ✅ Hecho — **DER** ✅ |
 | 2 | `DBConexion` + prueba de conexión | ✅ Hecho — `test-db.php` eliminado |
 | 3 | `Producto` lectura PDO + listado/detalle | ✅ Hecho |
 | 4 | `Usuario` + login admin | ✅ Hecho — lógica, sesión, guard y **UI login** |
-| 5 | ABM admin (alta, edición, baja) | ✅ Backend B1–B6 · ⬜ **frontend ABM** |
+| 5 | ABM admin (alta, edición, baja) | ✅ Backend B1–B6 · UI completa (baja vía `<dialog>` en listado) |
 | 6 | Pulido (`htmlspecialchars`, edge cases) | ⬜ Pendiente |
 | 7 | Empaquetado (`sitio/`, zip, `datos.txt`) | ⬜ Pendiente |
 
-**Próximo paso:** Frontend del panel ABM según [FRONTEND-CONTRATO-ADMIN.md](FRONTEND-CONTRATO-ADMIN.md).
+**Próximo paso:** Fase 6 (`htmlspecialchars` en sitio público) → DER → empaquetado final.
 
-**Verificado contra** [Programación II - Segundo Parcial.pdf](Programación%20II%20-%20Segundo%20Parcial.pdf): sitio público ✅ · login ✅ · ABM backend ✅ · pendiente UI ABM, DER y entrega final.
+**Verificado contra** [Programación II - Segundo Parcial.pdf](Programación%20II%20-%20Segundo%20Parcial.pdf): sitio público ✅ · login ✅ · ABM ✅ · DER ✅ · `htmlspecialchars` parcial ⬜ · entrega final ⬜.
 
 ---
 
@@ -32,7 +32,6 @@ Guía de implementación para completar el **2.º parcial** de Programación II 
 |---------|-----------|
 | Consigna 1.er parcial | [Programación II - Primer Parcial.pdf](Programación%20II%20-%20Primer%20Parcial.pdf) |
 | Consigna 2.º parcial | [Programación II - Segundo Parcial.pdf](Programación%20II%20-%20Segundo%20Parcial.pdf) |
-| Contrato frontend admin | [FRONTEND-CONTRATO-ADMIN.md](FRONTEND-CONTRATO-ADMIN.md) |
 | Código en desarrollo | Raíz del repo (migrar a `sitio/` al empaquetar) |
 | SQL exportado | `db/dw3_kuringhian_garcia.sql` ✅ |
 | Ejemplo del docente (patrones) | `../Clase_Ejemplo_Parcial_2/proyecto/` |
@@ -71,9 +70,10 @@ Marcar antes de subir al campus:
 ### Panel de administración
 
 - [x] **Login** con email y password (PDO + sesión + diseño en `ingresar.php`)
-- [ ] **ABM** — listado de ítems con acceso a alta, edición y baja (backend ✅ · UI ⬜)
-- [ ] **Formulario de alta** con campos necesarios → INSERT en BD (backend ✅ · UI ⬜)
-- [ ] **Formulario de edición** pre-poblado con datos actuales → UPDATE en BD (backend ✅ · UI ⬜)
+- [x] **ABM** — listado de ítems con acceso a alta, edición y baja (UI listado ✅)
+- [x] **Formulario de alta** con campos necesarios → INSERT en BD (UI ✅)
+- [x] **Formulario de edición** pre-poblado con datos actuales → UPDATE en BD (UI ✅)
+- [x] **Confirmación de baja** con form POST → DELETE en BD (UI: `<dialog>` en `productos.php`; backend en `producto-borrar.php`)
 
 ### PHP
 
@@ -86,7 +86,7 @@ Marcar antes de subir al campus:
 ### Base de datos
 
 - [x] Nombre: `dw3_kuringhian_garcia`
-- [ ] DER incluido en la entrega (`der/dw3_kuringhian_garcia.png`)
+- [x] DER incluido en la entrega (`der/dw3_kuringhian_garcia.png`)
 - [x] Archivo `.sql` exportado con **datos cargados**
 - [x] Datos reales (6 productos, 5 categorías, 1 admin)
 - [x] Normalizada (1NF, 2NF, 3NF)
@@ -110,14 +110,14 @@ Marcar antes de subir al campus:
 | `DBConexion` | No existía | `clases/DBConexion.php` | ✅ Hecho (MAMP) |
 | `Producto` lectura | JSON | `todas()`, `porId()` PDO | ✅ Hecho |
 | `Usuario` + sesión | No existía | Login admin + `session_start()` | ✅ Hecho |
-| Panel `admin/` | No existía | `admin/index.php` + vistas ABM | ✅ Backend · UI ABM ⬜ |
+| Panel `admin/` | No existía | `admin/index.php` + vistas ABM | ✅ |
 | CRUD productos | Solo lectura | `crear`, `actualizar`, `eliminar` | ✅ Hecho |
 | Tabla relacionada | No existía | `categorias` + N:M | ✅ Hecho |
 | Detalle | Descripción hardcodeada | `getDescripcion()` desde BD | ✅ Hecho |
-| Escape HTML | Parcial | `htmlspecialchars()` en salidas | ⬜ Fase 6 |
+| Escape HTML | Parcial (admin sí, público no) | `htmlspecialchars()` en **todas** las salidas | ⬜ Fase 6 |
 | Estructura entrega | Proyecto en raíz | `sitio/` + `db/` + `der/` | ⬜ Fase 7 |
 | `datos.txt` | 1er parcial | 2do parcial + credenciales | ⬜ Pendiente |
-| DER | — | `der/dw3_kuringhian_garcia.png` | ⬜ Pendiente |
+| DER | — | `der/dw3_kuringhian_garcia.png` | ✅ |
 
 ---
 
@@ -148,7 +148,7 @@ productos (N) ──< productos_tienen_categorias >── (N) categorias
 | Archivo | Estado |
 |---------|--------|
 | `db/dw3_kuringhian_garcia.sql` | ✅ Exportado desde phpMyAdmin |
-| `der/dw3_kuringhian_garcia.png` | ⬜ Pendiente |
+| `der/dw3_kuringhian_garcia.png` | ✅ |
 
 ---
 
@@ -228,11 +228,11 @@ PHP-E-Commerce/
 ├── admin/
 │   ├── index.php                ✅ session_start, whitelist, guard, salir (sin precarga BD)
 │   └── vistas/
-│       ├── ingresar.php         ✅ POST login + diseño frontend
-│       ├── productos.php        ✅ backend B3 · UI ⬜
-│       ├── producto-alta.php    ✅ backend B4 · UI ⬜
-│       ├── producto-editar.php  ✅ backend B5 · UI ⬜
-│       ├── producto-borrar.php  ✅ backend B6 · UI ⬜
+│       ├── ingresar.php         ✅ login + UI
+│       ├── productos.php        ✅ backend B3 + UI
+│       ├── producto-alta.php    ✅ backend B4 + UI
+│       ├── producto-editar.php  ✅ backend B5 + UI
+│       ├── producto-borrar.php  ✅ backend POST (GET solo fallback si se abre la URL directo)
 │       └── 404.php              ✅
 ├── vistas/
 │   ├── home.php                 ✅
@@ -241,15 +241,18 @@ PHP-E-Commerce/
 │   ├── contacto.php             ✅
 │   └── 404.php                  ✅
 ├── includes/                    ✅
-├── admin/css/ingresar.css       ✅ diseño login
 ├── css/ · imgs/                 ✅ (incl. `login-img.webp`)
+├── admin/css/
+│   ├── ingresar.css             ✅
+│   ├── productos.css            ✅
+│   └── producto-editar.css      ✅ (alta + edición)
 ├── data/productos.json          ✅ backup migración
 ├── db/dw3_kuringhian_garcia.sql ✅
 ├── docs/
 │   ├── RULES.md                 ✅
-│   └── FRONTEND-CONTRATO-ADMIN.md ✅ contrato UI panel ABM
-├── der/                         ⬜
-└── datos.txt                    ⬜ actualizar a 2do parcial
+│   └── Programación II - Segundo Parcial.pdf
+├── der/dw3_kuringhian_garcia.png  ✅
+└── datos.txt                    ⬜ actualizar a 2do parcial + credenciales admin
 ```
 
 ### Objetivo al empaquetar (`sitio/`)
@@ -297,12 +300,12 @@ Las credenciales son las del **panel web**, no las de MySQL `root`.
 
 | # | Fase | Tareas | Estado |
 |---|------|--------|--------|
-| 1 | **Base de datos** | Tablas, seed, exportar `.sql`, DER | ✅ SQL · ⬜ DER |
+| 1 | **Base de datos** | Tablas, seed, exportar `.sql`, DER | ✅ |
 | 2 | **`DBConexion`** | Perfil MAMP/XAMPP, probar conexión | ✅ |
 | 3 | **`Producto` lectura** | `todas()`, `porId()`, listado, detalle | ✅ |
 | 4 | **`Usuario` + login** | `Usuario.php`, `admin/`, sesión, guard, UI login | ✅ |
-| 5 | **ABM admin** | Backend B1–B6 ✅ · UI panel según contrato | ✅ backend · ⬜ UI |
-| 6 | **Pulido** | `htmlspecialchars`, id inválido, filtro `q` opcional | ⬜ **siguiente** |
+| 5 | **ABM admin** | Backend B1–B6 + UI (login, listado, alta, edición, baja vía dialog) | ✅ |
+| 6 | **Pulido** | `htmlspecialchars` en público + admin, pruebas ABM | ⬜ **siguiente** |
 | 7 | **Empaquetado** | `sitio/`, `db/`, `der/`, `datos.txt`, zip | ⬜ |
 
 ### 8.1 Pasos lógicos tras el diseño del login (Fase 4 → 5)
@@ -332,31 +335,69 @@ Reglas PDO para el ABM (igual que lectura):
 - Campos mínimos del producto: `nombre`, `precio`, `descripcion_corta`, `descripcion`, `imagen`, `categoria_id` (una categoría por alta/edición; tabla N:M sigue en BD).
 - Estilo alineado al docente: `prepare()` + `execute()` en lecturas, datos cargados en cada vista, ABM sin transacciones ni helpers privados extra.
 
-#### Paso C — Fase 5 frontend (diseño del panel ABM) ⬜ **siguiente**
+#### Paso C — Fase 5 frontend ✅
 
-Contrato de integración: **[FRONTEND-CONTRATO-ADMIN.md](FRONTEND-CONTRATO-ADMIN.md)** — variables PHP, `name` de formularios, URLs y checklist de pruebas.
+Todas las pantallas del panel tienen UI integrada:
 
-| Pantalla | Sección | Contenido mínimo |
-|----------|---------|------------------|
-| Listado | `productos` | Tabla/cards con nombre, precio, categoría, acciones Editar / Borrar, botón Alta |
-| Alta | `producto-alta` | Form con mismos campos que edición, vacíos |
-| Edición | `producto-editar&id=N` | Form pre-poblado con `$valoresEdicion` |
-| Baja | `producto-borrar&id=N` | Confirmación + form POST con `producto_id` |
+| Pantalla | Sección | Archivo | Notas |
+|----------|---------|---------|-------|
+| Login | `ingresar` | `ingresar.php` | ✅ |
+| Listado | `productos` | `productos.php` | ✅ incluye acciones Editar / Borrar |
+| Alta | `producto-alta` | `producto-alta.php` | ✅ |
+| Edición | `producto-editar&id=N` | `producto-editar.php` | ✅ |
+| Baja | `producto-borrar&id=N` | `productos.php` + `producto-borrar.php` | ✅ confirmación en `<dialog>` del listado; POST a `producto-borrar` |
 
-Reutilizar tipografía/colores del login (`Inter`, paleta Galmir) para coherencia visual del panel.
+**Flujo de baja (implementado):**
 
-#### División sugerida del equipo
+1. En el listado, el botón borrar abre un `<dialog>` con el nombre del producto.
+2. «Sí, eliminar» envía `POST` a `index.php?seccion=producto-borrar&id={id}` con `producto_id`.
+3. `producto-borrar.php` ejecuta `eliminar()` y redirige al listado.
 
-| Integrante | Enfoque actual |
-|------------|----------------|
-| Frontend | UI ABM según [FRONTEND-CONTRATO-ADMIN.md](FRONTEND-CONTRATO-ADMIN.md) |
-| Backend | ✅ Fase 5 cerrada — Fase 6 pulido cuando UI esté integrada |
+El HTML mínimo en `producto-borrar.php` (GET) solo aparece si alguien abre esa URL directo en el navegador; el flujo normal no lo usa.
 
-#### Paso D — Fase 6 y 7 (después del ABM funcional)
+#### Paso D — Fase 6 (pulido) ⬜ **siguiente**
 
-1. **Pulido:** `htmlspecialchars()` en todas las salidas dinámicas (público + admin).
-2. **DER:** exportar diagrama a `der/dw3_kuringhian_garcia.png`.
-3. **Empaquetado:** copiar proyecto a `sitio/`, actualizar `datos.txt`, generar zip final.
+1. **`htmlspecialchars()` en sitio público:** `vistas/home.php`, `listado.php`, `detalle.php`, `contacto.php` e `includes/` — hoy solo está aplicado en vistas admin.
+2. **Revisar admin:** confirmar escape en todas las salidas dinámicas restantes.
+3. **Pruebas ABM end-to-end** (checklist § 8.2).
+
+#### Paso E — Fase 7 (entrega) ⬜
+
+1. **DER:** ✅ `der/dw3_kuringhian_garcia.png`
+2. **`datos.txt`:** carácter **2do Parcial** + credenciales admin (`admin@galmir.local` / `admin123`).
+3. **Empaquetado:** copiar proyecto PHP a `sitio/`, incluir `db/` y `der/`, generar `kuringhian-milagros_garcia-gael.zip`.
+4. **Verificar:** no incluir `test-db.php`; perfil MAMP activo en `DBConexion.php`.
+
+### 8.2 Checklist de pruebas (antes de entregar)
+
+Marcar al cerrar Fase 5–6:
+
+**Listado admin**
+- [ ] Muestra los productos seed desde BD
+- [ ] Enlaces Editar/Borrar llevan al `id` correcto
+- [ ] Botón Alta funciona
+- [ ] Cerrar sesión redirige al login
+
+**Alta**
+- [ ] Select muestra las 5 categorías
+- [ ] Alta válida aparece en listado público y admin
+- [ ] Error de validación muestra `$errorAlta` y repuebla campos
+
+**Edición**
+- [ ] Formulario pre-poblado con `$valoresEdicion` (incluye `categoria_id`)
+- [ ] Cambios persisten en BD y sitio público
+- [ ] `id=999` redirige al listado
+
+**Baja**
+- [ ] Muestra nombre del producto a eliminar
+- [ ] POST elimina y redirige al listado
+- [ ] Cancelar vuelve sin borrar
+- [ ] Producto desaparece del sitio público
+
+**General**
+- [ ] `htmlspecialchars()` en todas las salidas dinámicas (público + admin)
+- [ ] HTML5 semántico y CSS coherente con la temática
+- [ ] Zip con estructura `sitio/`, `db/`, `der/`, `datos.txt`
 
 ---
 
@@ -378,13 +419,13 @@ Reutilizar tipografía/colores del login (`Inter`, paleta Galmir) para coherenci
 
 | Docente | Galmir | Estado |
 |---------|--------|--------|
-| `Noticia` | `Producto` | Lectura ✅ · CRUD ✅ · UI ABM ⬜ |
+| `Noticia` | `Producto` | Lectura ✅ · CRUD ✅ · UI ABM ✅ |
 | `noticias` | `productos` | ✅ |
 | `equipos` | `categorias` | ✅ |
 | `noticias_tienen_equipos` | `productos_tienen_categorias` | ✅ |
 | `noticias` (listado) | `listado` | ✅ |
 | `noticias-leer` | `detalle` | ✅ |
-| `admin/vistas/noticias.php` | `admin/vistas/productos.php` | ✅ backend · UI ⬜ |
+| `admin/vistas/noticias.php` | `admin/vistas/productos.php` | ✅ |
 | `DBConexion` + `Usuario` | Igual concepto | ✅ |
 
 ---
@@ -411,9 +452,10 @@ cd /ruta/al/proyecto
 | `http://localhost:8000/index.php?seccion=detalle&id=1` | T.E.G. + descripción BD |
 | `http://localhost:8000/index.php?seccion=detalle&id=999` | Producto no encontrado |
 | `http://localhost:8000/admin/index.php?seccion=ingresar` | Login UI + credenciales |
-| `http://localhost:8000/admin/index.php?seccion=productos` | Listado ABM (backend OK · UI stub) |
-| `http://localhost:8000/admin/index.php?seccion=producto-alta` | Alta (backend OK · UI stub) |
-| `http://localhost:8000/admin/index.php?seccion=producto-editar&id=1` | Edición (backend OK · UI stub) |
+| `http://localhost:8000/admin/index.php?seccion=productos` | Listado ABM con UI |
+| `http://localhost:8000/admin/index.php?seccion=producto-alta` | Alta con UI |
+| `http://localhost:8000/admin/index.php?seccion=producto-editar&id=1` | Edición con UI |
+| `http://localhost:8000/admin/index.php?seccion=producto-borrar&id=1` | Solo POST desde dialog del listado (GET = fallback mínimo) |
 
 ### `DBConexion.php` (estado actual en repo)
 
@@ -486,8 +528,8 @@ Terminal MAMP (alternativa):
 
 ## Resumen rápido
 
-**Hecho:** BD + SQL + `DBConexion` + `Producto` (lectura + CRUD) + sitio público + login admin + **ABM backend completo (B1–B6)**.
+**Hecho:** BD + SQL + `DBConexion` + `Producto` (lectura + CRUD) + sitio público + login admin + ABM completo (backend + UI, baja vía dialog).
 
-**Pendiente:** UI panel ABM ([FRONTEND-CONTRATO-ADMIN.md](FRONTEND-CONTRATO-ADMIN.md)) → Fase 6 (pulido) → DER → Fase 7 (zip).
+**Pendiente:** `htmlspecialchars` en sitio público → pruebas finales → `datos.txt` + `sitio/` + zip.
 
 Referencia docente: `../Clase_Ejemplo_Parcial_2/proyecto/`.
