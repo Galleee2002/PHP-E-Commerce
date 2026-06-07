@@ -3,8 +3,8 @@
 Documento de integración entre **backend (PHP/PDO)** y **frontend (HTML/CSS)** del panel de administración.
 
 **Estado backend:** ✅ Fases B1–B6 completas (jun 2026)  
-**Estado frontend:** ⬜ Pendiente — login ✅ · ABM ⬜  
-**Referencia general:** [RULES.md](RULES.md)
+**Estado frontend:** login ✅ · listado ✅ · edición ✅ · alta ✅ · baja ⬜  
+**Referencia general:** [RULES.md](RULES.md) · Consigna admin: [Programación II - Segundo Parcial.pdf](Programación%20II%20-%20Segundo%20Parcial.pdf) puntos 2–4
 
 ---
 
@@ -12,13 +12,22 @@ Documento de integración entre **backend (PHP/PDO)** y **frontend (HTML/CSS)** 
 
 El frontend debe **reemplazar los stubs HTML** dentro de `admin/vistas/` **sin modificar** la lógica PHP del bloque superior de cada archivo (líneas antes del `?>`).
 
+### Equivalencia con la consigna (panel admin)
+
+| Punto PDF | Pantalla requerida | Sección | Archivo vista |
+|-----------|-------------------|---------|---------------|
+| **2** | ABM — listado con acceso a alta, edición y baja | `productos` | `admin/vistas/productos.php` |
+| **3** | Formulario de alta de ítem | `producto-alta` | `admin/vistas/producto-alta.php` |
+| **4** | Formulario de edición pre-poblado | `producto-editar` | `admin/vistas/producto-editar.php` |
+| *(implícito en 2)* | Confirmación de baja (POST) | `producto-borrar` | `admin/vistas/producto-borrar.php` |
+
 | Vista | Archivo | Backend | Frontend |
 |-------|---------|---------|----------|
 | Login | `ingresar.php` | ✅ | ✅ |
-| Listado ABM | `productos.php` | ✅ B3 | ⬜ |
-| Alta | `producto-alta.php` | ✅ B4 | ⬜ |
-| Edición | `producto-editar.php` | ✅ B5 | ⬜ |
-| Baja | `producto-borrar.php` | ✅ B6 | ⬜ |
+| Listado ABM | `productos.php` | ✅ B3 | ✅ |
+| Alta | `producto-alta.php` | ✅ B4 | ✅ |
+| Edición | `producto-editar.php` | ✅ B5 | ✅ |
+| Baja | `producto-borrar.php` | ✅ B6 | ⬜ stub |
 
 ---
 
@@ -60,27 +69,107 @@ El frontend **no debe** mover esta lógica a `admin/index.php`.
 
 Aplicar en: nombres, descripciones, rutas de imagen, emails, mensajes de error.
 
+### Rutas dinámicas (`$adminBase` / `$sitioBase`)
+
+El listado ya calcula bases relativas al script (patrón válido para todo el panel):
+
+```php
+$adminBase = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/admin')), '/') . '/';
+$sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/') . '/';
+```
+
+| Variable | Uso en frontend |
+|----------|-----------------|
+| `$adminBase` | Enlaces y assets del panel (`css/productos.css`, `index.php?seccion=…`) |
+| `$sitioBase` | Imágenes de productos (`$sitioBase . $producto->getImagen()`) |
+
+Ejemplo: imagen → `imgs/teg.webp` en BD → `src="<?= $sitioBase ?>imgs/teg.webp"`.
+
 ### Estilo visual
 
 Reutilizar la línea del login admin:
 
 - Tipografías: **Inter** (cuerpo), **Roboto** (títulos/logo)
 - CSS login existente: `admin/css/ingresar.css`
+- CSS listado existente: `admin/css/productos.css`
 - Imagen de marca: `imgs/login-img.webp` (ruta desde raíz del sitio)
-- Crear CSS del panel ABM en `admin/css/` (ej. `panel.css`, `productos.css`) — **no modificar** la lógica PHP
+- Crear CSS de formularios en `admin/css/` (ej. `producto-form.css`) — **no modificar** la lógica PHP
 
 ### Lo que NO debe hacer el frontend
 
 - No mover la lógica POST/redirect al JavaScript
-- No cambiar los `name` de los campos de formulario (ver § 4)
+- No cambiar los `name` de los campos de formulario (ver § 5)
 - No usar rutas absolutas de disco ni URLs fijas al localhost
 - No eliminar el guard de sesión en `admin/index.php`
 
 ---
 
-## 3. Pantallas y variables PHP disponibles
+## 3. Modelo de datos expuesto al frontend
 
-### 3.1 Login — `ingresar.php` ✅
+### 3.0.1 Clase `Producto` — getters disponibles
+
+El backend **no expone** `usuario_fk` ni `fecha_alta` en las vistas. Solo estos getters:
+
+| Getter | Tipo PHP | Origen BD | Uso en UI |
+|--------|----------|-----------|-----------|
+| `getId()` | `int` | `productos.producto_id` | Enlaces, hidden `producto_id` |
+| `getNombre()` | `string` | `productos.nombre` | Título / confirmación baja |
+| `getPrecio()` | `float` | `productos.precio` | Mostrar con `number_format()` |
+| `getDescripcionCorta()` | `string` | `productos.descripcion_corta` | Subtítulo en listado |
+| `getDescripcion()` | `string` | `productos.descripcion` | Solo formularios alta/edición |
+| `getImagen()` | `string` | `productos.imagen` | Thumbnail — ruta relativa desde raíz sitio |
+| `getCategoria()` | `string` | `GROUP_CONCAT(categorias.nombre)` | Texto en listado (puede ser varias separadas por `, `) |
+
+**Nota categorías:** la BD es N:M, pero el formulario maneja **una sola** `categoria_id` por alta/edición. En edición, el backend toma la **primera** categoría vinculada (`categoriasPorProducto()[0]`).
+
+### 3.0.2 Categorías del select (`todasCategorias()`)
+
+Array asociativo por fila:
+
+```php
+['categoria_id' => int, 'nombre' => string]
+```
+
+Seed actual (5 opciones):
+
+| `categoria_id` | `nombre` |
+|----------------|----------|
+| 1 | Estrategia |
+| 2 | Clasico |
+| 3 | Rompecabezas |
+| 4 | Cartas |
+| 5 | Misterio |
+
+### 3.0.3 Campos de formulario ↔ columnas BD
+
+| `name` del form | Columna / tabla | Tipo en POST | Validación backend |
+|-----------------|-----------------|--------------|-------------------|
+| `nombre` | `productos.nombre` | `string` | No vacío tras `trim()` |
+| `precio` | `productos.precio` | `string` | No vacío; `float` > 0 (acepta `,` o `.`) |
+| `descripcion_corta` | `productos.descripcion_corta` | `string` | No vacío |
+| `descripcion` | `productos.descripcion` | `string` | No vacío |
+| `imagen` | `productos.imagen` | `string` | No vacío — ruta relativa ej. `imgs/teg.webp` |
+| `categoria_id` | `productos_tienen_categorias.categoria_fk` | `int` | `> 0` |
+| `producto_id` | `productos.producto_id` | `int` | Solo edición/baja; `> 0` |
+
+En alta, `usuario_fk` lo asigna el backend con `Usuario::idEnSesion()` — **no hay input** en el formulario.
+
+### 3.0.4 Mensajes de error del backend
+
+| Variable | Cuándo aparece | Texto |
+|----------|----------------|-------|
+| `$errorAlta` | POST inválido en alta | `Completá todos los campos obligatorios con valores válidos.` |
+| `$errorAlta` | Excepción en `crear()` | `Debe indicar al menos una categoría.` |
+| `$errorEdicion` | POST inválido en edición | `Completá todos los campos obligatorios con valores válidos.` |
+| `$errorEdicion` | Excepción en `actualizar()` | `Debe indicar al menos una categoría.` |
+
+El frontend debe renderizar `$errorAlta` / `$errorEdicion` cuando no estén vacíos (hoy los stubs no lo hacen).
+
+---
+
+## 4. Pantallas y variables PHP disponibles
+
+### 4.1 Login — `ingresar.php` ✅
 
 **URL:** `admin/index.php?seccion=ingresar`
 
@@ -108,7 +197,7 @@ Reutilizar la línea del login admin:
 
 ---
 
-### 3.2 Listado — `productos.php` ⬜
+### 4.2 Listado — `productos.php` ✅ *(consigna punto 2)*
 
 **URL:** `admin/index.php?seccion=productos`
 
@@ -119,24 +208,29 @@ require_once __DIR__ . '/../../clases/Producto.php';
 
 $producto = new Producto;
 $productos = $producto->todas();
+
+$usuarioId = Usuario::idEnSesion();
+$usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
 ```
 
 | Variable | Tipo | Descripción |
 |----------|------|-------------|
-| `$productos` | `Producto[]` | Listado desde BD, cargado en esta vista (`Producto::todas()`) |
-| `$usuarioId` | `int` | ID del admin logueado |
-| `$usuarioEmail` | `string` | Email de sesión |
+| `$productos` | `Producto[]` | Listado desde BD, orden `fecha_alta DESC` |
+| `$usuarioId` | `int\|null` | ID del admin logueado (`Usuario::idEnSesion()`) |
+| `$usuarioEmail` | `string` | Email de sesión — mostrar en barra superior |
+| `$adminBase` | `string` | Prefijo URL del panel (calculado en HTML) |
+| `$sitioBase` | `string` | Prefijo URL del sitio público (para imágenes) |
 
-**Por cada `$producto` en el foreach**
+**Por cada `$producto` en el foreach** — ver § 3.0.1. Campos usados en el diseño actual:
 
-| Getter | Uso en UI |
-|--------|-----------|
-| `getId()` | Enlaces editar/borrar |
-| `getNombre()` | Columna título |
-| `getPrecio()` | Columna precio — formatear con `number_format($p->getPrecio(), 0, ',', '.')` |
-| `getCategoria()` | Texto concatenado de categorías |
-| `getDescripcionCorta()` | Opcional en listado |
-| `getImagen()` | Thumbnail opcional — ruta relativa desde raíz sitio |
+| Getter | Uso en UI actual |
+|--------|------------------|
+| `getId()` | Query `id` en enlaces editar/borrar |
+| `getNombre()` | Nombre principal de la fila |
+| `getDescripcionCorta()` | Subtítulo bajo el nombre |
+| `getImagen()` | Thumbnail (`$sitioBase . getImagen()`) |
+| `getCategoria()` | Columna categoría |
+| `getPrecio()` | Columna precio — `number_format(..., 0, ',', '.')` |
 
 **Enlaces que debe incluir la UI**
 
@@ -165,19 +259,39 @@ $productos = $producto->todas();
 
 ---
 
-### 3.3 Alta — `producto-alta.php` ⬜
+### 4.3 Alta — `producto-alta.php` ✅ *(consigna punto 3)*
 
 **URL:** `admin/index.php?seccion=producto-alta`
 
+**Bloque PHP superior (no modificar)**
+
+```php
+require_once __DIR__ . '/../../clases/Producto.php';
+
+$producto = new Producto;
+$categorias = $producto->todasCategorias();
+
+$errorAlta = '';
+$valoresAlta = [ /* ver tabla abajo */ ];
+// … lógica POST …
+```
+
 | Variable | Tipo | Descripción |
 |----------|------|-------------|
-| `$categorias` | `array` | `[['categoria_id' => int, 'nombre' => string], ...]` — cargado en esta vista |
-| `$valoresAlta` | `array` | Valores repoblados del formulario |
-| `$errorAlta` | `string` | Mensaje de error; vacío si no hay |
+| `$categorias` | `array` | Filas `['categoria_id' => int, 'nombre' => string]` — § 3.0.2 |
+| `$valoresAlta` | `array` | Valores del formulario (vacíos en GET; repoblados en error POST) |
+| `$errorAlta` | `string` | Mensaje de error; `''` si no hay — § 3.0.4 |
 
-**Claves de `$valoresAlta`**
+**Claves y valores por defecto de `$valoresAlta`**
 
-`nombre`, `precio`, `descripcion_corta`, `descripcion`, `imagen`, `categoria_id`
+| Clave | Tipo | Default (GET) | Repoblado (POST error) |
+|-------|------|---------------|------------------------|
+| `nombre` | `string` | `''` | `trim($_POST['nombre'])` |
+| `precio` | `string` | `''` | `trim($_POST['precio'])` — sin formatear |
+| `descripcion_corta` | `string` | `''` | `trim($_POST['descripcion_corta'])` |
+| `descripcion` | `string` | `''` | `trim($_POST['descripcion'])` |
+| `imagen` | `string` | `''` | `trim($_POST['imagen'])` |
+| `categoria_id` | `int` | `0` | `(int) $_POST['categoria_id']` |
 
 **Formulario POST**
 
@@ -210,28 +324,57 @@ $productos = $producto->todas();
 
 **Comportamiento backend**
 
-- Validación OK → INSERT + redirect `?seccion=productos`
-- Validación fallida → `$errorAlta` + `$valoresAlta` repoblados
-- Precio acepta coma o punto decimal
+- Validación OK → `Producto::crear(...)` + redirect `?seccion=productos`
+- Validación fallida → `$errorAlta` + `$valoresAlta` repoblados (sin redirect)
+- Precio: `str_replace(',', '.', $valoresAlta['precio'])` antes de validar
+- Éxito: **no hay mensaje flash** — solo redirect al listado
 
-**Mensaje de error posible:** `Completá todos los campos obligatorios con valores válidos.`
+**Ejemplo de input repoblado**
+
+```php
+<input
+    type="text"
+    name="nombre"
+    id="nombre"
+    value="<?= htmlspecialchars($valoresAlta['nombre'], ENT_QUOTES, 'UTF-8') ?>"
+    required
+>
+```
 
 ---
 
-### 3.4 Edición — `producto-editar.php` ⬜
+### 4.4 Edición — `producto-editar.php` ✅ *(consigna punto 4)*
 
 **URL:** `admin/index.php?seccion=producto-editar&id={id}`
 
+**Bloque PHP superior (no modificar)**
+
+```php
+require_once __DIR__ . '/../../clases/Producto.php';
+
+$productoModel = new Producto;
+$categorias = $productoModel->todasCategorias();
+// … $errorEdicion, $producto, $valoresEdicion, lógica GET/POST …
+```
+
 | Variable | Tipo | Descripción |
 |----------|------|-------------|
-| `$categorias` | `array` | Opciones del select — cargado en esta vista |
-| `$valoresEdicion` | `array` | Valores pre-poblados o repoblados tras error (incluye `categoria_id`) |
-| `$errorEdicion` | `string` | Mensaje de error |
-| `$producto` | `Producto\|null` | Objeto cargado (GET o tras error POST) |
+| `$categorias` | `array` | Opciones del select — § 3.0.2 |
+| `$valoresEdicion` | `array` | **Fuente única** para pre-poblar inputs (GET y error POST) |
+| `$errorEdicion` | `string` | Mensaje de error; `''` si no hay — § 3.0.4 |
+| `$producto` | `Producto\|null` | Objeto cargado solo en error POST; **no usar en HTML del form** |
 
-**Claves de `$valoresEdicion`**
+**Claves y origen de `$valoresEdicion`**
 
-`producto_id`, `nombre`, `precio`, `descripcion_corta`, `descripcion`, `imagen`, `categoria_id`
+| Clave | Tipo | Origen en GET exitoso | Origen en POST con error |
+|-------|------|----------------------|--------------------------|
+| `producto_id` | `int` | `$producto->getId()` | `(int) $_POST['producto_id']` |
+| `nombre` | `string` | `$producto->getNombre()` | `trim($_POST['nombre'])` |
+| `precio` | `string` | `(string) $producto->getPrecio()` | `trim($_POST['precio'])` |
+| `descripcion_corta` | `string` | `$producto->getDescripcionCorta()` | `trim($_POST['descripcion_corta'])` |
+| `descripcion` | `string` | `$producto->getDescripcion()` | `trim($_POST['descripcion'])` |
+| `imagen` | `string` | `$producto->getImagen()` | `trim($_POST['imagen'])` |
+| `categoria_id` | `int` | Primera de `categoriasPorProducto($id)[0]` | `(int) $_POST['categoria_id']` |
 
 **Formulario POST**
 
@@ -243,23 +386,46 @@ Mismos campos que alta **más**:
 
 **Action:** `index.php?seccion=producto-editar&id={id}` · **Method:** `POST`
 
-**Pre-poblado:** usar `$valoresEdicion` en todos los inputs (no `$producto` directamente en el HTML, para que funcione también tras error de validación).
+**Pre-poblado:** usar **solo** `$valoresEdicion` en todos los inputs y en el `selected` del select. No leer `$producto` en el HTML.
 
 **Comportamiento backend**
 
-- `id` inválido o producto inexistente (GET) → redirect `?seccion=productos`
-- Validación OK → UPDATE + redirect `?seccion=productos`
-- Validación fallida → `$errorEdicion` + valores repoblados
+- GET: `id` ≤ 0 o producto inexistente → redirect `?seccion=productos` (sin variables de error)
+- POST: `producto_id` ≤ 0 → redirect `?seccion=productos`
+- Validación OK → `Producto::actualizar(...)` + redirect `?seccion=productos`
+- Validación fallida → `$errorEdicion` + `$valoresEdicion` repoblados + `$producto` cargado (no usado en form)
+- Producto borrado entre GET y POST → redirect al listado
 
 ---
 
-### 3.5 Baja — `producto-borrar.php` ⬜
+### 4.5 Baja — `producto-borrar.php` ⬜ *(parte del ABM, punto 2)*
 
 **URL:** `admin/index.php?seccion=producto-borrar&id={id}`
 
+**Bloque PHP superior (no modificar)**
+
+```php
+require_once __DIR__ . '/../../clases/Producto.php';
+
+$productoModel = new Producto;
+$producto = null;
+$idProducto = (int) ($_GET['id'] ?? 0);
+// … POST elimina y redirige; GET carga $producto …
+```
+
 | Variable | Tipo | Descripción |
 |----------|------|-------------|
-| `$producto` | `Producto` | Producto a eliminar (solo en GET válido) |
+| `$producto` | `Producto` | Producto a eliminar — solo disponible en GET válido (antes del HTML) |
+
+**Getters útiles para la UI de confirmación**
+
+| Getter | Uso sugerido |
+|--------|--------------|
+| `getId()` | Hidden `producto_id` y `action` |
+| `getNombre()` | Texto principal de confirmación |
+| `getPrecio()` | Opcional — `$<?= number_format(...) ?>` |
+| `getCategoria()` | Opcional |
+| `getImagen()` | Opcional — preview con `$sitioBase` si se copia el patrón del listado |
 
 **Formulario POST (confirmación obligatoria)**
 
@@ -294,7 +460,7 @@ Mismos campos que alta **más**:
 
 ---
 
-## 4. Resumen de `name` en formularios
+## 5. Resumen de `name` en formularios
 
 | Vista | Campos `name` |
 |-------|---------------|
@@ -307,7 +473,7 @@ Mismos campos que alta **más**:
 
 ---
 
-## 5. Flujos de navegación
+## 6. Flujos de navegación
 
 ```mermaid
 flowchart TD
@@ -324,7 +490,7 @@ flowchart TD
 
 ---
 
-## 6. Checklist de pruebas (frontend)
+## 7. Checklist de pruebas (frontend)
 
 Marcar al integrar cada pantalla:
 
@@ -359,15 +525,17 @@ Marcar al integrar cada pantalla:
 
 ---
 
-## 7. Archivos que puede crear/modificar el frontend
+## 8. Archivos que puede crear/modificar el frontend
 
 | Archivo | Acción permitida |
 |---------|------------------|
-| `admin/vistas/productos.php` | Reemplazar HTML **debajo** del bloque PHP |
-| `admin/vistas/producto-alta.php` | Idem |
-| `admin/vistas/producto-editar.php` | Idem |
+| `admin/vistas/productos.php` | Ajustes visuales sobre HTML existente (backend + UI integrados) |
+| `admin/vistas/producto-alta.php` | Ajustes visuales sobre HTML existente (backend + UI integrados) |
+| `admin/vistas/producto-editar.php` | Ajustes visuales sobre HTML existente |
+| `admin/css/producto-editar.css` | Estilos del formulario de edición |
 | `admin/vistas/producto-borrar.php` | Idem |
-| `admin/css/*.css` | Crear/editar estilos del panel |
+| `admin/css/productos.css` | Estilos del listado (ya existe) |
+| `admin/css/*.css` | Crear/editar estilos de formularios y baja |
 | `admin/vistas/ingresar.php` | Solo ajustes visuales (backend ya integrado) |
 
 | Archivo | No modificar sin coordinar |
@@ -379,11 +547,11 @@ Marcar al integrar cada pantalla:
 
 ---
 
-## 8. Contacto / dudas de integración
+## 9. Contacto / dudas de integración
 
 Si un campo no persiste o el redirect falla, verificar en este orden:
 
-1. ¿El `name` del input coincide con § 4?
+1. ¿El `name` del input coincide con § 5?
 2. ¿El form usa `method="post"`?
 3. ¿Hay sesión activa (`admin@galmir.local`)?
 4. ¿MySQL MAMP está corriendo y la BD importada?
