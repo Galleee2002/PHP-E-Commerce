@@ -162,15 +162,28 @@ productos (N) ──< productos_tienen_categorias >── (N) categorias
 
 ### Routing (como el docente)
 
+Whitelist de nombres de sección + `require` dinámico de la vista (sin mapa de rutas absolutas):
+
 ```php
-$seccionesPermitidas = [
-    'home' => __DIR__ . '/vistas/home.php',
-    'listado' => __DIR__ . '/vistas/listado.php',
-    // ...
-];
+$seccionesPermitidas = ['home', 'listado', 'detalle', 'contacto'];
+
 $seccionActual = $_GET['seccion'] ?? 'home';
-$rutaSeccion = $seccionesPermitidas[$seccionActual] ?? __DIR__ . '/vistas/404.php';
+
+if (!in_array($seccionActual, $seccionesPermitidas, true)) {
+    $seccionActual = '404';
+}
+
+require __DIR__ . '/vistas/' . $seccionActual . '.php';
 ```
+
+Mismo patrón en `admin/index.php` (whitelist + guard de sesión + `require` de `admin/vistas/{seccion}.php`).
+
+### Carga de datos (como el docente)
+
+- **No** precargar productos en `index.php` público ni en `admin/index.php`.
+- Cada vista hace su `require_once` de la clase y consulta PDO en el bloque PHP superior.
+- Ejemplo público (`vistas/listado.php`): `$productos = (new Producto)->todas();`
+- Ejemplo admin (`admin/vistas/productos.php`): idem.
 
 ### PDO en clases (implementado en `Producto`)
 
@@ -207,13 +220,13 @@ En `admin/index.php`, antes del HTML:
 
 ```
 PHP-E-Commerce/
-├── index.php                    ✅
+├── index.php                    ✅ whitelist + require vista (sin precarga BD)
 ├── clases/
 │   ├── DBConexion.php           ✅ MAMP activo
-│   ├── Producto.php             ✅ lectura + CRUD + categorías N:M
+│   ├── Producto.php             ✅ lectura + CRUD (1 categoría por formulario, N:M en BD)
 │   └── Usuario.php              ✅ porEmail, verificarCredenciales, sesión
 ├── admin/
-│   ├── index.php                ✅ session_start, whitelist, guard, salir
+│   ├── index.php                ✅ session_start, whitelist, guard, salir (sin precarga BD)
 │   └── vistas/
 │       ├── ingresar.php         ✅ POST login + diseño frontend
 │       ├── productos.php        ✅ backend B3 · UI ⬜
@@ -223,7 +236,7 @@ PHP-E-Commerce/
 │       └── 404.php              ✅
 ├── vistas/
 │   ├── home.php                 ✅
-│   ├── listado.php              ✅ lee BD vía index.php
+│   ├── listado.php              ✅ lee BD en la vista (Producto::todas)
 │   ├── detalle.php              ✅ getDescripcion() desde BD
 │   ├── contacto.php             ✅
 │   └── 404.php                  ✅
@@ -304,8 +317,8 @@ Verificado: login, guard de sesión, redirect y logout funcionan correctamente.
 
 | Orden | Tarea | Archivo(s) | Estado |
 |-------|-------|------------|--------|
-| B1 | Métodos `crear()`, `actualizar()`, `eliminar()` en `Producto` | `clases/Producto.php` | ✅ |
-| B2 | Alta/edición: persistir relación N:M en `productos_tienen_categorias` | `Producto.php` + vistas | ✅ |
+| B1 | Métodos `crear()`, `actualizar()`, `eliminar()` en `Producto` (`$categoriaId` como `int`) | `clases/Producto.php` | ✅ |
+| B2 | Alta/edición: persistir categoría en `productos_tienen_categorias` (1 `categoria_id` por formulario) | `Producto.php` + vistas | ✅ |
 | B3 | Listado admin desde BD | `admin/vistas/productos.php` | ✅ backend |
 | B4 | Formulario alta + POST → INSERT | `admin/vistas/producto-alta.php` | ✅ backend |
 | B5 | Formulario edición pre-poblado + POST → UPDATE | `admin/vistas/producto-editar.php` | ✅ backend |
@@ -316,7 +329,8 @@ Reglas PDO para el ABM (igual que lectura):
 - Solo `prepare()` + placeholders (`:nombre`, `:id`, etc.).
 - `usuario_fk` en INSERT: usar `Usuario::idEnSesion()`.
 - Validar `id` inexistente antes de editar/borrar → mensaje o redirect al listado.
-- Campos mínimos del producto: `nombre`, `precio`, `descripcion_corta`, `descripcion`, `imagen`, categoría(s).
+- Campos mínimos del producto: `nombre`, `precio`, `descripcion_corta`, `descripcion`, `imagen`, `categoria_id` (una categoría por alta/edición; tabla N:M sigue en BD).
+- Estilo alineado al docente: `prepare()` + `execute()` en lecturas, datos cargados en cada vista, ABM sin transacciones ni helpers privados extra.
 
 #### Paso C — Fase 5 frontend (diseño del panel ABM) ⬜ **siguiente**
 

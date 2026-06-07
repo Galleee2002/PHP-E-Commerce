@@ -1,11 +1,8 @@
 <?php
 
-/**
- * B6 — Baja de producto (backend).
- * GET: ?seccion=producto-borrar&id=N — pantalla de confirmación (frontend).
- * POST: producto_id — ejecuta Producto::eliminar() y redirige al listado.
- */
+require_once __DIR__ . '/../../clases/Producto.php';
 
+$productoModel = new Producto;
 $producto = null;
 $idProducto = (int) ($_GET['id'] ?? 0);
 
@@ -17,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    (new Producto())->eliminar($idProducto);
+    $productoModel->eliminar($idProducto);
 
     header('Location: index.php?seccion=productos');
     exit;
@@ -28,7 +25,7 @@ if ($idProducto <= 0) {
     exit;
 }
 
-$producto = (new Producto())->porId($idProducto);
+$producto = $productoModel->porId($idProducto);
 
 if ($producto === null) {
     header('Location: index.php?seccion=productos');

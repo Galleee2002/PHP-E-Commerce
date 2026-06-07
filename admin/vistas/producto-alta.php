@@ -1,10 +1,9 @@
 <?php
 
-/**
- * B4 — Alta de producto (backend).
- * $categorias: array cargado en admin/index.php vía Producto::todasCategorias().
- * POST esperado: nombre, precio, descripcion_corta, descripcion, imagen, categoria_id.
- */
+require_once __DIR__ . '/../../clases/Producto.php';
+
+$producto = new Producto;
+$categorias = $producto->todasCategorias();
 
 $errorAlta = '';
 $valoresAlta = [
@@ -40,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorAlta = 'Completá todos los campos obligatorios con valores válidos.';
     } else {
         try {
-            (new Producto())->crear(
+            $producto->crear(
                 $valoresAlta['nombre'],
                 $precio,
                 $valoresAlta['descripcion_corta'],
                 $valoresAlta['descripcion'],
                 $valoresAlta['imagen'],
                 Usuario::idEnSesion(),
-                [$valoresAlta['categoria_id']]
+                $valoresAlta['categoria_id']
             );
 
             header('Location: index.php?seccion=productos');

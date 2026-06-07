@@ -3,14 +3,13 @@
 session_start();
 
 require_once __DIR__ . '/../clases/Usuario.php';
-require_once __DIR__ . '/../clases/Producto.php';
 
 $seccionesPermitidas = [
-    'ingresar' => __DIR__ . '/vistas/ingresar.php',
-    'productos' => __DIR__ . '/vistas/productos.php',
-    'producto-alta' => __DIR__ . '/vistas/producto-alta.php',
-    'producto-editar' => __DIR__ . '/vistas/producto-editar.php',
-    'producto-borrar' => __DIR__ . '/vistas/producto-borrar.php',
+    'ingresar',
+    'productos',
+    'producto-alta',
+    'producto-editar',
+    'producto-borrar',
 ];
 
 $seccionActual = $_GET['seccion'] ?? 'ingresar';
@@ -21,29 +20,18 @@ if ($seccionActual === 'salir') {
     exit;
 }
 
-$requiereSesion = $seccionActual !== 'ingresar';
-
 if ($seccionActual === 'ingresar' && Usuario::estaLogueado()) {
     header('Location: ?seccion=productos');
     exit;
 }
 
-if ($requiereSesion && !Usuario::estaLogueado()) {
+if ($seccionActual !== 'ingresar' && !Usuario::estaLogueado()) {
     header('Location: ?seccion=ingresar');
     exit;
 }
 
-$productos = [];
-$categorias = [];
-
-if ($seccionActual === 'productos') {
-    $productos = (new Producto())->todas();
+if (!in_array($seccionActual, $seccionesPermitidas, true)) {
+    $seccionActual = '404';
 }
 
-if (in_array($seccionActual, ['producto-alta', 'producto-editar'], true)) {
-    $categorias = (new Producto())->todasCategorias();
-}
-
-$rutaSeccion = $seccionesPermitidas[$seccionActual] ?? __DIR__ . '/vistas/404.php';
-
-require $rutaSeccion;
+require __DIR__ . '/vistas/' . $seccionActual . '.php';

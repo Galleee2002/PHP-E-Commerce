@@ -30,6 +30,20 @@ El frontend debe **reemplazar los stubs HTML** dentro de `admin/vistas/` **sin m
 - Todas las rutas son **relativas** al directorio `admin/` (ej. `index.php?seccion=productos`)
 - Sesión requerida en todas las secciones excepto `ingresar`
 - Cerrar sesión: `index.php?seccion=salir`
+- `admin/index.php` solo hace **whitelist + guard de sesión** y luego `require` de la vista (patrón docente). **No precarga datos** de productos ni categorías.
+
+### Carga de datos (patrón docente)
+
+Cada vista admin hace su propio `require_once` de `Producto.php` y consulta lo que necesita (igual que `noticias.php` en Saraza Basket):
+
+| Vista | Carga en el bloque PHP superior |
+|-------|----------------------------------|
+| `productos.php` | `$productos = (new Producto)->todas()` |
+| `producto-alta.php` | `$categorias = (new Producto)->todasCategorias()` |
+| `producto-editar.php` | `$categorias = (new Producto)->todasCategorias()` + lógica de edición |
+| `producto-borrar.php` | `$producto = (new Producto)->porId($id)` en GET válido |
+
+El frontend **no debe** mover esta lógica a `admin/index.php`.
 
 ### Credenciales de prueba
 
@@ -98,9 +112,18 @@ Reutilizar la línea del login admin:
 
 **URL:** `admin/index.php?seccion=productos`
 
+**Bloque PHP superior (no modificar)**
+
+```php
+require_once __DIR__ . '/../../clases/Producto.php';
+
+$producto = new Producto;
+$productos = $producto->todas();
+```
+
 | Variable | Tipo | Descripción |
 |----------|------|-------------|
-| `$productos` | `Producto[]` | Listado desde BD, cargado en `admin/index.php` |
+| `$productos` | `Producto[]` | Listado desde BD, cargado en esta vista (`Producto::todas()`) |
 | `$usuarioId` | `int` | ID del admin logueado |
 | `$usuarioEmail` | `string` | Email de sesión |
 
@@ -148,7 +171,7 @@ Reutilizar la línea del login admin:
 
 | Variable | Tipo | Descripción |
 |----------|------|-------------|
-| `$categorias` | `array` | `[['categoria_id' => int, 'nombre' => string], ...]` |
+| `$categorias` | `array` | `[['categoria_id' => int, 'nombre' => string], ...]` — cargado en esta vista |
 | `$valoresAlta` | `array` | Valores repoblados del formulario |
 | `$errorAlta` | `string` | Mensaje de error; vacío si no hay |
 
@@ -201,9 +224,8 @@ Reutilizar la línea del login admin:
 
 | Variable | Tipo | Descripción |
 |----------|------|-------------|
-| `$categorias` | `array` | Opciones del select (igual que alta) |
-| `$valoresEdicion` | `array` | Valores pre-poblados o repoblados tras error |
-| `$categoriasProducto` | `int[]` | IDs de categorías actuales del producto |
+| `$categorias` | `array` | Opciones del select — cargado en esta vista |
+| `$valoresEdicion` | `array` | Valores pre-poblados o repoblados tras error (incluye `categoria_id`) |
 | `$errorEdicion` | `string` | Mensaje de error |
 | `$producto` | `Producto\|null` | Objeto cargado (GET o tras error POST) |
 
@@ -319,8 +341,8 @@ Marcar al integrar cada pantalla:
 - [ ] Redirect a listado tras éxito
 
 ### Edición
-- [ ] Formulario llega pre-poblado con datos del producto
-- [ ] Categoría actual seleccionada en el select
+- [ ] Formulario llega pre-poblado con `$valoresEdicion` (incluye `categoria_id`)
+- [ ] Categoría actual seleccionada en el select (`$valoresEdicion['categoria_id']`)
 - [ ] Cambios persisten en BD y sitio público
 - [ ] `id=999` redirige al listado (backend)
 
@@ -350,8 +372,8 @@ Marcar al integrar cada pantalla:
 
 | Archivo | No modificar sin coordinar |
 |---------|---------------------------|
-| `admin/index.php` | Router, sesión, carga de datos |
-| `clases/Producto.php` | CRUD PDO |
+| `admin/index.php` | Router, sesión, guard (sin carga de datos) |
+| `clases/Producto.php` | CRUD PDO (`crear`/`actualizar` reciben un `int $categoriaId`) |
 | `clases/Usuario.php` | Login/sesión |
 | `clases/DBConexion.php` | Conexión BD |
 

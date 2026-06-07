@@ -1,15 +1,12 @@
 <?php
 
-/**
- * B5 — Edición de producto (backend).
- * $categorias: array cargado en admin/index.php vía Producto::todasCategorias().
- * GET: ?seccion=producto-editar&id=N
- * POST: producto_id, nombre, precio, descripcion_corta, descripcion, imagen, categoria_id.
- */
+require_once __DIR__ . '/../../clases/Producto.php';
+
+$productoModel = new Producto;
+$categorias = $productoModel->todasCategorias();
 
 $errorEdicion = '';
 $producto = null;
-$categoriasProducto = [];
 $valoresEdicion = [
     'producto_id' => 0,
     'nombre' => '',
@@ -52,18 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         || $valoresEdicion['categoria_id'] <= 0
     ) {
         $errorEdicion = 'Completá todos los campos obligatorios con valores válidos.';
-        $producto = (new Producto())->porId($idProducto);
-        $categoriasProducto = [$valoresEdicion['categoria_id']];
+        $producto = $productoModel->porId($idProducto);
     } else {
         try {
-            $actualizado = (new Producto())->actualizar(
+            $actualizado = $productoModel->actualizar(
                 $idProducto,
                 $valoresEdicion['nombre'],
                 $precio,
                 $valoresEdicion['descripcion_corta'],
                 $valoresEdicion['descripcion'],
                 $valoresEdicion['imagen'],
-                [$valoresEdicion['categoria_id']]
+                $valoresEdicion['categoria_id']
             );
 
             if (!$actualizado) {
@@ -75,8 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } catch (InvalidArgumentException $exception) {
             $errorEdicion = $exception->getMessage();
-            $producto = (new Producto())->porId($idProducto);
-            $categoriasProducto = [$valoresEdicion['categoria_id']];
+            $producto = $productoModel->porId($idProducto);
         }
     }
 } else {
@@ -85,14 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $producto = (new Producto())->porId($idProducto);
+    $producto = $productoModel->porId($idProducto);
 
     if ($producto === null) {
         header('Location: index.php?seccion=productos');
         exit;
     }
 
-    $categoriasProducto = (new Producto())->categoriasPorProducto($idProducto);
+    $categoriasProducto = $productoModel->categoriasPorProducto($idProducto);
 
     $valoresEdicion = [
         'producto_id' => $producto->getId(),
@@ -101,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'descripcion_corta' => $producto->getDescripcionCorta(),
         'descripcion' => $producto->getDescripcion(),
         'imagen' => $producto->getImagen(),
-        'categoria_id' => $categoriasProducto[0] ?? 0,
+        'categoria_id' => (int) ($categoriasProducto[0] ?? 0),
     ];
 }
 

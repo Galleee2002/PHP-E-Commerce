@@ -1,10 +1,9 @@
 <?php
 
-/**
- * B3 — Listado admin (backend).
- * $productos: Producto[] cargado en admin/index.php vía Producto::todas().
- * Disponible para el frontend: getId(), getNombre(), getPrecio(), getCategoria(), etc.
- */
+require_once __DIR__ . '/../../clases/Producto.php';
+
+$producto = new Producto;
+$productos = $producto->todas();
 
 $usuarioId = Usuario::idEnSesion();
 $usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';

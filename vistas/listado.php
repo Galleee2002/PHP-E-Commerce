@@ -1,7 +1,12 @@
+<?php
+require_once __DIR__ . '/../clases/Producto.php';
+$producto = new Producto;
+$productos = $producto->todas();
+?>
 <section class="listado" aria-labelledby="titulo-listado">
     <h1 class="page-title" id="titulo-listado">Listado de productos</h1>
     <section aria-label="Catalogo de juegos" class="product-grid">
-        <?php foreach (($productos ?? []) as $producto): ?>
+        <?php foreach ($productos as $producto): ?>
             <article class="product-card">
                 <img class="product-card__img" src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>">
                 <h2 class="product-card__title"><?= $producto->getNombre() ?></h2>
