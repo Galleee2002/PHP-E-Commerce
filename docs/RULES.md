@@ -17,12 +17,12 @@ Guía de implementación para completar el **2.º parcial** de Programación II 
 | 3 | `Producto` lectura PDO + listado/detalle | ✅ Hecho |
 | 4 | `Usuario` + login admin | ✅ Hecho — lógica, sesión, guard y **UI login** |
 | 5 | ABM admin (alta, edición, baja) | ✅ Backend B1–B6 · UI completa (baja vía `<dialog>` en listado) |
-| 6 | Pulido (`htmlspecialchars`, edge cases) | ⬜ Pendiente |
-| 7 | Empaquetado (`sitio/`, zip, `datos.txt`) | ⬜ Pendiente |
+| 6 | Pulido (`htmlspecialchars`, edge cases) | ✅ Hecho |
+| 7 | Empaquetado (`sitio/`, zip, `datos.txt`) | ✅ Hecho |
 
-**Próximo paso:** Fase 6 (`htmlspecialchars` en sitio público) → DER → empaquetado final.
+**Próximo paso:** Pruebas finales ABM (§ 8.2) → subir `kuringhian-milagros_garcia-gael.zip` al campus.
 
-**Verificado contra** [Programación II - Segundo Parcial.pdf](Programación%20II%20-%20Segundo%20Parcial.pdf): sitio público ✅ · login ✅ · ABM ✅ · DER ✅ · `htmlspecialchars` parcial ⬜ · entrega final ⬜.
+**Verificado contra** [Programación II - Segundo Parcial.pdf](Programación%20II%20-%20Segundo%20Parcial.pdf): sitio público ✅ · login ✅ · ABM ✅ · DER ✅ · `htmlspecialchars` ✅ · entrega final ⬜.
 
 ---
 
@@ -96,9 +96,9 @@ Marcar antes de subir al campus:
 
 ### Entrega
 
-- [ ] Zip con carpetas `sitio/`, `db/`, `der/` y `datos.txt` en la raíz del zip
-- [ ] `datos.txt` indica **2do parcial** + credenciales admin (`admin@galmir.local` / `admin123`)
-- [ ] Nombre del zip: `kuringhian-milagros_garcia-gael.zip`
+- [x] Zip con carpetas `sitio/`, `db/`, `der/` y `datos.txt` en la raíz del zip
+- [x] `datos.txt` indica **2do parcial** + credenciales admin (`admin@galmir.local` / `admin123`)
+- [x] Nombre del zip: `kuringhian-milagros_garcia-gael.zip`
 
 ---
 
@@ -114,9 +114,9 @@ Marcar antes de subir al campus:
 | CRUD productos | Solo lectura | `crear`, `actualizar`, `eliminar` | ✅ Hecho |
 | Tabla relacionada | No existía | `categorias` + N:M | ✅ Hecho |
 | Detalle | Descripción hardcodeada | `getDescripcion()` desde BD | ✅ Hecho |
-| Escape HTML | Parcial (admin sí, público no) | `htmlspecialchars()` en **todas** las salidas | ⬜ Fase 6 |
-| Estructura entrega | Proyecto en raíz | `sitio/` + `db/` + `der/` | ⬜ Fase 7 |
-| `datos.txt` | 1er parcial | 2do parcial + credenciales | ⬜ Pendiente |
+| Escape HTML | Parcial (admin sí, público no) | `htmlspecialchars()` en **todas** las salidas | ✅ Fase 6 |
+| Estructura entrega | Proyecto en raíz | `sitio/` + `db/` + `der/` | ✅ Fase 7 |
+| `datos.txt` | 1er parcial | 2do parcial + credenciales | ✅ Hecho |
 | DER | — | `der/dw3_kuringhian_garcia.png` | ✅ |
 
 ---
@@ -200,7 +200,17 @@ $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
 
 Propiedades privadas en **snake_case**: `$producto_id`, `$descripcion_corta`. Getters públicos en camelCase: `getId()`, `getDescripcionCorta()`.
 
-### Salida HTML (Fase 6)
+### Salida HTML (Fase 6) ✅
+
+Todas las salidas dinámicas usan `htmlspecialchars(..., ENT_QUOTES, 'UTF-8')`:
+
+| Área | Archivos |
+|------|----------|
+| Sitio público | `vistas/listado.php`, `vistas/detalle.php` |
+| Includes | `includes/header.php` (`$_GET['q']` en búsqueda) |
+| Admin | `admin/vistas/ingresar.php`, `productos.php`, `producto-alta.php`, `producto-editar.php` |
+
+`vistas/home.php`, `vistas/contacto.php` y `vistas/404.php` no tienen salida dinámica desde BD ni `$_GET`/`$_POST`.
 
 ```php
 <?= htmlspecialchars($producto->getNombre(), ENT_QUOTES, 'UTF-8') ?>
@@ -252,7 +262,7 @@ PHP-E-Commerce/
 │   ├── RULES.md                 ✅
 │   └── Programación II - Segundo Parcial.pdf
 ├── der/dw3_kuringhian_garcia.png  ✅
-└── datos.txt                    ⬜ actualizar a 2do parcial + credenciales admin
+└── datos.txt                    ✅ 2do parcial + credenciales admin
 ```
 
 ### Objetivo al empaquetar (`sitio/`)
@@ -305,8 +315,8 @@ Las credenciales son las del **panel web**, no las de MySQL `root`.
 | 3 | **`Producto` lectura** | `todas()`, `porId()`, listado, detalle | ✅ |
 | 4 | **`Usuario` + login** | `Usuario.php`, `admin/`, sesión, guard, UI login | ✅ |
 | 5 | **ABM admin** | Backend B1–B6 + UI (login, listado, alta, edición, baja vía dialog) | ✅ |
-| 6 | **Pulido** | `htmlspecialchars` en público + admin, pruebas ABM | ⬜ **siguiente** |
-| 7 | **Empaquetado** | `sitio/`, `db/`, `der/`, `datos.txt`, zip | ⬜ |
+| 6 | **Pulido** | `htmlspecialchars` en público + admin, pruebas ABM | ✅ |
+| 7 | **Empaquetado** | `sitio/`, `db/`, `der/`, `datos.txt`, zip | ✅ Hecho |
 
 ### 8.1 Pasos lógicos tras el diseño del login (Fase 4 → 5)
 
@@ -355,11 +365,11 @@ Todas las pantallas del panel tienen UI integrada:
 
 El HTML mínimo en `producto-borrar.php` (GET) solo aparece si alguien abre esa URL directo en el navegador; el flujo normal no lo usa.
 
-#### Paso D — Fase 6 (pulido) ⬜ **siguiente**
+#### Paso D — Fase 6 (pulido) ✅
 
-1. **`htmlspecialchars()` en sitio público:** `vistas/home.php`, `listado.php`, `detalle.php`, `contacto.php` e `includes/` — hoy solo está aplicado en vistas admin.
-2. **Revisar admin:** confirmar escape en todas las salidas dinámicas restantes.
-3. **Pruebas ABM end-to-end** (checklist § 8.2).
+1. **`htmlspecialchars()` en sitio público:** `vistas/listado.php`, `vistas/detalle.php` e `includes/header.php` (`$_GET['q']`). `home.php`, `contacto.php` y `404.php` sin salida dinámica.
+2. **Admin:** escape confirmado en `ingresar`, `productos`, `producto-alta` y `producto-editar`; `producto-borrar` solo expone `(int)` en fallback GET.
+3. **Pruebas ABM end-to-end** (checklist § 8.2) — pendiente de marcar manualmente antes de entregar.
 
 #### Paso E — Fase 7 (entrega) ⬜
 
@@ -395,7 +405,7 @@ Marcar al cerrar Fase 5–6:
 - [ ] Producto desaparece del sitio público
 
 **General**
-- [ ] `htmlspecialchars()` en todas las salidas dinámicas (público + admin)
+- [x] `htmlspecialchars()` en todas las salidas dinámicas (público + admin)
 - [ ] HTML5 semántico y CSS coherente con la temática
 - [ ] Zip con estructura `sitio/`, `db/`, `der/`, `datos.txt`
 
@@ -528,8 +538,8 @@ Terminal MAMP (alternativa):
 
 ## Resumen rápido
 
-**Hecho:** BD + SQL + `DBConexion` + `Producto` (lectura + CRUD) + sitio público + login admin + ABM completo (backend + UI, baja vía dialog).
+**Hecho:** BD + SQL + `DBConexion` + `Producto` (lectura + CRUD) + sitio público + login admin + ABM completo (backend + UI, baja vía dialog) + `htmlspecialchars` (público + admin).
 
-**Pendiente:** `htmlspecialchars` en sitio público → pruebas finales → `datos.txt` + `sitio/` + zip.
+**Pendiente:** pruebas finales ABM (§ 8.2) → subir `kuringhian-milagros_garcia-gael.zip` al campus.
 
 Referencia docente: `../Clase_Ejemplo_Parcial_2/proyecto/`.

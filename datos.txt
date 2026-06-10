@@ -6,4 +6,7 @@ Turno: Noche
 Comisión: DWN3AP
 Apellido y nombre: Milagros Sol Kuringhian / Gael Garcia Nuñez
 Docente: Santiago Gallino
-Carácter de la entrega: 1er Parcial
+Carácter de la entrega: 2do Parcial
+
+Email administrador: admin@galmir.local
+Password administrador: admin123

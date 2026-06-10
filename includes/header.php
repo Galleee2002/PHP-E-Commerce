@@ -1,5 +1,6 @@
 <?php
 $seccionActual ??= 'home';
+$busquedaHeader = htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES, 'UTF-8');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -38,7 +39,7 @@ $seccionActual ??= 'home';
             <form class="search-form" action="index.php" method="get" role="search" aria-label="Buscar productos">
                 <input type="hidden" name="seccion" value="listado">
                 <label class="sr-only" for="busqueda-header">Buscar</label>
-                <input class="search-form__input" id="busqueda-header" name="q" type="search" placeholder="Buscar juego...">
+                <input class="search-form__input" id="busqueda-header" name="q" type="search" placeholder="Buscar juego..." value="<?= $busquedaHeader ?>">
                 <button class="search-form__submit" type="submit">Buscar</button>
             </form>
         </nav>

@@ -25,24 +25,24 @@ $productoSeleccionado = (new Producto)->porId($idProducto);
     </p>
     <article class="detail-article">
         <figure class="detail-article__media">
-            <img class="detail-article__img" src="<?= $productoSeleccionado->getImagen() ?>" alt="<?= $productoSeleccionado->getNombre() ?>">
+            <img class="detail-article__img" src="<?= htmlspecialchars($productoSeleccionado->getImagen(), ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($productoSeleccionado->getNombre(), ENT_QUOTES, 'UTF-8') ?>">
         </figure>
 
         <div class="detail-article__content">
             <header class="detail-article__intro">
                 <div class="detail-article__title-row">
-                    <h1 class="detail-article__title"><?= $productoSeleccionado->getNombre() ?></h1>
+                    <h1 class="detail-article__title"><?= htmlspecialchars($productoSeleccionado->getNombre(), ENT_QUOTES, 'UTF-8') ?></h1>
                     <p class="detail-article__price">$<?= number_format($productoSeleccionado->getPrecio(), 0, ',', '.') ?></p>
                 </div>
                 <p class="detail-article__category">
                     <span class="detail-article__category-label">Categoría</span>
-                    <?= $productoSeleccionado->getCategoria() ?>
+                    <?= htmlspecialchars($productoSeleccionado->getCategoria(), ENT_QUOTES, 'UTF-8') ?>
                 </p>
             </header>
 
             <section class="detail-article__section detail-article__section--description">
                 <h2 class="detail-article__section-title">Descripción</h2>
-                <p class="detail-article__text"><?= $productoSeleccionado->getDescripcion() ?></p>
+                <p class="detail-article__text"><?= htmlspecialchars($productoSeleccionado->getDescripcion(), ENT_QUOTES, 'UTF-8') ?></p>
             </section>
 
             <div class="detail-actions">
