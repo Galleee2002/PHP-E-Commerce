@@ -10,30 +10,14 @@ class Usuario
     private int $usuario_id = 0;
     private string $email = '';
     private string $password = '';
-    private ?string $nombre = null;
-    private ?string $apellido = null;
 
     public function porEmail(string $email): ?self
     {
         $db = (new DBConexion)->getConexion();
 
-        $consulta = "SELECT * FROM usuarios WHERE email = :email";
+        $consulta = "SELECT usuario_id, email, password FROM usuarios WHERE email = :email";
         $stmt = $db->prepare($consulta);
         $stmt->execute(['email' => $email]);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
-
-        $usuario = $stmt->fetch();
-
-        return $usuario === false ? null : $usuario;
-    }
-
-    public function porId(int $id): ?self
-    {
-        $db = (new DBConexion)->getConexion();
-
-        $consulta = "SELECT * FROM usuarios WHERE usuario_id = :id";
-        $stmt = $db->prepare($consulta);
-        $stmt->execute(['id' => $id]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
 
         $usuario = $stmt->fetch();
@@ -98,20 +82,5 @@ class Usuario
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    public function getNombre(): ?string
-    {
-        return $this->nombre;
-    }
-
-    public function getApellido(): ?string
-    {
-        return $this->apellido;
-    }
-
-    public function getNombreCompleto(): string
-    {
-        return trim(($this->nombre ?? '') . ' ' . ($this->apellido ?? ''));
     }
 }

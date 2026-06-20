@@ -1,6 +1,5 @@
 <?php
 $seccionActual ??= 'home';
-$busquedaHeader = htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES, 'UTF-8');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +12,7 @@ $busquedaHeader = htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES, 'UTF-8');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260505-2">
+    <link rel="stylesheet" href="css/estilos.css?v=20260620-1">
 </head>
     
 <body class="page">
@@ -36,12 +35,14 @@ $busquedaHeader = htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES, 'UTF-8');
                 </li>
             </ul>
 
-            <form class="search-form" action="index.php" method="get" role="search" aria-label="Buscar productos">
-                <input type="hidden" name="seccion" value="listado">
-                <label class="sr-only" for="busqueda-header">Buscar</label>
-                <input class="search-form__input" id="busqueda-header" name="q" type="search" placeholder="Buscar juego..." value="<?= $busquedaHeader ?>">
-                <button class="search-form__submit" type="submit">Buscar</button>
-            </form>
+            <div class="site-nav__actions">
+                <a class="admin-link" href="admin/index.php?seccion=ingresar" aria-label="Ingresar al panel de administración">
+                    <svg class="admin-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M20 21a8 8 0 1 0-16 0"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+            </div>
         </nav>
     </header>
     <main class="site-main<?= $seccionActual === 'home' ? ' site-main--home' : '' ?>">

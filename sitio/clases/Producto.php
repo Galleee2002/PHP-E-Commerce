@@ -211,19 +211,9 @@ class Producto
         return $this->producto_id;
     }
 
-    public function setId(int $id): void
-    {
-        $this->producto_id = $id;
-    }
-
     public function getNombre(): string
     {
         return $this->nombre;
-    }
-
-    public function setNombre(string $nombre): void
-    {
-        $this->nombre = $nombre;
     }
 
     public function getPrecio(): float
@@ -231,19 +221,9 @@ class Producto
         return $this->precio;
     }
 
-    public function setPrecio(float $precio): void
-    {
-        $this->precio = $precio;
-    }
-
     public function getCategoria(): string
     {
         return $this->categoria;
-    }
-
-    public function setCategoria(string $categoria): void
-    {
-        $this->categoria = $categoria;
     }
 
     public function getDescripcionCorta(): string
@@ -251,28 +231,13 @@ class Producto
         return $this->descripcion_corta;
     }
 
-    public function setDescripcionCorta(string $descripcionCorta): void
-    {
-        $this->descripcion_corta = $descripcionCorta;
-    }
-
     public function getDescripcion(): string
     {
         return $this->descripcion;
     }
 
-    public function setDescripcion(string $descripcion): void
-    {
-        $this->descripcion = $descripcion;
-    }
-
     public function getImagen(): string
     {
         return $this->imagen;
-    }
-
-    public function setImagen(string $imagen): void
-    {
-        $this->imagen = $imagen;
     }
 }

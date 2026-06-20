@@ -57,14 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-?>
-<?php
 $usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
-$adminBase = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/admin')), '/') . '/';
-$sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/') . '/';
 $imagenPreview = $valoresAlta['imagen'] !== ''
-    ? $sitioBase . $valoresAlta['imagen']
+    ? '../' . $valoresAlta['imagen']
     : '';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -76,7 +73,7 @@ $imagenPreview = $valoresAlta['imagen'] !== ''
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>css/producto-editar.css?v=20260607-3">
+    <link rel="stylesheet" href="css/producto-editar.css?v=20260607-3">
 </head>
 
 <body class="admin-editar">
@@ -100,7 +97,7 @@ $imagenPreview = $valoresAlta['imagen'] !== ''
                     </svg>
                 </summary>
                 <div class="admin-editar__profile-menu">
-                    <a class="admin-editar__profile-logout" href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>index.php?seccion=salir">Cerrar sesión</a>
+                    <a class="admin-editar__profile-logout" href="index.php?seccion=salir">Cerrar sesión</a>
                 </div>
             </details>
         </div>
@@ -114,13 +111,13 @@ $imagenPreview = $valoresAlta['imagen'] !== ''
                     <p class="admin-editar__subtitle">Completa la información para agregar un nuevo juego de mesa a tu tienda.</p>
                     <nav aria-label="Ruta de navegación">
                         <ol class="admin-editar__breadcrumb">
-                            <li><a href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>index.php?seccion=productos">Productos</a></li>
+                            <li><a href="index.php?seccion=productos">Productos</a></li>
                             <li class="admin-editar__breadcrumb-sep" aria-hidden="true">›</li>
                             <li aria-current="page">Alta de producto</li>
                         </ol>
                     </nav>
                 </div>
-                <a class="admin-editar__back" href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>index.php?seccion=productos">
+                <a class="admin-editar__back" href="index.php?seccion=productos">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <polyline points="15 18 9 12 15 6"/>
                     </svg>
@@ -135,7 +132,7 @@ $imagenPreview = $valoresAlta['imagen'] !== ''
             <form
                 class="admin-editar__form"
                 method="post"
-                action="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>index.php?seccion=producto-alta"
+                action="index.php?seccion=producto-alta"
             >
                 <div class="admin-editar__grid">
                     <section class="admin-editar__card" aria-labelledby="alta-info-basica">
@@ -260,7 +257,7 @@ $imagenPreview = $valoresAlta['imagen'] !== ''
                 </div>
 
                 <footer class="admin-editar__actions">
-                    <a class="admin-editar__btn admin-editar__btn--ghost" href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>index.php?seccion=productos">Cancelar</a>
+                    <a class="admin-editar__btn admin-editar__btn--ghost" href="index.php?seccion=productos">Cancelar</a>
                     <button class="admin-editar__btn admin-editar__btn--primary" type="submit">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>

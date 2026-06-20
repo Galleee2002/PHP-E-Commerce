@@ -33,7 +33,7 @@ if ($producto === null) {
 }
 
 ?>
-<!-- TODO (frontend + Fase 5): confirmación de baja con form POST -->
+
 <section>
     <h1>Borrar producto #<?= (int) $producto->getId() ?></h1>
     <p><a href="index.php?seccion=productos">Volver al listado</a></p>

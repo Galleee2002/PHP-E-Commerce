@@ -5,13 +5,8 @@ require_once __DIR__ . '/../../clases/Producto.php';
 $producto = new Producto;
 $productos = $producto->todas();
 
-$usuarioId = Usuario::idEnSesion();
 $usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
 
-?>
-<?php
-$adminBase = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/admin')), '/') . '/';
-$sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/') . '/';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,7 +18,7 @@ $sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/')
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>css/productos.css?v=20260607-6">
+    <link rel="stylesheet" href="css/productos.css?v=20260607-6">
 </head>
 
 <body class="admin-productos">
@@ -47,7 +42,7 @@ $sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/')
                     </svg>
                 </summary>
                 <div class="admin-productos__profile-menu">
-                    <a class="admin-productos__profile-logout" href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>index.php?seccion=salir">Cerrar sesión</a>
+                    <a class="admin-productos__profile-logout" href="index.php?seccion=salir">Cerrar sesión</a>
                 </div>
             </details>
         </div>
@@ -60,7 +55,7 @@ $sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/')
                     <h1 class="admin-productos__title">Panel — Productos</h1>
                     <p class="admin-productos__subtitle">Gestiona todos los juegos de mesa de tu tienda.</p>
                 </div>
-                <a class="admin-productos__add" href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>index.php?seccion=producto-alta">
+                <a class="admin-productos__add" href="index.php?seccion=producto-alta">
                     <span class="admin-productos__add-icon" aria-hidden="true">+</span>
                     Agregar producto
                 </a>
@@ -88,7 +83,7 @@ $sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/')
                                         <div class="admin-productos__product">
                                             <img
                                                 class="admin-productos__thumb"
-                                                src="<?= htmlspecialchars($sitioBase . $producto->getImagen(), ENT_QUOTES, 'UTF-8') ?>"
+                                                src="<?= htmlspecialchars('../' . $producto->getImagen(), ENT_QUOTES, 'UTF-8') ?>"
                                                 alt=""
                                             >
                                             <div class="admin-productos__product-info">
@@ -103,7 +98,7 @@ $sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/')
                                         <div class="admin-productos__actions">
                                             <a
                                                 class="admin-productos__action admin-productos__action--edit"
-                                                href="<?= htmlspecialchars($adminBase, ENT_QUOTES, 'UTF-8') ?>index.php?seccion=producto-editar&id=<?= (int) $producto->getId() ?>"
+                                                href="index.php?seccion=producto-editar&amp;id=<?= (int) $producto->getId() ?>"
                                                 aria-label="Editar <?= htmlspecialchars($producto->getNombre(), ENT_QUOTES, 'UTF-8') ?>"
                                             >
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -164,7 +159,6 @@ $sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/')
             var productIdInput = document.getElementById('delete-product-id');
             var productNameEl = document.getElementById('delete-product-name');
             var cancelBtn = document.getElementById('delete-cancel');
-            var adminBase = <?= json_encode($adminBase, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 
             document.querySelectorAll('.admin-productos__action--delete').forEach(function (btn) {
                 btn.addEventListener('click', function () {
@@ -173,7 +167,7 @@ $sitioBase = rtrim(str_replace('\\', '/', dirname(rtrim($adminBase, '/'))), '/')
 
                     productIdInput.value = id;
                     productNameEl.textContent = name;
-                    form.action = adminBase + 'index.php?seccion=producto-borrar&id=' + id;
+                    form.action = 'index.php?seccion=producto-borrar&id=' + id;
                     dialog.showModal();
                 });
             });
