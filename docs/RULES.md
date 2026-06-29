@@ -32,7 +32,7 @@ Guía de implementación para completar el **2.º parcial** de Programación II 
 |---------|-----------|
 | Consigna 1.er parcial | [Programación II - Primer Parcial.pdf](Programación%20II%20-%20Primer%20Parcial.pdf) |
 | Consigna 2.º parcial | [Programación II - Segundo Parcial.pdf](Programación%20II%20-%20Segundo%20Parcial.pdf) |
-| Código en desarrollo | Raíz del repo (migrar a `sitio/` al empaquetar) |
+| Código PHP del proyecto | `sitio/` (única ubicación del sitio) |
 | SQL exportado | `db/dw3_kuringhian_garcia.sql` ✅ |
 | Ejemplo del docente (patrones) | `../Clase_Ejemplo_Parcial_2/proyecto/` |
 | Conexión PDO de referencia | `../Clase_Ejemplo_Parcial_2/proyecto/clases/DBConexion.php` |
@@ -115,7 +115,7 @@ Marcar antes de subir al campus:
 | Tabla relacionada | No existía | `categorias` + N:M | ✅ Hecho |
 | Detalle | Descripción hardcodeada | `getDescripcion()` desde BD | ✅ Hecho |
 | Escape HTML | Parcial (admin sí, público no) | `htmlspecialchars()` en **todas** las salidas | ✅ Fase 6 |
-| Estructura entrega | Proyecto en raíz | `sitio/` + `db/` + `der/` | ✅ Fase 7 |
+| Estructura entrega | Proyecto en raíz | Solo `sitio/` + `db/` + `der/` en repo | ✅ Fase 7 |
 | `datos.txt` | 1er parcial | 2do parcial + credenciales | ✅ Hecho |
 | DER | — | `der/dw3_kuringhian_garcia.png` | ✅ |
 
@@ -226,48 +226,32 @@ En `admin/index.php`, antes del HTML:
 
 ## 6. Mapa de archivos
 
-### Estado en repo (raíz)
+### Estructura del repo (entrega)
 
 ```
 PHP-E-Commerce/
-├── index.php                    ✅ whitelist + require vista (sin precarga BD)
-├── clases/
-│   ├── DBConexion.php           ✅ MAMP activo
-│   ├── Producto.php             ✅ lectura + CRUD (1 categoría por formulario, N:M en BD)
-│   └── Usuario.php              ✅ porEmail, verificarCredenciales, sesión
-├── admin/
-│   ├── index.php                ✅ session_start, whitelist, guard, salir (sin precarga BD)
-│   └── vistas/
-│       ├── ingresar.php         ✅ login + UI
-│       ├── productos.php        ✅ backend B3 + UI
-│       ├── producto-alta.php    ✅ backend B4 + UI
-│       ├── producto-editar.php  ✅ backend B5 + UI
-│       ├── producto-borrar.php  ✅ backend POST (GET solo fallback si se abre la URL directo)
-│       └── 404.php              ✅
-├── vistas/
-│   ├── home.php                 ✅
-│   ├── listado.php              ✅ lee BD en la vista (Producto::todas)
-│   ├── detalle.php              ✅ getDescripcion() desde BD
-│   ├── contacto.php             ✅
-│   └── 404.php                  ✅
-├── includes/                    ✅
-├── css/ · imgs/                 ✅ (incl. `login-img.webp`)
-├── admin/css/
-│   ├── ingresar.css             ✅
-│   ├── productos.css            ✅
-│   └── producto-editar.css      ✅ (alta + edición)
-├── data/productos.json          ✅ backup migración
+├── sitio/                       ✅ proyecto PHP completo (desarrollo y entrega)
+│   ├── index.php                ✅ whitelist + require vista (sin precarga BD)
+│   ├── clases/
+│   │   ├── DBConexion.php       ✅ MAMP activo
+│   │   ├── Producto.php         ✅ lectura + CRUD (1 categoría por formulario, N:M en BD)
+│   │   └── Usuario.php          ✅ porEmail, verificarCredenciales, sesión
+│   ├── admin/
+│   │   ├── index.php            ✅ session_start, whitelist, guard, salir
+│   │   ├── css/                 ✅ ingresar, productos, producto-editar
+│   │   └── vistas/              ✅ ingresar, productos, alta, editar, borrar, 404
+│   ├── vistas/                  ✅ home, listado, detalle, contacto, 404
+│   ├── includes/                ✅ header, footer
+│   ├── css/ · imgs/             ✅ (incl. `login-img.webp`)
+│   └── data/productos.json      ✅ backup migración
 ├── db/dw3_kuringhian_garcia.sql ✅
-├── docs/
-│   ├── RULES.md                 ✅
-│   └── Programación II - Segundo Parcial.pdf
 ├── der/dw3_kuringhian_garcia.png  ✅
-└── datos.txt                    ✅ 2do parcial + credenciales admin
+├── datos.txt                    ✅ 2do parcial + credenciales admin
+├── docs/                        ✅ RULES.md + PDFs consigna
+└── kuringhian-milagros_garcia-gael.zip  ✅ (generar antes de subir)
 ```
 
-### Objetivo al empaquetar (`sitio/`)
-
-Copiar el proyecto PHP completo dentro de `sitio/` manteniendo la misma estructura.
+No hay duplicado del PHP en la raíz: todo el código vive en `sitio/`.
 
 **Whitelist público:** `home`, `listado`, `detalle`, `contacto`, `404`
 
@@ -375,7 +359,7 @@ El HTML mínimo en `producto-borrar.php` (GET) solo aparece si alguien abre esa 
 
 1. **DER:** ✅ `der/dw3_kuringhian_garcia.png`
 2. **`datos.txt`:** carácter **2do Parcial** + credenciales admin (`admin@galmir.local` / `admin123`).
-3. **Empaquetado:** copiar proyecto PHP a `sitio/`, incluir `db/` y `der/`, generar `kuringhian-milagros_garcia-gael.zip`.
+3. **Empaquetado:** zip con `sitio/`, `db/`, `der/` y `datos.txt` → `kuringhian-milagros_garcia-gael.zip`.
 4. **Verificar:** no incluir `test-db.php`; perfil MAMP activo en `DBConexion.php`.
 
 ### 8.2 Checklist de pruebas (antes de entregar)
@@ -452,7 +436,7 @@ Solo **dos perfiles** en `DBConexion.php`. Dejar **uno activo**.
 ### Levantar el sitio (desarrollo)
 
 ```bash
-cd /ruta/al/proyecto
+cd /ruta/al/proyecto/sitio
 /Applications/MAMP/bin/php/php8.3.30/bin/php -S localhost:8000
 ```
 
@@ -467,7 +451,7 @@ cd /ruta/al/proyecto
 | `http://localhost:8000/admin/index.php?seccion=producto-editar&id=1` | Edición con UI |
 | `http://localhost:8000/admin/index.php?seccion=producto-borrar&id=1` | Solo POST desde dialog del listado (GET = fallback mínimo) |
 
-### `DBConexion.php` (estado actual en repo)
+### `sitio/clases/DBConexion.php` (estado actual)
 
 ```php
 <?php
