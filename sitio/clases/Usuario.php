@@ -33,7 +33,7 @@ class Usuario
             return null;
         }
 
-        if ($usuario->getPassword() !== $password) {
+        if (!password_verify($password, $usuario->getPassword())) {
             return null;
         }
 

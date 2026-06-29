@@ -2,13 +2,6 @@
 
 class DBConexion
 {
-    // --- Perfil XAMPP (Mac o Windows) ---
-    // public const DB_HOST = "127.0.0.1:3306";
-    // public const DB_USER = "root";
-    // public const DB_PASS = "";
-    // public const DB_NAME = "dw3_kuringhian_garcia";
-
-    // --- Perfil MAMP (Mac) — activo ---
     public const DB_HOST = "127.0.0.1:8889";
     public const DB_USER = "root";
     public const DB_PASS = "root";

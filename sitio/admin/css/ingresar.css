@@ -70,8 +70,6 @@ body.admin-login {
   box-shadow: var(--admin-login-shadow);
 }
 
-/* ── Panel izquierdo (branding) ── */
-
 .admin-login__brand {
   position: relative;
   display: flex;
@@ -176,8 +174,6 @@ body.admin-login {
   text-align-last: center;
   hyphens: auto;
 }
-
-/* ── Panel derecho (formulario) ── */
 
 .admin-login__form-panel {
   display: flex;
@@ -413,8 +409,6 @@ body.admin-login {
 .admin-login__footer a:hover {
   color: #5a0909;
 }
-
-/* ── Responsive ── */
 
 @media (max-width: 768px) {
   body.admin-login {
