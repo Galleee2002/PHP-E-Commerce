@@ -72,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <section class="admin-login__form-panel">
             <header class="admin-login__form-header">
-                <h2 class="admin-login__form-title">Inicia sesión en tu cuenta</h2>
-                <p class="admin-login__form-subtitle">Accede para gestionar tus pedidos, productos y más.</p>
+                <h2 class="admin-login__form-title">Iniciá sesión en tu cuenta</h2>
+                <p class="admin-login__form-subtitle">Accedé para gestionar tus pedidos, productos y más.</p>
             </header>
 
             <?php if ($errorLogin !== ''): ?>

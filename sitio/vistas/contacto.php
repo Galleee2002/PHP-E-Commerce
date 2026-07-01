@@ -1,7 +1,7 @@
 <section class="contact-page" aria-labelledby="titulo-contacto">
     <div class="contact-page__hero">
         <div class="contact-page__hero-copy">
-            <h1 class="contact-page__title" id="titulo-contacto">Ponte en contacto con nosotros</h1>
+            <h1 class="contact-page__title" id="titulo-contacto">Ponete en contacto con nosotros</h1>
             <p class="contact-page__lead">¿Tenés dudas, sugerencias o querés colaborar con Galmir? Completá el formulario y te responderemos lo antes posible.</p>
         </div>
         <div class="contact-page__hero-art">

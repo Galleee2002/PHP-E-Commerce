@@ -53,7 +53,7 @@ $usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
             <header class="admin-productos__header">
                 <div>
                     <h1 class="admin-productos__title">Panel — Productos</h1>
-                    <p class="admin-productos__subtitle">Gestiona todos los juegos de mesa de tu tienda.</p>
+                    <p class="admin-productos__subtitle">Gestioná todos los juegos de mesa de tu tienda.</p>
                 </div>
                 <a class="admin-productos__add" href="index.php?seccion=producto-alta">
                     <span class="admin-productos__add-icon" aria-hidden="true">+</span>

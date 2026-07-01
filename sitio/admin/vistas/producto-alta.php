@@ -108,7 +108,7 @@ $imagenPreview = $valoresAlta['imagen'] !== ''
             <header class="admin-editar__page-head">
                 <div class="admin-editar__page-head-text">
                     <h1 class="admin-editar__title">Alta de producto</h1>
-                    <p class="admin-editar__subtitle">Completa la información para agregar un nuevo juego de mesa a tu tienda.</p>
+                    <p class="admin-editar__subtitle">Completá la información para agregar un nuevo juego de mesa a tu tienda.</p>
                     <nav aria-label="Ruta de navegación">
                         <ol class="admin-editar__breadcrumb">
                             <li><a href="index.php?seccion=productos">Productos</a></li>

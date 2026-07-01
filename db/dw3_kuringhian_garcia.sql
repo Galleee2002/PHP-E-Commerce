@@ -11,7 +11,7 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`categoria_id`, `nombre`) VALUES
 (4, 'Cartas'),
-(2, 'Clasico'),
+(2, 'Clásico'),
 (1, 'Estrategia'),
 (5, 'Misterio'),
 (3, 'Rompecabezas');
@@ -28,12 +28,12 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `productos` (`producto_id`, `nombre`, `precio`, `descripcion_corta`, `descripcion`, `imagen`, `usuario_fk`, `fecha_alta`) VALUES
-(1, 'T.E.G.', 46999.00, 'Plan tactico y conquista de territorios para jugar en grupo.', 'Juego de estrategia por turnos donde cada jugador busca dominar el mapa con decisiones de ataque y defensa.', 'imgs/teg.webp', 1, '2026-06-06 18:43:38'),
-(2, 'Monopoly', 39999.00, 'Compra, venta y negociacion de propiedades para toda la familia.', 'Juego clasico donde el objetivo es administrar dinero, comprar calles y dejar sin fondos a los rivales.', 'imgs/monopoly.webp', 1, '2026-06-06 18:43:38'),
-(3, 'Rompecabezas Starry Sky', 21999.00, 'Puzzle de 1000 piezas para disfrutar solo o en familia.', 'Rompecabezas inspirado en una obra clasica, ideal para practicar paciencia y concentracion.', 'imgs/rompecabezas.webp', 1, '2026-06-06 18:43:38'),
-(4, 'No Lo Testeamos Ni Un Poco', 27999.00, 'Juego de cartas caotico y rapido para reuniones con amigos.', 'Partidas dinamicas con cartas impredecibles, ideal para grupos que buscan humor y diversion.', 'imgs/no_lo_testeamos_ni_un_poco.webp', 1, '2026-06-06 18:43:38'),
-(5, 'Burako', 25999.00, 'Version de buraco para 2 o mas jugadores.', 'Juego de combinaciones y estrategia liviana donde gana quien administra mejor sus cartas.', 'imgs/burako.webp', 1, '2026-06-06 18:43:38'),
-(6, 'Clue', 32999.00, 'Descubri al culpable, el arma y el lugar antes que los demas.', 'Juego de deduccion y misterio donde tenes que reunir pistas y razonar para resolver el crimen.', 'imgs/clue.webp', 1, '2026-06-06 18:43:38');
+(1, 'T.E.G.', 46999.00, 'Plan táctico y conquista de territorios para jugar en grupo.', 'Juego de estrategia por turnos donde cada jugador busca dominar el mapa con decisiones de ataque y defensa.', 'imgs/teg.webp', 1, '2026-06-06 18:43:38'),
+(2, 'Monopoly', 39999.00, 'Compra, venta y negociación de propiedades para toda la familia.', 'Juego clásico donde el objetivo es administrar dinero, comprar calles y dejar sin fondos a los rivales.', 'imgs/monopoly.webp', 1, '2026-06-06 18:43:38'),
+(3, 'Rompecabezas Starry Sky', 21999.00, 'Puzzle de 1000 piezas para disfrutar solo o en familia.', 'Rompecabezas inspirado en una obra clásica, ideal para practicar paciencia y concentración.', 'imgs/rompecabezas.webp', 1, '2026-06-06 18:43:38'),
+(4, 'No Lo Testeamos Ni Un Poco', 27999.00, 'Juego de cartas caótico y rápido para reuniones con amigos.', 'Partidas dinámicas con cartas impredecibles, ideal para grupos que buscan humor y diversión.', 'imgs/no_lo_testeamos_ni_un_poco.webp', 1, '2026-06-06 18:43:38'),
+(5, 'Burako', 25999.00, 'Versión de buraco para 2 o más jugadores.', 'Juego de combinaciones y estrategia liviana donde gana quien administra mejor sus cartas.', 'imgs/burako.webp', 1, '2026-06-06 18:43:38'),
+(6, 'Clue', 32999.00, 'Descubrí al culpable, el arma y el lugar antes que los demás.', 'Juego de deducción y misterio donde tenés que reunir pistas y razonar para resolver el crimen.', 'imgs/clue.webp', 1, '2026-06-06 18:43:38');
 
 CREATE TABLE `productos_tienen_categorias` (
   `producto_fk` int UNSIGNED NOT NULL,

@@ -4,7 +4,7 @@ Cuatrimestre: 3er Cuatrimestre
 Año: 2026
 Turno: Noche
 Comisión: DWN3AP
-Apellido y nombre: Milagros Sol Kuringhian / Gael Garcia Nuñez
+Apellido y nombre: Milagros Sol Kuringhian / Gael García Núñez
 Docente: Santiago Gallino
 Carácter de la entrega: 2do Parcial
 
