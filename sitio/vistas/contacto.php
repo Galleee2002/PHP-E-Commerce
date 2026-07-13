@@ -87,8 +87,8 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var form = document.querySelector('.contact-form');
-    var enviar = document.getElementById('contacto-enviar');
+    let form = document.querySelector('.contact-form');
+    let enviar = document.getElementById('contacto-enviar');
     enviar.addEventListener('click', function () {
       if (form.reportValidity()) {
         alert('Tu mensaje se envió con éxito. ¡Gracias por contactarnos!');
