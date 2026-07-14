@@ -154,16 +154,16 @@ $usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
 
     <script>
         (function () {
-            var dialog = document.getElementById('delete-dialog');
-            var form = document.getElementById('delete-form');
-            var productIdInput = document.getElementById('delete-product-id');
-            var productNameEl = document.getElementById('delete-product-name');
-            var cancelBtn = document.getElementById('delete-cancel');
+            const dialog = document.getElementById('delete-dialog');
+            const form = document.getElementById('delete-form');
+            const productIdInput = document.getElementById('delete-product-id');
+            const productNameEl = document.getElementById('delete-product-name');
+            const cancelBtn = document.getElementById('delete-cancel');
 
             document.querySelectorAll('.admin-productos__action--delete').forEach(function (btn) {
                 btn.addEventListener('click', function () {
-                    var id = btn.getAttribute('data-delete-id');
-                    var name = btn.getAttribute('data-delete-name');
+                    const id = btn.getAttribute('data-delete-id');
+                    const name = btn.getAttribute('data-delete-name');
 
                     productIdInput.value = id;
                     productNameEl.textContent = name;
