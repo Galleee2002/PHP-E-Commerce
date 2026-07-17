@@ -20,12 +20,12 @@ if ($seccionActual === 'salir') {
     exit;
 }
 
-if ($seccionActual === 'ingresar' && Usuario::estaLogueado()) {
+if ($seccionActual === 'ingresar' && Usuario::esAdmin()) {
     header('Location: ?seccion=productos');
     exit;
 }
 
-if ($seccionActual !== 'ingresar' && !Usuario::estaLogueado()) {
+if ($seccionActual !== 'ingresar' && !Usuario::esAdmin()) {
     header('Location: ?seccion=ingresar');
     exit;
 }

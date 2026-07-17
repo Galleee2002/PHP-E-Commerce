@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $usuario = (new Usuario)->verificarCredenciales($emailIngresado, $passwordIngresado);
 
-    if ($usuario !== null) {
+    if ($usuario !== null && $usuario->getRol() === Usuario::ROL_ADMIN) {
         Usuario::iniciarSesion($usuario);
         header('Location: ?seccion=productos');
         exit;

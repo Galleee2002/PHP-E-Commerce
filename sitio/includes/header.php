@@ -1,5 +1,7 @@
 <?php
 $seccionActual ??= 'home';
+$estaLogueado = class_exists('Usuario') && Usuario::estaLogueado();
+$esAdmin = class_exists('Usuario') && Usuario::esAdmin();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,7 +14,7 @@ $seccionActual ??= 'home';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260620-1">
+    <link rel="stylesheet" href="css/estilos.css?v=20260717-1">
 </head>
     
 <body class="page">
@@ -33,15 +35,32 @@ $seccionActual ??= 'home';
                 <li>
                     <a class="nav-link<?= $seccionActual === 'contacto' ? ' nav-link--current' : '' ?>" href="index.php?seccion=contacto" <?= $seccionActual === 'contacto' ? ' aria-current="page"' : '' ?>>Contacto</a>
                 </li>
+                <?php if ($estaLogueado): ?>
+                    <li>
+                        <a class="nav-link<?= $seccionActual === 'perfil' ? ' nav-link--current' : '' ?>" href="index.php?seccion=perfil" <?= $seccionActual === 'perfil' ? ' aria-current="page"' : '' ?>>Perfil</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="index.php?seccion=salir">Cerrar sesión</a>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a class="nav-link<?= $seccionActual === 'registro' ? ' nav-link--current' : '' ?>" href="index.php?seccion=registro" <?= $seccionActual === 'registro' ? ' aria-current="page"' : '' ?>>Registro</a>
+                    </li>
+                    <li>
+                        <a class="nav-link<?= $seccionActual === 'iniciar-sesion' ? ' nav-link--current' : '' ?>" href="index.php?seccion=iniciar-sesion" <?= $seccionActual === 'iniciar-sesion' ? ' aria-current="page"' : '' ?>>Iniciar sesión</a>
+                    </li>
+                <?php endif; ?>
             </ul>
 
             <div class="site-nav__actions">
-                <a class="admin-link" href="admin/index.php?seccion=ingresar" aria-label="Ingresar al panel de administración">
-                    <svg class="admin-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M20 21a8 8 0 1 0-16 0"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                </a>
+                <?php if ($esAdmin): ?>
+                    <a class="admin-link" href="admin/index.php?seccion=productos" aria-label="Ir al panel de administración">
+                        <svg class="admin-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M20 21a8 8 0 1 0-16 0"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </a>
+                <?php endif; ?>
             </div>
         </nav>
     </header>
