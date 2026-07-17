@@ -14,7 +14,7 @@ $esAdmin = class_exists('Usuario') && Usuario::esAdmin();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260717-1">
+    <link rel="stylesheet" href="css/estilos.css?v=20260717-2">
 </head>
     
 <body class="page">
@@ -37,22 +37,18 @@ $esAdmin = class_exists('Usuario') && Usuario::esAdmin();
                 </li>
                 <?php if ($estaLogueado): ?>
                     <li>
-                        <a class="nav-link<?= $seccionActual === 'perfil' ? ' nav-link--current' : '' ?>" href="index.php?seccion=perfil" <?= $seccionActual === 'perfil' ? ' aria-current="page"' : '' ?>>Perfil</a>
-                    </li>
-                    <li>
                         <a class="nav-link" href="index.php?seccion=salir">Cerrar sesión</a>
-                    </li>
-                <?php else: ?>
-                    <li>
-                        <a class="nav-link<?= $seccionActual === 'registro' ? ' nav-link--current' : '' ?>" href="index.php?seccion=registro" <?= $seccionActual === 'registro' ? ' aria-current="page"' : '' ?>>Registro</a>
-                    </li>
-                    <li>
-                        <a class="nav-link<?= $seccionActual === 'iniciar-sesion' ? ' nav-link--current' : '' ?>" href="index.php?seccion=iniciar-sesion" <?= $seccionActual === 'iniciar-sesion' ? ' aria-current="page"' : '' ?>>Iniciar sesión</a>
                     </li>
                 <?php endif; ?>
             </ul>
 
             <div class="site-nav__actions">
+                <a class="icon-link" href="index.php?seccion=<?= $estaLogueado ? 'perfil' : 'iniciar-sesion' ?>" aria-label="<?= $estaLogueado ? 'Ir a mi perfil' : 'Iniciar sesión' ?>">
+                    <img class="icon-link__img" src="imgs/usuario.png" alt="">
+                </a>
+                <a class="icon-link" href="#" aria-label="Ver carrito de compras">
+                    <img class="icon-link__img" src="imgs/carro.png" alt="">
+                </a>
                 <?php if ($esAdmin): ?>
                     <a class="admin-link" href="admin/index.php?seccion=productos" aria-label="Ir al panel de administración">
                         <svg class="admin-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
