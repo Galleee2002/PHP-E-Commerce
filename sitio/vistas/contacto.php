@@ -1,7 +1,7 @@
 <section class="contact-page" aria-labelledby="titulo-contacto">
     <div class="contact-page__hero">
         <div class="contact-page__hero-copy">
-            <h1 class="contact-page__title" id="titulo-contacto">Ponte en contacto con nosotros</h1>
+            <h1 class="contact-page__title" id="titulo-contacto">Ponete en contacto con nosotros</h1>
             <p class="contact-page__lead">¿Tenés dudas, sugerencias o querés colaborar con Galmir? Completá el formulario y te responderemos lo antes posible.</p>
         </div>
         <div class="contact-page__hero-art">
@@ -87,8 +87,8 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var form = document.querySelector('.contact-form');
-    var enviar = document.getElementById('contacto-enviar');
+    let form = document.querySelector('.contact-form');
+    let enviar = document.getElementById('contacto-enviar');
     enviar.addEventListener('click', function () {
       if (form.reportValidity()) {
         alert('Tu mensaje se envió con éxito. ¡Gracias por contactarnos!');

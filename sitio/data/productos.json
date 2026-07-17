@@ -4,7 +4,7 @@
     "nombre": "T.E.G.",
     "precio": 46999,
     "categoria": "Estrategia",
-    "descripcion_corta": "Plan tactico y conquista de territorios para jugar en grupo.",
+    "descripcion_corta": "Plan táctico y conquista de territorios para jugar en grupo.",
     "descripcion": "Juego de estrategia por turnos donde cada jugador busca dominar el mapa con decisiones de ataque y defensa.",
     "imagen": "imgs/teg.webp"
   },
@@ -12,9 +12,9 @@
     "id": 2,
     "nombre": "Monopoly",
     "precio": 39999,
-    "categoria": "Clasico",
-    "descripcion_corta": "Compra, venta y negociacion de propiedades para toda la familia.",
-    "descripcion": "Juego clasico donde el objetivo es administrar dinero, comprar calles y dejar sin fondos a los rivales.",
+    "categoria": "Clásico",
+    "descripcion_corta": "Compra, venta y negociación de propiedades para toda la familia.",
+    "descripcion": "Juego clásico donde el objetivo es administrar dinero, comprar calles y dejar sin fondos a los rivales.",
     "imagen": "imgs/monopoly.webp"
   },
   {
@@ -23,7 +23,7 @@
     "precio": 21999,
     "categoria": "Rompecabezas",
     "descripcion_corta": "Puzzle de 1000 piezas para disfrutar solo o en familia.",
-    "descripcion": "Rompecabezas inspirado en una obra clasica, ideal para practicar paciencia y concentracion.",
+    "descripcion": "Rompecabezas inspirado en una obra clásica, ideal para practicar paciencia y concentración.",
     "imagen": "imgs/rompecabezas.webp"
   },
   {
@@ -31,8 +31,8 @@
     "nombre": "No Lo Testeamos Ni Un Poco",
     "precio": 27999,
     "categoria": "Cartas",
-    "descripcion_corta": "Juego de cartas caotico y rapido para reuniones con amigos.",
-    "descripcion": "Partidas dinamicas con cartas impredecibles, ideal para grupos que buscan humor y diversion.",
+    "descripcion_corta": "Juego de cartas caótico y rápido para reuniones con amigos.",
+    "descripcion": "Partidas dinámicas con cartas impredecibles, ideal para grupos que buscan humor y diversión.",
     "imagen": "imgs/no_lo_testeamos_ni_un_poco.webp"
   },
   {
@@ -40,7 +40,7 @@
     "nombre": "Burako",
     "precio": 25999,
     "categoria": "Cartas",
-    "descripcion_corta": "Version de buraco para 2 o mas jugadores.",
+    "descripcion_corta": "Versión de buraco para 2 o más jugadores.",
     "descripcion": "Juego de combinaciones y estrategia liviana donde gana quien administra mejor sus cartas.",
     "imagen": "imgs/burako.webp"
   },
@@ -49,8 +49,8 @@
     "nombre": "Clue",
     "precio": 32999,
     "categoria": "Misterio",
-    "descripcion_corta": "Descubri al culpable, el arma y el lugar antes que los demas.",
-    "descripcion": "Juego de deduccion y misterio donde tenes que reunir pistas y razonar para resolver el crimen.",
+    "descripcion_corta": "Descubrí al culpable, el arma y el lugar antes que los demás.",
+    "descripcion": "Juego de deducción y misterio donde tenés que reunir pistas y razonar para resolver el crimen.",
     "imagen": "imgs/clue.webp"
   }
 ]
