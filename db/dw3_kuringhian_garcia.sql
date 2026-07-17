@@ -53,11 +53,34 @@ CREATE TABLE `usuarios` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nombre` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `apellido` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `apellido` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rol` enum('comun','admin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'comun'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `usuarios` (`usuario_id`, `email`, `password`, `nombre`, `apellido`) VALUES
-(1, 'admin@galmir.local', '$2y$10$69jvgm2s9KH7L5TWb3Ii0Oc5pixmrpbWT3exKoWNZtrrvOsoCOZyi', 'Admin', 'Galmir');
+INSERT INTO `usuarios` (`usuario_id`, `email`, `password`, `nombre`, `apellido`, `rol`) VALUES
+(1, 'admin@galmir.local', '$2y$10$69jvgm2s9KH7L5TWb3Ii0Oc5pixmrpbWT3exKoWNZtrrvOsoCOZyi', 'Admin', 'Galmir', 'admin'),
+(2, 'usuario@galmir.local', '$2y$12$1v99.fQp/pQKYgraqywQC.dbg9XJpiMhTLiCRBbVoYYS6kkRKHN26', 'Usuario', 'Prueba', 'comun');
+
+CREATE TABLE `compras` (
+  `compra_id` int UNSIGNED NOT NULL,
+  `usuario_fk` int UNSIGNED NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `total` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `compras` (`compra_id`, `usuario_fk`, `fecha`, `total`) VALUES
+(1, 2, '2026-07-10 15:30:00', 86998.00);
+
+CREATE TABLE `compras_tienen_productos` (
+  `compra_fk` int UNSIGNED NOT NULL,
+  `producto_fk` int UNSIGNED NOT NULL,
+  `cantidad` int UNSIGNED NOT NULL DEFAULT 1,
+  `precio_unitario` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `compras_tienen_productos` (`compra_fk`, `producto_fk`, `cantidad`, `precio_unitario`) VALUES
+(1, 1, 1, 46999.00),
+(1, 2, 1, 39999.00);
 
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`categoria_id`),
@@ -76,6 +99,14 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`usuario_id`),
   ADD UNIQUE KEY `email` (`email`);
 
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`compra_id`),
+  ADD KEY `fk_compras_usuario` (`usuario_fk`);
+
+ALTER TABLE `compras_tienen_productos`
+  ADD PRIMARY KEY (`compra_fk`,`producto_fk`),
+  ADD KEY `fk_ctp_producto` (`producto_fk`);
+
 ALTER TABLE `categorias`
   MODIFY `categoria_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
@@ -83,7 +114,10 @@ ALTER TABLE `productos`
   MODIFY `producto_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 ALTER TABLE `usuarios`
-  MODIFY `usuario_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `usuario_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+ALTER TABLE `compras`
+  MODIFY `compra_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `productos`
   ADD CONSTRAINT `fk_productos_usuario` FOREIGN KEY (`usuario_fk`) REFERENCES `usuarios` (`usuario_id`);
@@ -91,5 +125,12 @@ ALTER TABLE `productos`
 ALTER TABLE `productos_tienen_categorias`
   ADD CONSTRAINT `fk_ptc_categoria` FOREIGN KEY (`categoria_fk`) REFERENCES `categorias` (`categoria_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_ptc_producto` FOREIGN KEY (`producto_fk`) REFERENCES `productos` (`producto_id`) ON DELETE CASCADE;
+
+ALTER TABLE `compras`
+  ADD CONSTRAINT `fk_compras_usuario` FOREIGN KEY (`usuario_fk`) REFERENCES `usuarios` (`usuario_id`);
+
+ALTER TABLE `compras_tienen_productos`
+  ADD CONSTRAINT `fk_ctp_compra` FOREIGN KEY (`compra_fk`) REFERENCES `compras` (`compra_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_ctp_producto` FOREIGN KEY (`producto_fk`) REFERENCES `productos` (`producto_id`);
 
 COMMIT;

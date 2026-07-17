@@ -566,4 +566,3 @@ RULES.md                             # este archivo
 | ¿Regla de oro JS? | Solo `let` / `const`. |
 
 Este documento es la fuente de verdad del equipo hasta cerrar el final.
-`)
