@@ -2,9 +2,9 @@
 
 class DBConexion
 {
-    public const DB_HOST = "127.0.0.1:8889";
+    public const DB_HOST = "127.0.0.1";
     public const DB_USER = "root";
-    public const DB_PASS = "root";
+    public const DB_PASS = "";
     public const DB_NAME = "dw3_kuringhian_garcia";
 
     public function getConexion(): PDO
