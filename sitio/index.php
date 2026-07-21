@@ -3,6 +3,7 @@
 session_start();
 
 require_once __DIR__ . '/clases/Usuario.php';
+require_once __DIR__ . '/clases/Carrito.php';
 
 $seccionesPermitidas = [
     'home',
@@ -12,18 +13,22 @@ $seccionesPermitidas = [
     'registro',
     'iniciar-sesion',
     'perfil',
+    'carrito',
 ];
 
 $seccionActual = $_GET['seccion'] ?? 'home';
 
 $errorAuth = '';
 $exitoAuth = '';
+$mensajeCarrito = '';
+$errorCarrito = '';
 $datosFormulario = [
     'nombre' => '',
     'apellido' => '',
     'email' => '',
 ];
 $usuarioPerfil = null;
+$carrito = new Carrito();
 
 if ($seccionActual === 'salir') {
     Usuario::cerrarSesion();
@@ -39,9 +44,53 @@ if (
     exit;
 }
 
-if ($seccionActual === 'perfil' && !Usuario::estaLogueado()) {
+if (
+    ($seccionActual === 'perfil' || $seccionActual === 'carrito')
+    && !Usuario::estaLogueado()
+) {
     header('Location: index.php?seccion=iniciar-sesion');
     exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $accionCarrito = $_POST['accion'] ?? '';
+
+    if ($accionCarrito === 'agregar-carrito') {
+        if (!Usuario::estaLogueado()) {
+            header('Location: index.php?seccion=iniciar-sesion');
+            exit;
+        }
+
+        $productoId = (int) ($_POST['producto_id'] ?? 0);
+        $cantidad = (int) ($_POST['cantidad'] ?? 1);
+        if ($cantidad < 1) {
+            $cantidad = 1;
+        }
+
+        if ($carrito->agregar($productoId, $cantidad)) {
+            $_SESSION[Carrito::FLASH_OK] = $cantidad === 1
+                ? 'Producto añadido al carrito.'
+                : $cantidad . ' unidades añadidas al carrito.';
+        } else {
+            $_SESSION[Carrito::FLASH_ERROR] = 'No se pudo añadir el producto al carrito.';
+        }
+
+        header('Location: index.php?seccion=detalle&id=' . $productoId);
+        exit;
+    }
+
+    if ($accionCarrito === 'quitar-carrito') {
+        if (!Usuario::estaLogueado()) {
+            header('Location: index.php?seccion=iniciar-sesion');
+            exit;
+        }
+
+        $productoId = (int) ($_POST['producto_id'] ?? 0);
+        $carrito->quitar($productoId);
+        $_SESSION[Carrito::FLASH_OK] = 'Producto quitado del carrito.';
+        header('Location: index.php?seccion=carrito');
+        exit;
+    }
 }
 
 if ($seccionActual === 'registro' && $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -110,6 +159,18 @@ if ($seccionActual === 'perfil') {
         Usuario::cerrarSesion();
         header('Location: index.php?seccion=iniciar-sesion');
         exit;
+    }
+}
+
+if ($seccionActual === 'detalle' || $seccionActual === 'carrito') {
+    if (isset($_SESSION[Carrito::FLASH_OK])) {
+        $mensajeCarrito = (string) $_SESSION[Carrito::FLASH_OK];
+        unset($_SESSION[Carrito::FLASH_OK]);
+    }
+
+    if (isset($_SESSION[Carrito::FLASH_ERROR])) {
+        $errorCarrito = (string) $_SESSION[Carrito::FLASH_ERROR];
+        unset($_SESSION[Carrito::FLASH_ERROR]);
     }
 }
 

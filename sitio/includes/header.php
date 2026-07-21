@@ -2,6 +2,9 @@
 $seccionActual ??= 'home';
 $estaLogueado = class_exists('Usuario') && Usuario::estaLogueado();
 $esAdmin = class_exists('Usuario') && Usuario::esAdmin();
+$cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito instanceof Carrito)
+    ? $carrito->cantidadItems()
+    : 0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +17,7 @@ $esAdmin = class_exists('Usuario') && Usuario::esAdmin();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260721-1">
+    <link rel="stylesheet" href="css/estilos.css?v=20260721-2">
 </head>
     
 <body class="page">
@@ -53,8 +56,16 @@ $esAdmin = class_exists('Usuario') && Usuario::esAdmin();
                         <img class="icon-link__img" src="imgs/usuario.png" alt="">
                     </a>
                 <?php endif; ?>
-                <a class="icon-link" href="#" aria-label="Ver carrito de compras">
+                <?php
+                $ariaCarrito = $cantidadCarrito > 0
+                    ? 'Ver carrito de compras (' . $cantidadCarrito . ' productos)'
+                    : 'Ver carrito de compras';
+                ?>
+                <a class="icon-link icon-link--cart" href="index.php?seccion=carrito" aria-label="<?= htmlspecialchars($ariaCarrito, ENT_QUOTES, 'UTF-8') ?>">
                     <img class="icon-link__img" src="imgs/carro.png" alt="">
+                    <?php if ($cantidadCarrito > 0): ?>
+                        <span class="cart-badge" aria-hidden="true"><?= (int) $cantidadCarrito ?></span>
+                    <?php endif; ?>
                 </a>
                 <?php if ($esAdmin): ?>
                     <a class="admin-link" href="admin/index.php?seccion=productos" aria-label="Ir al panel de administración">

@@ -3,6 +3,8 @@ require_once __DIR__ . "/../clases/Producto.php";
 
 $idProducto = (int) ($_GET["id"] ?? 0);
 $productoSeleccionado = (new Producto)->porId($idProducto);
+$mensajeCarrito = $mensajeCarrito ?? '';
+$errorCarrito = $errorCarrito ?? '';
 ?>
 
 <?php if ($productoSeleccionado === null): ?>
@@ -45,23 +47,90 @@ $productoSeleccionado = (new Producto)->porId($idProducto);
                 <p class="detail-article__text"><?= htmlspecialchars($productoSeleccionado->getDescripcion(), ENT_QUOTES, 'UTF-8') ?></p>
             </section>
 
+            <?php if ($mensajeCarrito !== ''): ?>
+                <p class="cuenta-alert cuenta-alert--success" role="status"><?= htmlspecialchars($mensajeCarrito, ENT_QUOTES, 'UTF-8') ?></p>
+            <?php endif; ?>
+
+            <?php if ($errorCarrito !== ''): ?>
+                <p class="cuenta-alert cuenta-alert--error" role="alert"><?= htmlspecialchars($errorCarrito, ENT_QUOTES, 'UTF-8') ?></p>
+            <?php endif; ?>
+
             <div class="detail-actions">
-                <a class="btn btn--buy-now" href="#" aria-label="Comprar ahora">Comprar ahora</a>
-                <a class="btn btn--cta-icon" href="#" aria-label="Añadir a favoritos" title="Añadir a favoritos">
-                    <svg class="btn__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M12.001 20.327s-6.73-4.364-9.116-7.917a5.44 5.44 0 0 1 .648-6.955 5.213 5.213 0 0 1 7.521.657l.947 1.14.947-1.14a5.213 5.213 0 0 1 7.521-.657 5.44 5.44 0 0 1 .648 6.955c-2.386 3.553-9.116 7.917-9.116 7.917Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span class="sr-only">Añadir a favoritos</span>
-                </a>
-                <a class="btn btn--cta-icon" href="#" aria-label="Añadir al carrito" title="Añadir al carrito">
-                    <svg class="btn__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M3.5 5h2.1l1.34 9.108a1 1 0 0 0 .99.855h9.89a1 1 0 0 0 .977-.79L20.2 8.5H7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.4 19a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Zm7.2 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z" fill="currentColor"/>
-                    </svg>
-                    <span class="sr-only">Añadir al carrito</span>
-                </a>
+                <form class="detail-actions__form" method="post" action="index.php?seccion=detalle&amp;id=<?= (int) $productoSeleccionado->getId() ?>" data-qty-form>
+                    <input type="hidden" name="accion" value="agregar-carrito">
+                    <input type="hidden" name="producto_id" value="<?= (int) $productoSeleccionado->getId() ?>">
+
+                    <button class="btn btn--buy-now" type="submit">Añadir al carrito</button>
+
+                    <div class="qty-stepper" role="group" aria-label="Cantidad">
+                        <button
+                            class="qty-stepper__btn"
+                            type="button"
+                            data-qty-dec
+                            aria-label="Restar una unidad"
+                            disabled
+                        >
+                            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <input
+                            class="qty-stepper__value"
+                            type="text"
+                            name="cantidad"
+                            value="1"
+                            inputmode="numeric"
+                            readonly
+                            aria-live="polite"
+                            aria-label="Cantidad seleccionada"
+                        >
+                        <button
+                            class="qty-stepper__btn"
+                            type="button"
+                            data-qty-inc
+                            aria-label="Sumar una unidad"
+                        >
+                            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </article>
 </section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var form = document.querySelector('[data-qty-form]');
+  if (!form) {
+    return;
+  }
+
+  var input = form.querySelector('.qty-stepper__value');
+  var btnDec = form.querySelector('[data-qty-dec]');
+  var btnInc = form.querySelector('[data-qty-inc]');
+
+  function getCantidad() {
+    var n = parseInt(input.value, 10);
+    return Number.isFinite(n) && n >= 1 ? n : 1;
+  }
+
+  function setCantidad(n) {
+    if (n < 1) {
+      n = 1;
+    }
+    input.value = String(n);
+    btnDec.disabled = n <= 1;
+  }
+
+  btnDec.addEventListener('click', function () {
+    setCantidad(getCantidad() - 1);
+  });
+
+  btnInc.addEventListener('click', function () {
+    setCantidad(getCantidad() + 1);
+  });
+});
+</script>
 <?php endif; ?>
