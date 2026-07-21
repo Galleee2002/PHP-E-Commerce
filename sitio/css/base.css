@@ -243,6 +243,56 @@ h6,
   filter: invert(1);
 }
 
+.account-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.account-menu__toggle {
+  list-style: none;
+  cursor: pointer;
+}
+
+.account-menu__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.account-menu[open] > .account-menu__toggle {
+  background-color: var(--color-warm-white-10);
+}
+
+.account-menu__panel {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 20;
+  min-width: 11rem;
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-warm-white);
+  box-shadow: 0 8px 24px rgba(43, 30, 30, 0.18);
+}
+
+.account-menu__link {
+  display: block;
+  padding: 0.625rem 0.75rem;
+  border-radius: 4px;
+  color: var(--color-soft-black);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.account-menu__link:hover,
+.account-menu__link:focus-visible {
+  background-color: var(--color-beige-medium);
+  outline: none;
+}
+
+.account-menu__link--current {
+  font-weight: 600;
+}
+
 .admin-link {
   display: inline-flex;
   flex-shrink: 0;

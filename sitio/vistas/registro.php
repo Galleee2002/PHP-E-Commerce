@@ -10,7 +10,7 @@ $datosFormulario = $datosFormulario ?? [
     <div class="cuenta-page__panel">
         <header class="cuenta-page__header">
             <h1 class="cuenta-page__title" id="titulo-registro">Creá tu cuenta</h1>
-            <p class="cuenta-page__lead">Registrate para comprar y seguir tus pedidos en Galmir.</p>
+            <p class="cuenta-page__lead">Registrate para poder realizar una compra con nosotros.</p>
         </header>
 
         <?php if ($errorAuth !== ''): ?>

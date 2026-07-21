@@ -14,7 +14,7 @@ $esAdmin = class_exists('Usuario') && Usuario::esAdmin();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260717-2">
+    <link rel="stylesheet" href="css/estilos.css?v=20260721-1">
 </head>
     
 <body class="page">
@@ -35,17 +35,24 @@ $esAdmin = class_exists('Usuario') && Usuario::esAdmin();
                 <li>
                     <a class="nav-link<?= $seccionActual === 'contacto' ? ' nav-link--current' : '' ?>" href="index.php?seccion=contacto" <?= $seccionActual === 'contacto' ? ' aria-current="page"' : '' ?>>Contacto</a>
                 </li>
-                <?php if ($estaLogueado): ?>
-                    <li>
-                        <a class="nav-link" href="index.php?seccion=salir">Cerrar sesión</a>
-                    </li>
-                <?php endif; ?>
             </ul>
 
             <div class="site-nav__actions">
-                <a class="icon-link" href="index.php?seccion=<?= $estaLogueado ? 'perfil' : 'iniciar-sesion' ?>" aria-label="<?= $estaLogueado ? 'Ir a mi perfil' : 'Iniciar sesión' ?>">
-                    <img class="icon-link__img" src="imgs/usuario.png" alt="">
-                </a>
+                <?php if ($estaLogueado): ?>
+                    <details class="account-menu">
+                        <summary class="icon-link account-menu__toggle" aria-label="Menú de cuenta">
+                            <img class="icon-link__img" src="imgs/usuario.png" alt="">
+                        </summary>
+                        <div class="account-menu__panel">
+                            <a class="account-menu__link<?= $seccionActual === 'perfil' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=perfil">Mi perfil</a>
+                            <a class="account-menu__link" href="index.php?seccion=salir">Cerrar sesión</a>
+                        </div>
+                    </details>
+                <?php else: ?>
+                    <a class="icon-link" href="index.php?seccion=iniciar-sesion" aria-label="Iniciar sesión">
+                        <img class="icon-link__img" src="imgs/usuario.png" alt="">
+                    </a>
+                <?php endif; ?>
                 <a class="icon-link" href="#" aria-label="Ver carrito de compras">
                     <img class="icon-link__img" src="imgs/carro.png" alt="">
                 </a>
