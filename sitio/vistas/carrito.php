@@ -64,9 +64,16 @@ $total = $carrito->calcularTotal();
             </table>
         </div>
 
-        <p class="carrito-total">
-            <span class="carrito-total__label">Total</span>
-            <span class="carrito-total__value">$<?= number_format($total, 0, ',', '.') ?></span>
-        </p>
+        <div class="carrito-footer">
+            <p class="carrito-total">
+                <span class="carrito-total__label">Total</span>
+                <span class="carrito-total__value">$<?= number_format($total, 0, ',', '.') ?></span>
+            </p>
+
+            <form class="carrito-completar" method="post" action="index.php?seccion=carrito">
+                <input type="hidden" name="accion" value="completar-compra">
+                <button class="btn btn--accent" type="submit">Completar compra</button>
+            </form>
+        </div>
     <?php endif; ?>
 </section>

@@ -64,6 +64,38 @@ body.admin-productos {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.admin-productos__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 1.5rem;
+}
+
+.admin-productos__nav-link {
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.admin-productos__nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.admin-productos__nav-link--active {
+  color: #1a1a1a;
+  background-color: var(--panel-gold);
+}
+
+.admin-productos__nav-link--active:hover {
+  color: #1a1a1a;
+  filter: brightness(1.05);
+}
+
 .admin-productos__session {
   display: flex;
   align-items: center;
@@ -456,11 +488,172 @@ body.admin-productos {
   filter: brightness(1.08);
 }
 
+.admin-productos__link-detalle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  background-color: var(--panel-gold);
+  color: #1a1a1a;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 0.15s;
+}
+
+.admin-productos__link-detalle:hover {
+  filter: brightness(1.05);
+}
+
+.admin-productos__rol {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.admin-productos__rol--admin {
+  background-color: #f3e6c8;
+  color: #6b4a10;
+}
+
+.admin-productos__rol--comun {
+  background-color: #e8e4df;
+  color: #4a4540;
+}
+
+.admin-productos__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+  color: var(--panel-text-muted);
+}
+
+.admin-productos__breadcrumb a {
+  color: #6b0b0b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.admin-productos__breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.admin-productos__breadcrumb-sep {
+  color: #a39c94;
+}
+
+.admin-productos__alert {
+  margin: 0 2rem 1.5rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background-color: #fdecea;
+  color: #9b1c1c;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.admin-productos__section-title {
+  margin: 0 0 1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.admin-productos__user-block,
+.admin-productos__compras-block {
+  padding: 0 2rem 1.75rem;
+}
+
+.admin-productos__user-dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.admin-productos__user-dl dt {
+  margin: 0 0 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--panel-text-muted);
+}
+
+.admin-productos__user-dl dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.admin-productos__empty-msg {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #f5f1eb;
+  color: var(--panel-text-muted);
+  font-size: 0.9375rem;
+}
+
+.admin-productos__compra {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1rem 0.25rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.admin-productos__compra:last-child {
+  margin-bottom: 0;
+}
+
+.admin-productos__compra-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-productos__compra-meta {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--panel-text-muted);
+}
+
+.admin-productos__compra-total {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.admin-productos__table-wrap--nested {
+  padding: 0 0 1rem;
+}
+
 @media (max-width: 768px) {
   .admin-productos__topbar {
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem 1.25rem;
+  }
+
+  .admin-productos__nav {
+    margin-left: 0;
+    width: 100%;
   }
 
   .admin-productos__session {
@@ -492,5 +685,14 @@ body.admin-productos {
 
   .admin-productos__footer {
     padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .admin-productos__user-block,
+  .admin-productos__compras-block {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .admin-productos__alert {
+    margin: 0 1.25rem 1.25rem;
   }
 }

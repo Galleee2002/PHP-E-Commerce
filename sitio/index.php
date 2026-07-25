@@ -4,6 +4,7 @@ session_start();
 
 require_once __DIR__ . '/clases/Usuario.php';
 require_once __DIR__ . '/clases/Carrito.php';
+require_once __DIR__ . '/clases/Compra.php';
 
 $seccionesPermitidas = [
     'home',
@@ -88,6 +89,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $productoId = (int) ($_POST['producto_id'] ?? 0);
         $carrito->quitar($productoId);
         $_SESSION[Carrito::FLASH_OK] = 'Producto quitado del carrito.';
+        header('Location: index.php?seccion=carrito');
+        exit;
+    }
+
+    if ($accionCarrito === 'completar-compra') {
+        if (!Usuario::estaLogueado()) {
+            header('Location: index.php?seccion=iniciar-sesion');
+            exit;
+        }
+
+        $usuarioId = Usuario::idEnSesion();
+
+        try {
+            if ($usuarioId === null) {
+                throw new RuntimeException('No se pudo identificar al usuario.');
+            }
+
+            (new Compra)->crearDesdeCarrito($usuarioId, $carrito);
+            $_SESSION[Carrito::FLASH_OK] = 'Compra realizada correctamente. Gracias por tu pedido.';
+        } catch (Throwable $e) {
+            $_SESSION[Carrito::FLASH_ERROR] = $e->getMessage() !== ''
+                ? $e->getMessage()
+                : 'No se pudo completar la compra.';
+        }
+
         header('Location: index.php?seccion=carrito');
         exit;
     }

@@ -10,6 +10,8 @@ $seccionesPermitidas = [
     'producto-alta',
     'producto-editar',
     'producto-borrar',
+    'usuarios',
+    'usuario-detalle',
 ];
 
 $seccionActual = $_GET['seccion'] ?? 'ingresar';

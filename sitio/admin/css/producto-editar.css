@@ -66,6 +66,38 @@ body.admin-editar {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.admin-editar__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 1.5rem;
+}
+
+.admin-editar__nav-link {
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.admin-editar__nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.admin-editar__nav-link--active {
+  color: #1a1a1a;
+  background-color: var(--edit-gold);
+}
+
+.admin-editar__nav-link--active:hover {
+  color: #1a1a1a;
+  filter: brightness(1.05);
+}
+
 .admin-editar__session {
   display: flex;
   align-items: center;

@@ -50,6 +50,25 @@ class Usuario
         return $usuario === false ? null : $usuario;
     }
 
+    /**
+     * Listado de todos los usuarios (panel admin).
+     *
+     * @return list<self>
+     */
+    public function todos(): array
+    {
+        $db = (new DBConexion)->getConexion();
+
+        $stmt = $db->query(
+            'SELECT usuario_id, email, password, nombre, apellido, rol
+             FROM usuarios
+             ORDER BY usuario_id ASC'
+        );
+        $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
+
+        return $stmt->fetchAll();
+    }
+
     public function verificarCredenciales(string $email, string $password): ?self
     {
         $usuario = $this->porEmail($email);

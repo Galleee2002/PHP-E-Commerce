@@ -73,7 +73,7 @@ $imagenPreview = $valoresAlta['imagen'] !== ''
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/producto-editar.css?v=20260607-3">
+    <link rel="stylesheet" href="css/producto-editar.css?v=20260725-1">
 </head>
 
 <body class="admin-editar">
@@ -84,6 +84,10 @@ $imagenPreview = $valoresAlta['imagen'] !== ''
                 <p class="admin-editar__logo-tagline">Juegos de mesa</p>
             </div>
         </div>
+        <nav class="admin-editar__nav" aria-label="Secciones del panel">
+            <a class="admin-editar__nav-link admin-editar__nav-link--active" href="index.php?seccion=productos" aria-current="page">Productos</a>
+            <a class="admin-editar__nav-link" href="index.php?seccion=usuarios">Usuarios</a>
+        </nav>
         <div class="admin-editar__session">
             <details class="admin-editar__profile">
                 <summary class="admin-editar__profile-toggle">

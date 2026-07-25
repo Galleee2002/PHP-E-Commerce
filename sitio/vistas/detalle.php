@@ -102,17 +102,17 @@ $errorCarrito = $errorCarrito ?? '';
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  var form = document.querySelector('[data-qty-form]');
+  const form = document.querySelector('[data-qty-form]');
   if (!form) {
     return;
   }
 
-  var input = form.querySelector('.qty-stepper__value');
-  var btnDec = form.querySelector('[data-qty-dec]');
-  var btnInc = form.querySelector('[data-qty-inc]');
+  const input = form.querySelector('.qty-stepper__value');
+  const btnDec = form.querySelector('[data-qty-dec]');
+  const btnInc = form.querySelector('[data-qty-inc]');
 
   function getCantidad() {
-    var n = parseInt(input.value, 10);
+    const n = parseInt(input.value, 10);
     return Number.isFinite(n) && n >= 1 ? n : 1;
   }
 

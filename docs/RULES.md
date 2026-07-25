@@ -114,18 +114,18 @@ Fuentes auditadas: consigna (`docs/Programación II - Final.pdf`), proyecto del 
 | DB + DER + seed productos/categorías | `db/`, `der/` |
 | Categorías N:M (tabla adicional) | `categorias`, `productos_tienen_categorias` |
 
-**Gaps críticos vs consigna**
+**Gaps críticos vs consigna (histórico — ya resueltos en Fases 1–6)**
 
-| Gap | Impacto |
-|-----|---------|
-| Sin columna / lógica de `rol` | No hay 2 roles |
-| Sin registro / login / perfil en el Sitio | Secciones 5–7 faltan |
-| Sin `session_start` en el front | No hay auth pública ni carrito |
-| Botones carrito/favoritos con `href="#"` | Carrito no funcional |
-| Sin tablas / clases de compras | Requisito DB + proceso de compra |
-| Admin sin lista/detalle de usuarios | Secciones admin 5–6 |
-| JS con `var` en 3 archivos | Incumple regla del equipo |
-| `datos.txt` dice “2do Parcial” | Debe decir final al entregar |
+| Gap (inicial) | Estado actual |
+|---------------|---------------|
+| Sin columna / lógica de `rol` | Resuelto (Fase 1–2) |
+| Sin registro / login / perfil en el Sitio | Resuelto (Fase 2) |
+| Sin `session_start` en el front | Resuelto (Fase 2) |
+| Botones carrito con `href="#"` | Resuelto (Fases 3–4) |
+| Sin tablas / clases de compras | Resuelto (Fases 1 + 4) |
+| Admin sin lista/detalle de usuarios | Resuelto (Fase 5) |
+| JS con `var` | Resuelto (Fase 6: `detalle.php`) |
+| `datos.txt` decía “2do Parcial” | Resuelto (Fase 6: carácter **final**) |
 
 ---
 
@@ -133,22 +133,22 @@ Fuentes auditadas: consigna (`docs/Programación II - Final.pdf`), proyecto del 
 
 | Requisito | Estado | Acción |
 |-----------|--------|--------|
-| Sitio público | Parcial | Ampliar auth, carrito, compra, nav condicional |
-| Panel admin | Parcial | Agregar usuarios + historial; restringir login a `rol=admin` |
-| 2 roles | Falta | Columna `rol` + guards |
-| Home / Listado / Detalle / Contacto | OK | Mantener; en detalle: POST agregar al carrito |
-| Registro / Iniciar sesión / Perfil | Falta | Vistas + métodos en `Usuario` |
-| Carrito + compra | Falta | Clase `Carrito` (sesión) + `Compra` (MySQL) |
-| Admin login | OK (cualquier logueado) | Exigir `esAdmin()` |
-| ABM ítems | OK | No reescribir |
-| Lista / detalle usuarios | Falta | Vistas admin + consultas |
-| OOP producto/usuario/DB/auth | OK | Ampliar auth; agregar Carrito (+ Compra) |
+| Sitio público | OK | Auth, carrito, compra, nav condicional |
+| Panel admin | OK | Usuarios + historial; login solo `rol=admin` |
+| 2 roles | OK | Columna `rol` + guards |
+| Home / Listado / Detalle / Contacto | OK | Detalle: POST agregar al carrito |
+| Registro / Iniciar sesión / Perfil | OK | Vistas + métodos en `Usuario` |
+| Carrito + compra | OK | `Carrito` (sesión) + `Compra` (MySQL) |
+| Admin login | OK | Exige `esAdmin()` |
+| ABM ítems | OK | Sin reescritura |
+| Lista / detalle usuarios | OK | Vistas admin + consultas |
+| OOP producto/usuario/DB/auth | OK | + Carrito + Compra |
 | PDO + placeholders | OK | Mantener en todo lo nuevo |
 | Rutas relativas / `__DIR__` | OK | Mantener |
-| DB nombre + DER + SQL | Parcial | Extender schema, re-exportar, actualizar DER |
-| Tabla compras | Falta | Crear + seed |
-| HTML semántico + CSS propio | OK | Reutilizar estilos; extender lo mínimo |
-| Entrega zip + datos.txt | Preparar al final | Actualizar carácter a `final` |
+| DB nombre + DER + SQL | OK | Schema + DER + dump re-exportado (Fase 6) |
+| Tabla compras | OK | Creada + seed + historial admin |
+| HTML semántico + CSS propio | OK | Reutilizado / extendido mínimo |
+| Entrega zip + datos.txt | OK | `Kuringhian_Garcia.zip` + carácter **final** |
 
 ---
 
@@ -417,9 +417,11 @@ $seccionesPermitidas = [
 
 ---
 
-### Fase 3 — Carrito OOP (sesión)
+### Fase 3 — Carrito OOP (sesión) ✅ FINALIZADA
 
 **Objetivo:** agregar desde detalle, listar, quitar, total.
+
+**Documentación de lo implementado:** `docs/IMPLEMENTACIONES.md` (§3).
 
 **Archivos**
 
@@ -444,19 +446,22 @@ class Carrito
 }
 ```
 
-**Done cuando:** usuario logueado agrega 2 productos, ve el carrito, quita uno, ve el total actualizado.
+**Done cuando:** usuario logueado agrega 2 productos, ve el carrito, quita uno, ve el total actualizado.  
+**Estado:** cumplido (agregar / listar / quitar / total / badge / guards de autenticación).
 
 ---
 
-### Fase 4 — Completar compra
+### Fase 4 — Completar compra ✅ FINALIZADA
 
 **Objetivo:** persistir compra + vaciar carrito (sin pagos).
+
+**Documentación de lo implementado:** `docs/IMPLEMENTACIONES.md` (§4).
 
 **Archivos**
 
 - `sitio/clases/Compra.php` (nuevo)
 - `sitio/vistas/carrito.php` → botón “Completar compra”
-- Opcional: vista `compra-ok.php` o mensaje flash en sesión
+- Feedback: mensaje flash en sesión (sin vista `compra-ok.php`)
 
 **Patrón (transacción)**
 
@@ -473,13 +478,16 @@ try {
 }
 ```
 
-**Done cuando:** tras comprar, el carrito está vacío y en MySQL existen filas en `compras` + detalle; el usuario las ve en admin (Fase 5) o vía consulta.
+**Done cuando:** tras comprar, el carrito está vacío y en MySQL existen filas en `compras` + detalle; el usuario las ve en admin (Fase 5) o vía consulta.  
+**Estado:** cumplido (transacción PDO, precio desde DB, flash, `porId` / `porUsuario` listos para Fase 5).
 
 ---
 
-### Fase 5 — Admin: usuarios e historial
+### Fase 5 — Admin: usuarios e historial ✅ FINALIZADA
 
 **Objetivo:** lista de usuarios + detalle con compras.
+
+**Documentación de lo implementado:** `docs/IMPLEMENTACIONES.md` (§5).
 
 **Archivos**
 
@@ -489,26 +497,30 @@ try {
 - Métodos en `Usuario` / `Compra` (`todos()`, `porId()`, `porUsuario()`)
 - Link en topbar/nav admin hacia Usuarios
 
-**Done cuando:** desde admin ves todos los usuarios, entrás a uno y ves su historial (fecha, total, productos).
+**Done cuando:** desde admin ves todos los usuarios, entrás a uno y ves su historial (fecha, total, productos).  
+**Estado:** cumplido (listado, detalle, historial con líneas, nav Productos|Usuarios, guard `esAdmin`).
 
 ---
 
-### Fase 6 — Pulido y entrega
+### Fase 6 — Pulido y entrega ✅ FINALIZADA
 
 **Checklist**
 
-- [ ] Reemplazar todo `var` por `let`/`const` en JS inline.
-- [ ] Nav Sitio: registro/login solo si no auth; perfil/carrito/salir si auth.
-- [ ] Detalle: agregar al carrito funciona y valida login.
-- [ ] Contacto: form conceptual OK (sin mail).
-- [ ] Placeholders en **todas** las consultas nuevas.
-- [ ] Sin rutas absolutas de máquina.
-- [ ] `datos.txt` con carácter **final** + email/password admin.
-- [ ] DER actualizado + SQL importable.
-- [ ] Zip: `sitio/` + `db/` + `der/` + `datos.txt` con nombre de archivo según consigna.
-- [ ] Probar flujo feliz end-to-end una vez en entorno limpio.
+- [x] Reemplazar todo `var` por `let`/`const` en JS inline.
+- [x] Nav Sitio: registro/login solo si no auth; perfil/carrito/salir si auth.
+- [x] Detalle: agregar al carrito funciona y valida login.
+- [x] Contacto: form conceptual OK (sin mail).
+- [x] Placeholders en **todas** las consultas nuevas.
+- [x] Sin rutas absolutas de máquina.
+- [x] `datos.txt` con carácter **final** + email/password admin.
+- [x] DER actualizado + SQL importable.
+- [x] Zip: `sitio/` + `db/` + `der/` + `datos.txt` con nombre de archivo según consigna.
+- [x] Probar flujo feliz end-to-end una vez en entorno limpio.
 
-**Done cuando:** el checklist está completo y el flujo Home → Registro → Login → Detalle → Carrito → Compra → Admin Usuarios → Detalle historial funciona.
+**Done cuando:** el checklist está completo y el flujo Home → Registro → Login → Detalle → Carrito → Compra → Admin Usuarios → Detalle historial funciona.  
+**Estado:** cumplido. Devolución: `docs/QA-FINAL.md` (23/23 PASS). Zip: `Kuringhian_Garcia.zip`.
+
+**Documentación:** `docs/IMPLEMENTACIONES.md` (§6), `docs/QA-FINAL.md`.
 
 ---
 
@@ -519,22 +531,22 @@ sitio/
   index.php                          # session + whitelist ampliada
   includes/header.php                # nav condicional
   clases/
-    Usuario.php                      # rol, registro, esAdmin, listados
-    Carrito.php                      # NUEVO
-    Compra.php                       # NUEVO
+    Usuario.php                      # rol, registro, esAdmin, todos(), listados
+    Carrito.php                      # HECHO (Fase 3) — ver IMPLEMENTACIONES.md
+    Compra.php                       # HECHO (Fase 4) — ver IMPLEMENTACIONES.md
     Producto.php                     # sin cambios mayores
     DBConexion.php                   # sin cambios mayores
   vistas/
-    detalle.php                      # form agregar carrito
+    detalle.php                      # form agregar carrito (Fase 3)
     registro.php                     # NUEVO
     iniciar-sesion.php               # NUEVO
     perfil.php                       # NUEVO
-    carrito.php                      # NUEVO
+    carrito.php                      # HECHO (Fases 3–4: listado + completar compra)
   admin/
     index.php                        # guard esAdmin + rutas usuarios
     vistas/
-      usuarios.php                   # NUEVO
-      usuario-detalle.php            # NUEVO
+      usuarios.php                   # HECHO (Fase 5)
+      usuario-detalle.php            # HECHO (Fase 5)
 db/dw3_kuringhian_garcia.sql         # rol + compras + seed
 der/                                 # DER actualizado
 datos.txt                            # carácter final
@@ -561,8 +573,8 @@ RULES.md                             # este archivo
 | Pregunta | Respuesta |
 |----------|-----------|
 | ¿El proyecto del docente alcanza para el final? | **No** como producto; **sí** como guía de patrones PHP/PDO. |
-| ¿Cuánto tenemos hecho? | Catálogo + admin ABM + login admin. Falta e-commerce (roles, auth pública, carrito, compras, admin usuarios). |
-| ¿Cómo completamos? | Seguir el ROADMAP Fases 1→6 sin saltear ni sobrecomplicar. |
+| ¿Cuánto tenemos hecho? | Fases **1–6** hechas. Checklist de entrega completo. Ver `docs/QA-FINAL.md`. |
+| ¿Cómo completamos? | ROADMAP cerrado. Siguiente paso: **entrega del zip** + defensa oral. |
 | ¿Regla de oro JS? | Solo `let` / `const`. |
 
 Este documento es la fuente de verdad del equipo hasta cerrar el final.

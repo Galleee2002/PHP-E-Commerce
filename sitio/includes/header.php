@@ -17,7 +17,7 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260721-2">
+    <link rel="stylesheet" href="css/estilos.css?v=20260725-fase6">
 </head>
     
 <body class="page">
@@ -51,22 +51,21 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
                             <a class="account-menu__link" href="index.php?seccion=salir">Cerrar sesión</a>
                         </div>
                     </details>
-                <?php else: ?>
-                    <a class="icon-link" href="index.php?seccion=iniciar-sesion" aria-label="Iniciar sesión">
-                        <img class="icon-link__img" src="imgs/usuario.png" alt="">
+                    <?php
+                    $ariaCarrito = $cantidadCarrito > 0
+                        ? 'Ver carrito de compras (' . $cantidadCarrito . ' productos)'
+                        : 'Ver carrito de compras';
+                    ?>
+                    <a class="icon-link icon-link--cart" href="index.php?seccion=carrito" aria-label="<?= htmlspecialchars($ariaCarrito, ENT_QUOTES, 'UTF-8') ?>">
+                        <img class="icon-link__img" src="imgs/carro.png" alt="">
+                        <?php if ($cantidadCarrito > 0): ?>
+                            <span class="cart-badge" aria-hidden="true"><?= (int) $cantidadCarrito ?></span>
+                        <?php endif; ?>
                     </a>
+                <?php else: ?>
+                    <a class="auth-text-link<?= $seccionActual === 'registro' ? ' auth-text-link--current' : '' ?>" href="index.php?seccion=registro">Registro</a>
+                    <a class="auth-text-link<?= $seccionActual === 'iniciar-sesion' ? ' auth-text-link--current' : '' ?>" href="index.php?seccion=iniciar-sesion">Iniciar sesión</a>
                 <?php endif; ?>
-                <?php
-                $ariaCarrito = $cantidadCarrito > 0
-                    ? 'Ver carrito de compras (' . $cantidadCarrito . ' productos)'
-                    : 'Ver carrito de compras';
-                ?>
-                <a class="icon-link icon-link--cart" href="index.php?seccion=carrito" aria-label="<?= htmlspecialchars($ariaCarrito, ENT_QUOTES, 'UTF-8') ?>">
-                    <img class="icon-link__img" src="imgs/carro.png" alt="">
-                    <?php if ($cantidadCarrito > 0): ?>
-                        <span class="cart-badge" aria-hidden="true"><?= (int) $cantidadCarrito ?></span>
-                    <?php endif; ?>
-                </a>
                 <?php if ($esAdmin): ?>
                     <a class="admin-link" href="admin/index.php?seccion=productos" aria-label="Ir al panel de administración">
                         <svg class="admin-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">

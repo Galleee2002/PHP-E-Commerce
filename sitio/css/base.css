@@ -198,6 +198,29 @@ h6,
   }
 }
 
+.auth-text-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.65rem;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.auth-text-link:hover,
+.auth-text-link:focus-visible {
+  color: var(--color-yellow-soft);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.auth-text-link--current {
+  color: var(--color-yellow-soft);
+}
+
 .search-form {
   display: flex;
   flex: 1;
