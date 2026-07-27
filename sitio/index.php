@@ -56,12 +56,18 @@ if (
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $accionCarrito = $_POST['accion'] ?? '';
 
-    if ($accionCarrito === 'agregar-carrito') {
+    if (
+        $accionCarrito === 'agregar-carrito'
+        || $accionCarrito === 'quitar-carrito'
+        || $accionCarrito === 'completar-compra'
+    ) {
         if (!Usuario::estaLogueado()) {
             header('Location: index.php?seccion=iniciar-sesion');
             exit;
         }
+    }
 
+    if ($accionCarrito === 'agregar-carrito') {
         $productoId = (int) ($_POST['producto_id'] ?? 0);
         $cantidad = (int) ($_POST['cantidad'] ?? 1);
         if ($cantidad < 1) {
@@ -69,9 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($carrito->agregar($productoId, $cantidad)) {
-            $_SESSION[Carrito::FLASH_OK] = $cantidad === 1
-                ? 'Producto añadido al carrito.'
-                : $cantidad . ' unidades añadidas al carrito.';
+            $_SESSION[Carrito::FLASH_OK] = 'Producto añadido al carrito.';
         } else {
             $_SESSION[Carrito::FLASH_ERROR] = 'No se pudo añadir el producto al carrito.';
         }
@@ -81,11 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($accionCarrito === 'quitar-carrito') {
-        if (!Usuario::estaLogueado()) {
-            header('Location: index.php?seccion=iniciar-sesion');
-            exit;
-        }
-
         $productoId = (int) ($_POST['producto_id'] ?? 0);
         $carrito->quitar($productoId);
         $_SESSION[Carrito::FLASH_OK] = 'Producto quitado del carrito.';
@@ -94,11 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($accionCarrito === 'completar-compra') {
-        if (!Usuario::estaLogueado()) {
-            header('Location: index.php?seccion=iniciar-sesion');
-            exit;
-        }
-
         $usuarioId = Usuario::idEnSesion();
 
         try {
@@ -109,9 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             (new Compra)->crearDesdeCarrito($usuarioId, $carrito);
             $_SESSION[Carrito::FLASH_OK] = 'Compra realizada correctamente. Gracias por tu pedido.';
         } catch (Throwable $e) {
-            $_SESSION[Carrito::FLASH_ERROR] = $e->getMessage() !== ''
-                ? $e->getMessage()
-                : 'No se pudo completar la compra.';
+            $_SESSION[Carrito::FLASH_ERROR] = 'No se pudo completar la compra.';
         }
 
         header('Location: index.php?seccion=carrito');
