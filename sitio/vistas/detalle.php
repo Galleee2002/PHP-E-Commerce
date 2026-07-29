@@ -3,8 +3,6 @@ require_once __DIR__ . "/../clases/Producto.php";
 
 $idProducto = (int) ($_GET["id"] ?? 0);
 $productoSeleccionado = (new Producto)->porId($idProducto);
-$mensajeCarrito = $mensajeCarrito ?? '';
-$errorCarrito = $errorCarrito ?? '';
 ?>
 
 <?php if ($productoSeleccionado === null): ?>
@@ -47,90 +45,25 @@ $errorCarrito = $errorCarrito ?? '';
                 <p class="detail-article__text"><?= htmlspecialchars($productoSeleccionado->getDescripcion(), ENT_QUOTES, 'UTF-8') ?></p>
             </section>
 
-            <?php if ($mensajeCarrito !== ''): ?>
-                <p class="cuenta-alert cuenta-alert--success" role="status"><?= htmlspecialchars($mensajeCarrito, ENT_QUOTES, 'UTF-8') ?></p>
-            <?php endif; ?>
-
-            <?php if ($errorCarrito !== ''): ?>
-                <p class="cuenta-alert cuenta-alert--error" role="alert"><?= htmlspecialchars($errorCarrito, ENT_QUOTES, 'UTF-8') ?></p>
-            <?php endif; ?>
-
             <div class="detail-actions">
-                <form class="detail-actions__form" method="post" action="index.php?seccion=detalle&amp;id=<?= (int) $productoSeleccionado->getId() ?>" data-qty-form>
+                <form class="detail-actions__form" method="post" action="index.php?seccion=detalle&amp;id=<?= (int) $productoSeleccionado->getId() ?>">
                     <input type="hidden" name="accion" value="agregar-carrito">
                     <input type="hidden" name="producto_id" value="<?= (int) $productoSeleccionado->getId() ?>">
 
                     <button class="btn btn--buy-now" type="submit">Añadir al carrito</button>
 
-                    <div class="qty-stepper" role="group" aria-label="Cantidad">
-                        <button
-                            class="qty-stepper__btn"
-                            type="button"
-                            data-qty-dec
-                            aria-label="Restar una unidad"
-                            disabled
-                        >
-                            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                                <path d="M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </button>
-                        <input
-                            class="qty-stepper__value"
-                            type="text"
-                            name="cantidad"
-                            value="1"
-                            inputmode="numeric"
-                            readonly
-                            aria-live="polite"
-                            aria-label="Cantidad seleccionada"
-                        >
-                        <button
-                            class="qty-stepper__btn"
-                            type="button"
-                            data-qty-inc
-                            aria-label="Sumar una unidad"
-                        >
-                            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <label class="sr-only" for="cantidad">Cantidad</label>
+                    <input
+                        class="qty-stepper__value"
+                        type="number"
+                        id="cantidad"
+                        name="cantidad"
+                        value="1"
+                        min="1"
+                    >
                 </form>
             </div>
         </div>
     </article>
 </section>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('[data-qty-form]');
-  if (!form) {
-    return;
-  }
-
-  const input = form.querySelector('.qty-stepper__value');
-  const btnDec = form.querySelector('[data-qty-dec]');
-  const btnInc = form.querySelector('[data-qty-inc]');
-
-  function getCantidad() {
-    const n = parseInt(input.value, 10);
-    return Number.isFinite(n) && n >= 1 ? n : 1;
-  }
-
-  function setCantidad(n) {
-    if (n < 1) {
-      n = 1;
-    }
-    input.value = String(n);
-    btnDec.disabled = n <= 1;
-  }
-
-  btnDec.addEventListener('click', function () {
-    setCantidad(getCantidad() - 1);
-  });
-
-  btnInc.addEventListener('click', function () {
-    setCantidad(getCantidad() + 1);
-  });
-});
-</script>
 <?php endif; ?>

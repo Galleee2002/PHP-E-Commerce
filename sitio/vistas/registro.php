@@ -17,7 +17,7 @@ $datosFormulario = $datosFormulario ?? [
             <p class="cuenta-alert cuenta-alert--error" role="alert"><?= htmlspecialchars($errorAuth, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
 
-        <form class="cuenta-form" action="index.php?seccion=registro" method="post" novalidate>
+        <form class="cuenta-form" action="index.php?seccion=registro" method="post">
             <div class="cuenta-form__grid">
                 <div class="cuenta-field">
                     <label class="cuenta-field__label" for="nombre">Nombre</label>
@@ -58,7 +58,7 @@ $datosFormulario = $datosFormulario ?? [
                     >
                 </div>
 
-                <div class="cuenta-field">
+                <div class="cuenta-field cuenta-field--full">
                     <label class="cuenta-field__label" for="password">Contraseña</label>
                     <input
                         class="cuenta-field__input"
@@ -66,20 +66,6 @@ $datosFormulario = $datosFormulario ?? [
                         id="password"
                         name="password"
                         required
-                        minlength="8"
-                        autocomplete="new-password"
-                    >
-                </div>
-
-                <div class="cuenta-field">
-                    <label class="cuenta-field__label" for="password_confirmacion">Confirmar contraseña</label>
-                    <input
-                        class="cuenta-field__input"
-                        type="password"
-                        id="password_confirmacion"
-                        name="password_confirmacion"
-                        required
-                        minlength="8"
                         autocomplete="new-password"
                     >
                 </div>

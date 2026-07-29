@@ -1,6 +1,5 @@
 <?php
 $errorAuth = $errorAuth ?? '';
-$exitoAuth = $exitoAuth ?? '';
 $datosFormulario = $datosFormulario ?? [
     'email' => '',
 ];
@@ -12,15 +11,11 @@ $datosFormulario = $datosFormulario ?? [
             <p class="cuenta-page__lead">Accedé a tu cuenta para comprar y ver tu perfil.</p>
         </header>
 
-        <?php if ($exitoAuth !== ''): ?>
-            <p class="cuenta-alert cuenta-alert--success" role="status"><?= htmlspecialchars($exitoAuth, ENT_QUOTES, 'UTF-8') ?></p>
-        <?php endif; ?>
-
         <?php if ($errorAuth !== ''): ?>
             <p class="cuenta-alert cuenta-alert--error" role="alert"><?= htmlspecialchars($errorAuth, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
 
-        <form class="cuenta-form" action="index.php?seccion=iniciar-sesion" method="post" novalidate>
+        <form class="cuenta-form" action="index.php?seccion=iniciar-sesion" method="post">
             <div class="cuenta-form__grid">
                 <div class="cuenta-field cuenta-field--full">
                     <label class="cuenta-field__label" for="email">Email</label>

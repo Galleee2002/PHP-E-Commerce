@@ -5,8 +5,6 @@ require_once __DIR__ . '/Producto.php';
 class Carrito
 {
     public const SESSION_KEY = 'carrito';
-    public const FLASH_OK = 'mensaje_carrito';
-    public const FLASH_ERROR = 'error_carrito';
 
     private function asegurarSesion(): void
     {

@@ -10,7 +10,7 @@
     </div>
 
     <div class="contact-page__content">
-        <form class="contact-form" action="#" method="post" novalidate>
+        <form class="contact-form" action="#" method="post">
             <div class="contact-form__grid">
                 <div class="contact-field">
                     <label class="contact-field__label" for="nombre">
@@ -76,7 +76,7 @@
             </div>
 
             <div class="contact-form__actions">
-                <button class="contact-btn contact-btn--accent" type="button" id="contacto-enviar">
+                <button class="contact-btn contact-btn--accent" type="submit">
                     <img class="contact-field__label-icon" src="imgs/enviar-mensaje.png" alt="" aria-hidden="true">
                     <span>Enviar mensaje</span>
                 </button>
@@ -84,15 +84,3 @@
         </form>
     </div>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    let form = document.querySelector('.contact-form');
-    let enviar = document.getElementById('contacto-enviar');
-    enviar.addEventListener('click', function () {
-      if (form.reportValidity()) {
-        alert('Tu mensaje se envió con éxito. ¡Gracias por contactarnos!');
-      }
-    });
-  });
-</script>

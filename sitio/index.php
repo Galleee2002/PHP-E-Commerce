@@ -20,9 +20,6 @@ $seccionesPermitidas = [
 $seccionActual = $_GET['seccion'] ?? 'home';
 
 $errorAuth = '';
-$exitoAuth = '';
-$mensajeCarrito = '';
-$errorCarrito = '';
 $datosFormulario = [
     'nombre' => '',
     'apellido' => '',
@@ -74,11 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $cantidad = 1;
         }
 
-        if ($carrito->agregar($productoId, $cantidad)) {
-            $_SESSION[Carrito::FLASH_OK] = 'Producto añadido al carrito.';
-        } else {
-            $_SESSION[Carrito::FLASH_ERROR] = 'No se pudo añadir el producto al carrito.';
-        }
+        $carrito->agregar($productoId, $cantidad);
 
         header('Location: index.php?seccion=detalle&id=' . $productoId);
         exit;
@@ -87,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($accionCarrito === 'quitar-carrito') {
         $productoId = (int) ($_POST['producto_id'] ?? 0);
         $carrito->quitar($productoId);
-        $_SESSION[Carrito::FLASH_OK] = 'Producto quitado del carrito.';
         header('Location: index.php?seccion=carrito');
         exit;
     }
@@ -101,9 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             (new Compra)->crearDesdeCarrito($usuarioId, $carrito);
-            $_SESSION[Carrito::FLASH_OK] = 'Compra realizada correctamente. Gracias por tu pedido.';
         } catch (Throwable $e) {
-            $_SESSION[Carrito::FLASH_ERROR] = 'No se pudo completar la compra.';
+            // La compra falló; se redirige igual al carrito.
         }
 
         header('Location: index.php?seccion=carrito');
@@ -116,22 +107,14 @@ if ($seccionActual === 'registro' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $datosFormulario['apellido'] = trim($_POST['apellido'] ?? '');
     $datosFormulario['email'] = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
-    $passwordConfirmacion = $_POST['password_confirmacion'] ?? '';
 
     if (
         $datosFormulario['nombre'] === ''
         || $datosFormulario['apellido'] === ''
         || $datosFormulario['email'] === ''
         || $password === ''
-        || $passwordConfirmacion === ''
     ) {
         $errorAuth = 'Completá todos los campos.';
-    } elseif (!filter_var($datosFormulario['email'], FILTER_VALIDATE_EMAIL)) {
-        $errorAuth = 'Ingresá un email válido.';
-    } elseif (strlen($password) < 8) {
-        $errorAuth = 'La contraseña debe tener al menos 8 caracteres.';
-    } elseif ($password !== $passwordConfirmacion) {
-        $errorAuth = 'Las contraseñas no coinciden.';
     } elseif ((new Usuario)->porEmail($datosFormulario['email']) !== null) {
         $errorAuth = 'Ya existe una cuenta con ese email.';
     } else {
@@ -142,31 +125,24 @@ if ($seccionActual === 'registro' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $datosFormulario['apellido']
         );
 
-        header('Location: index.php?seccion=iniciar-sesion&registro=ok');
+        header('Location: index.php?seccion=iniciar-sesion');
         exit;
     }
 }
 
-if ($seccionActual === 'iniciar-sesion') {
-    if (isset($_GET['registro']) && $_GET['registro'] === 'ok') {
-        $exitoAuth = 'Tu cuenta se creó correctamente. Ya podés iniciar sesión.';
+if ($seccionActual === 'iniciar-sesion' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $datosFormulario['email'] = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    $usuario = (new Usuario)->verificarCredenciales($datosFormulario['email'], $password);
+
+    if ($usuario !== null) {
+        Usuario::iniciarSesion($usuario);
+        header('Location: index.php?seccion=perfil');
+        exit;
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $datosFormulario['email'] = trim($_POST['email'] ?? '');
-        $password = $_POST['password'] ?? '';
-
-        $usuario = (new Usuario)->verificarCredenciales($datosFormulario['email'], $password);
-
-        if ($usuario !== null) {
-            Usuario::iniciarSesion($usuario);
-            header('Location: index.php?seccion=perfil');
-            exit;
-        }
-
-        $errorAuth = 'Email o contraseña incorrectos.';
-        $exitoAuth = '';
-    }
+    $errorAuth = 'Email o contraseña incorrectos.';
 }
 
 if ($seccionActual === 'perfil') {
@@ -177,18 +153,6 @@ if ($seccionActual === 'perfil') {
         Usuario::cerrarSesion();
         header('Location: index.php?seccion=iniciar-sesion');
         exit;
-    }
-}
-
-if ($seccionActual === 'detalle' || $seccionActual === 'carrito') {
-    if (isset($_SESSION[Carrito::FLASH_OK])) {
-        $mensajeCarrito = (string) $_SESSION[Carrito::FLASH_OK];
-        unset($_SESSION[Carrito::FLASH_OK]);
-    }
-
-    if (isset($_SESSION[Carrito::FLASH_ERROR])) {
-        $errorCarrito = (string) $_SESSION[Carrito::FLASH_ERROR];
-        unset($_SESSION[Carrito::FLASH_ERROR]);
     }
 }
 

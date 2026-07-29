@@ -2,8 +2,6 @@
 /** @var Carrito $carrito */
 $carrito = $carrito ?? new Carrito();
 $items = $carrito->obtenerItems();
-$mensajeCarrito = $mensajeCarrito ?? '';
-$errorCarrito = $errorCarrito ?? '';
 $total = $carrito->calcularTotal();
 ?>
 <section class="panel panel--carrito" aria-labelledby="titulo-carrito">
@@ -11,14 +9,6 @@ $total = $carrito->calcularTotal();
         <h1 class="page-title" id="titulo-carrito">Carrito</h1>
         <p class="carrito-header__lead">Productos que agregaste para comprar.</p>
     </header>
-
-    <?php if ($mensajeCarrito !== ''): ?>
-        <p class="cuenta-alert cuenta-alert--success" role="status"><?= htmlspecialchars($mensajeCarrito, ENT_QUOTES, 'UTF-8') ?></p>
-    <?php endif; ?>
-
-    <?php if ($errorCarrito !== ''): ?>
-        <p class="cuenta-alert cuenta-alert--error" role="alert"><?= htmlspecialchars($errorCarrito, ENT_QUOTES, 'UTF-8') ?></p>
-    <?php endif; ?>
 
     <?php if ($items === []): ?>
         <div class="carrito-vacio">
