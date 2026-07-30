@@ -1,8 +1,6 @@
 <?php
-$errorAuth = $errorAuth ?? '';
-$datosFormulario = $datosFormulario ?? [
-    'email' => '',
-];
+/** @var string $errorAuth */
+/** @var array{nombre: string, apellido: string, email: string} $datosFormulario */
 ?>
 <section class="cuenta-page" aria-labelledby="titulo-login">
     <div class="cuenta-page__panel">

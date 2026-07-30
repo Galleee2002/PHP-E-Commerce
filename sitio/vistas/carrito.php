@@ -1,6 +1,4 @@
 <?php
-/** @var Carrito $carrito */
-$carrito = $carrito ?? new Carrito();
 $items = $carrito->obtenerItems();
 $total = $carrito->calcularTotal();
 ?>

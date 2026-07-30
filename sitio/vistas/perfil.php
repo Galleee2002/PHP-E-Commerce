@@ -1,11 +1,5 @@
 <?php
-/** @var Usuario|null $usuarioPerfil */
-$usuarioPerfil = $usuarioPerfil ?? null;
-
-if ($usuarioPerfil === null) {
-    return;
-}
-
+/** @var Usuario $usuarioPerfil */
 $nombreCompleto = trim($usuarioPerfil->getNombre() . ' ' . $usuarioPerfil->getApellido());
 ?>
 <section class="cuenta-page" aria-labelledby="titulo-perfil">
