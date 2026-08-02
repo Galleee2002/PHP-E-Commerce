@@ -260,10 +260,10 @@ CREATE TABLE compras_tienen_productos (
   cantidad INT UNSIGNED NOT NULL DEFAULT 1,
   precio_unitario DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (compra_fk, producto_fk),
-  KEY fk_ctp_producto (producto_fk),
-  CONSTRAINT fk_ctp_compra
+  KEY fk_compras_tienen_productos_producto (producto_fk),
+  CONSTRAINT fk_compras_tienen_productos_compra
     FOREIGN KEY (compra_fk) REFERENCES compras (compra_id) ON DELETE CASCADE,
-  CONSTRAINT fk_ctp_producto
+  CONSTRAINT fk_compras_tienen_productos_producto
     FOREIGN KEY (producto_fk) REFERENCES productos (producto_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```

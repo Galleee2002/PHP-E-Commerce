@@ -3,54 +3,6 @@
 Apunte de estudio para defender el final de **Programación II**.  
 Proyecto: e-commerce de juegos de mesa **Galmir** (Sitio + Admin, PHP + MySQL/PDO).
 
----
-
-## 1. Cómo usar este apunte
-
-1. Leé la **sección 2** (qué pide la consigna) y la **sección 6** (flujos end-to-end).
-2. Memorizá las **decisiones de la sección 5** (son las preguntas más frecuentes).
-3. Practicá en voz alta el **cheatsheet de la sección 8**.
-4. Antes de la defensa, recorré el **checklist de la sección 9** en el navegador.
-
-**Idea central del proyecto:** dos áreas (Sitio y Admin), dos roles (`comun` / `admin`), carrito temporal en sesión y compra permanente en MySQL, con OOP + PDO como exige la materia.
-
----
-
-## 2. Qué pide la consigna → dónde está en el proyecto
-
-| Requisito del PDF | Dónde vive | Estado |
-|-------------------|------------|--------|
-| Web pública (“el Sitio”) | `sitio/index.php` + `sitio/vistas/` | Cumple |
-| Panel (“el Admin”) | `sitio/admin/index.php` + `sitio/admin/vistas/` | Cumple |
-| ≥ 2 roles (común y admin) | Columna `usuarios.rol` + `Usuario::esAdmin()` | Cumple |
-| Registro / login / perfil | `Usuario.php` + vistas `registro`, `iniciar-sesion`, `perfil` | Cumple |
-| Carrito solo autenticados | Guards en `index.php` + clase `Carrito` | Cumple |
-| Compra: guardar detalle y vaciar carrito (sin pagos) | `Compra::crearDesdeCarrito()` | Cumple |
-| ABM de ítems | `Producto.php` + `producto-alta/editar/borrar` | Cumple |
-| Lista de usuarios + historial | `usuarios.php`, `usuario-detalle.php` | Cumple |
-| OOP: producto, usuario, DB, auth, carrito | 5 clases (+ `Compra` extra) | Cumple |
-| PDO + placeholders; SQL en métodos | Todas las clases de `sitio/clases/` | Cumple |
-| Secciones por `?seccion=` (GET) | Whitelist en ambos `index.php` | Cumple |
-| DB `dw3_apellido1_apellido2` + DER + SQL | `db/`, `der/` | Cumple |
-| Entrega zip + `datos.txt` (carácter **final**) | `datos.txt`, estructura de entrega | Cumple |
-
-Secciones del Sitio: Home, Listado, Detalle, Contacto, Registro, Iniciar sesión, Perfil, Carrito.  
-Secciones del Admin: Login, ABM productos, Lista usuarios, Detalle usuario + historial.
-
----
-
-## 3. Arquitectura general
-
-```mermaid
-flowchart TD
-  visitante[Visitante] --> sitioIndex[sitio/index.php]
-  sitioIndex --> vistas[vistas whitelist]
-  sitioIndex --> clases[clases OOP]
-  clases --> mysql[(MySQL PDO)]
-  adminUser[Admin] --> adminIndex[admin/index.php]
-  adminIndex --> adminVistas[admin/vistas]
-  adminVistas --> clases
-```
 
 ### Front controller + whitelist
 
@@ -135,42 +87,6 @@ Base: `dw3_kuringhian_garcia`.
 - **Métodos clave:** `crearDesdeCarrito()`, `porUsuario()`, `porId()`.
 - **Por qué existe:** la compra debe quedar en DB (detalle + total) y el admin debe ver historial.
 
-### 4.3 Sitio (vistas e includes)
-
-| Archivo | Rol |
-|---------|-----|
-| `includes/header.php` / `footer.php` | Layout; nav condicional según sesión/rol |
-| `vistas/home.php` | Introductoria |
-| `vistas/listado.php` | Productos desde DB |
-| `vistas/detalle.php` | Detalle + form agregar al carrito |
-| `vistas/contacto.php` | Form conceptual (no envía email) |
-| `vistas/registro.php` | Alta de usuario común |
-| `vistas/iniciar-sesion.php` | Login |
-| `vistas/perfil.php` | Datos del usuario logueado |
-| `vistas/carrito.php` | Listado, quitar, completar compra |
-| `vistas/404.php` | Sección inválida |
-
-### 4.4 Admin
-
-| Archivo | Rol |
-|---------|-----|
-| `vistas/ingresar.php` | Login solo si rol `admin` |
-| `vistas/productos.php` | Listado ABM |
-| `vistas/producto-alta.php` | Alta |
-| `vistas/producto-editar.php` | Edición pre-poblada |
-| `vistas/producto-borrar.php` | Eliminación |
-| `vistas/usuarios.php` | Lista de usuarios |
-| `vistas/usuario-detalle.php` | Datos + historial de compras |
-
-### 4.5 Persistencia y entrega
-
-| Pieza | Rol |
-|-------|-----|
-| `db/dw3_kuringhian_garcia.sql` | Schema + datos seed |
-| `der/` | Diagrama entidad-relación |
-| `datos.txt` | Datos de entrega + credenciales admin |
-
----
 
 ## 5. Decisiones de diseño (núcleo para estudiar)
 
