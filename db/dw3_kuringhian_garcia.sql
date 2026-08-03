@@ -5,6 +5,12 @@ SET UNIQUE_CHECKS = 0;
 SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO';
 SET SQL_NOTES = 0;
 
+CREATE DATABASE IF NOT EXISTS `dw3_kuringhian_garcia`
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE `dw3_kuringhian_garcia`;
+
 DROP TABLE IF EXISTS `usuarios`;
 
 CREATE TABLE `usuarios` (
