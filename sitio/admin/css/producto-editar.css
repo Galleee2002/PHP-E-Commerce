@@ -522,13 +522,31 @@ body.admin-editar {
 
 @media (max-width: 768px) {
   .admin-editar__topbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand session"
+      "nav nav";
+    align-items: center;
+    gap: 0.75rem 1rem;
+    padding: 0.85rem 1.25rem;
+  }
+
+  .admin-editar__brand {
+    grid-area: brand;
+  }
+
+  .admin-editar__nav {
+    grid-area: nav;
+    margin-left: 0;
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .admin-editar__session {
-    width: 100%;
+    grid-area: session;
+    width: auto;
+    margin-left: 0;
     justify-content: flex-end;
   }
 

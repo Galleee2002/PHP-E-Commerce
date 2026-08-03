@@ -18,7 +18,7 @@ $usuarioEmail = Usuario::emailEnSesion() ?? '';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/productos.css?v=20260725-1">
+    <link rel="stylesheet" href="css/productos.css?v=20260803-mobile4">
 </head>
 
 <body class="admin-productos">
@@ -62,7 +62,7 @@ $usuarioEmail = Usuario::emailEnSesion() ?? '';
             </header>
 
             <div class="admin-productos__table-wrap">
-                <table class="admin-productos__table">
+                <table class="admin-productos__table admin-productos__table--datos">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -81,16 +81,16 @@ $usuarioEmail = Usuario::emailEnSesion() ?? '';
                         <?php else: ?>
                             <?php foreach ($usuarios as $usuario): ?>
                                 <tr>
-                                    <td><?= (int) $usuario->getId() ?></td>
-                                    <td><?= htmlspecialchars($usuario->getNombre(), ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td><?= htmlspecialchars($usuario->getApellido(), ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td><?= htmlspecialchars($usuario->getEmail(), ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td>
+                                    <td data-label="ID"><?= (int) $usuario->getId() ?></td>
+                                    <td data-label="Nombre"><?= htmlspecialchars($usuario->getNombre(), ENT_QUOTES, 'UTF-8') ?></td>
+                                    <td data-label="Apellido"><?= htmlspecialchars($usuario->getApellido(), ENT_QUOTES, 'UTF-8') ?></td>
+                                    <td data-label="Email"><?= htmlspecialchars($usuario->getEmail(), ENT_QUOTES, 'UTF-8') ?></td>
+                                    <td data-label="Rol">
                                         <span class="admin-productos__rol admin-productos__rol--<?= htmlspecialchars($usuario->getRol(), ENT_QUOTES, 'UTF-8') ?>">
                                             <?= htmlspecialchars($usuario->getRol(), ENT_QUOTES, 'UTF-8') ?>
                                         </span>
                                     </td>
-                                    <td>
+                                    <td data-label="Acciones">
                                         <a
                                             class="admin-productos__link-detalle"
                                             href="index.php?seccion=usuario-detalle&amp;id=<?= (int) $usuario->getId() ?>"

@@ -18,7 +18,7 @@ $usuarioEmail = Usuario::emailEnSesion() ?? '';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/productos.css?v=20260725-1">
+    <link rel="stylesheet" href="css/productos.css?v=20260803-mobile4">
 </head>
 
 <body class="admin-productos">
@@ -53,6 +53,13 @@ $usuarioEmail = Usuario::emailEnSesion() ?? '';
     </header>
 
     <main class="admin-productos__main">
+        <a class="admin-productos__back" href="../index.php?seccion=home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M19 12H5"/>
+                <path d="m12 19-7-7 7-7"/>
+            </svg>
+            Volver al sitio
+        </a>
         <div class="admin-productos__card">
             <header class="admin-productos__header">
                 <div>
@@ -83,7 +90,7 @@ $usuarioEmail = Usuario::emailEnSesion() ?? '';
                         <?php else: ?>
                             <?php foreach ($productos as $producto): ?>
                                 <tr>
-                                    <td>
+                                    <td data-label="Producto">
                                         <div class="admin-productos__product">
                                             <img
                                                 class="admin-productos__thumb"
@@ -96,9 +103,9 @@ $usuarioEmail = Usuario::emailEnSesion() ?? '';
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="admin-productos__categoria"><?= htmlspecialchars($producto->getCategoria(), ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td class="admin-productos__precio">$<?= number_format($producto->getPrecio(), 0, ',', '.') ?></td>
-                                    <td>
+                                    <td class="admin-productos__categoria" data-label="Categoría"><?= htmlspecialchars($producto->getCategoria(), ENT_QUOTES, 'UTF-8') ?></td>
+                                    <td class="admin-productos__precio" data-label="Precio">$<?= number_format($producto->getPrecio(), 0, ',', '.') ?></td>
+                                    <td data-label="Acciones">
                                         <div class="admin-productos__actions">
                                             <a
                                                 class="admin-productos__action admin-productos__action--edit"

@@ -17,7 +17,7 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260803-logout">
+    <link rel="stylesheet" href="css/estilos.css?v=20260803-mobile4">
 </head>
     
 <body class="page">
@@ -41,20 +41,22 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
             </ul>
 
             <div class="site-nav__actions">
-                <details class="account-menu">
-                    <summary class="icon-link account-menu__toggle" aria-label="Menú de cuenta">
-                        <img class="icon-link__img" src="imgs/usuario.png" alt="">
-                    </summary>
-                    <div class="account-menu__panel">
-                        <?php if ($estaLogueado): ?>
-                            <a class="account-menu__link<?= $seccionActual === 'perfil' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=perfil">Mi perfil</a>
-                            <a class="account-menu__link js-confirm-logout" href="index.php?seccion=salir">Cerrar sesión</a>
-                        <?php else: ?>
-                            <a class="account-menu__link<?= $seccionActual === 'registro' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=registro">Crear cuenta</a>
-                            <a class="account-menu__link<?= $seccionActual === 'iniciar-sesion' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=iniciar-sesion">Iniciar sesión</a>
-                        <?php endif; ?>
-                    </div>
-                </details>
+                <?php if (!$esAdmin): ?>
+                    <details class="account-menu">
+                        <summary class="icon-link account-menu__toggle" aria-label="Menú de cuenta">
+                            <img class="icon-link__img" src="imgs/usuario.png" alt="">
+                        </summary>
+                        <div class="account-menu__panel">
+                            <?php if ($estaLogueado): ?>
+                                <a class="account-menu__link<?= $seccionActual === 'perfil' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=perfil">Mi perfil</a>
+                                <a class="account-menu__link js-confirm-logout" href="index.php?seccion=salir">Cerrar sesión</a>
+                            <?php else: ?>
+                                <a class="account-menu__link<?= $seccionActual === 'registro' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=registro">Crear cuenta</a>
+                                <a class="account-menu__link<?= $seccionActual === 'iniciar-sesion' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=iniciar-sesion">Iniciar sesión</a>
+                            <?php endif; ?>
+                        </div>
+                    </details>
+                <?php endif; ?>
                 <?php if ($estaLogueado): ?>
                     <?php
                     $ariaCarrito = $cantidadCarrito > 0
