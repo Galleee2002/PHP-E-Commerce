@@ -1,4 +1,5 @@
 <?php
+
 /** @var Usuario $usuarioPerfil */
 $nombreCompleto = trim($usuarioPerfil->getNombre() . ' ' . $usuarioPerfil->getApellido());
 ?>

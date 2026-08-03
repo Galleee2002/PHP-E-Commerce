@@ -629,8 +629,24 @@ body.admin-productos {
 
 .admin-productos__compra-meta {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem;
   font-size: 0.875rem;
   color: var(--panel-text-muted);
+}
+
+.admin-productos__compra-title {
+  margin: 0;
+  font: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.admin-productos__compra-fecha {
+  font: inherit;
+  color: inherit;
 }
 
 .admin-productos__compra-total {

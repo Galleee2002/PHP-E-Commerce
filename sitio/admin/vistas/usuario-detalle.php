@@ -140,10 +140,10 @@ if ($idUsuario <= 0) {
                             ?>
                             <article class="admin-productos__compra">
                                 <header class="admin-productos__compra-head">
-                                    <p class="admin-productos__compra-meta">
-                                        Compra #<?= $compraId ?>
-                                        · <?= htmlspecialchars($fecha, ENT_QUOTES, 'UTF-8') ?>
-                                    </p>
+                                    <div class="admin-productos__compra-meta">
+                                        <h3 class="admin-productos__compra-title">Compra #<?= $compraId ?></h3>
+                                        <span class="admin-productos__compra-fecha">· <?= htmlspecialchars($fecha, ENT_QUOTES, 'UTF-8') ?></span>
+                                    </div>
                                     <p class="admin-productos__compra-total">
                                         Total: $<?= number_format($total, 2, ',', '.') ?>
                                     </p>

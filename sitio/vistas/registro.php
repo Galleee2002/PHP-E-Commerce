@@ -1,4 +1,5 @@
 <?php
+
 /** @var string $errorAuth */
 /** @var array{nombre: string, apellido: string, email: string} $datosFormulario */
 ?>
@@ -24,8 +25,7 @@
                         name="nombre"
                         value="<?= htmlspecialchars($datosFormulario['nombre'], ENT_QUOTES, 'UTF-8') ?>"
                         required
-                        autocomplete="given-name"
-                    >
+                        autocomplete="given-name">
                 </div>
 
                 <div class="cuenta-field">
@@ -37,8 +37,7 @@
                         name="apellido"
                         value="<?= htmlspecialchars($datosFormulario['apellido'], ENT_QUOTES, 'UTF-8') ?>"
                         required
-                        autocomplete="family-name"
-                    >
+                        autocomplete="family-name">
                 </div>
 
                 <div class="cuenta-field cuenta-field--full">
@@ -50,8 +49,7 @@
                         name="email"
                         value="<?= htmlspecialchars($datosFormulario['email'], ENT_QUOTES, 'UTF-8') ?>"
                         required
-                        autocomplete="email"
-                    >
+                        autocomplete="email">
                 </div>
 
                 <div class="cuenta-field cuenta-field--full">
@@ -62,8 +60,7 @@
                         id="password"
                         name="password"
                         required
-                        autocomplete="new-password"
-                    >
+                        autocomplete="new-password">
                 </div>
             </div>
 

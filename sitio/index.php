@@ -94,7 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             (new Compra)->crearDesdeCarrito($usuarioId, $carrito);
         } catch (Throwable $e) {
-            // La compra falló; se redirige igual al carrito.
         }
 
         header('Location: index.php?seccion=carrito');

@@ -6,12 +6,6 @@ require_once __DIR__ . '/Carrito.php';
 
 class Compra
 {
-    /**
-     * Persiste la compra desde el carrito de sesión.
-     * Re-lee el precio desde MySQL (fuente de verdad) y usa transacción PDO.
-     *
-     * @throws RuntimeException si el carrito está vacío o un producto ya no existe
-     */
     public function crearDesdeCarrito(int $usuarioId, Carrito $carrito): int
     {
         if ($usuarioId <= 0) {
@@ -101,11 +95,6 @@ class Compra
         return $compraId;
     }
 
-    /**
-     * Cabecera de compra + líneas de detalle.
-     *
-     * @return array{compra: array, productos: array}|null
-     */
     public function porId(int $id): ?array
     {
         if ($id <= 0) {
@@ -142,11 +131,6 @@ class Compra
         ];
     }
 
-    /**
-     * Listado de compras de un usuario (sin detalle de productos).
-     *
-     * @return list<array>
-     */
     public function porUsuario(int $usuarioId): array
     {
         if ($usuarioId <= 0) {

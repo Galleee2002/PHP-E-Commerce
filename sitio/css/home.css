@@ -238,7 +238,7 @@
 
 .home-benefits {
     display: grid;
-    gap: 0;
+    gap: 16px;
     margin-top: 28px;
     margin-bottom: 18px;
 }
@@ -368,6 +368,13 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+}
+
+.home-faq__question-title {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    flex: 1;
 }
 
 .home-faq__question:hover {

@@ -88,6 +88,54 @@ class Producto
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
+    /**
+     *
+     * @param array{nombre?: string, precio?: string, descripcion_corta?: string, descripcion?: string, imagen?: string, categoria_id?: int} $valores
+     * @return array<string, string> Errores indexados por nombre de campo
+     */
+    public static function validarFormulario(array $valores): array
+    {
+        $errores = [];
+
+        $nombre = trim((string) ($valores['nombre'] ?? ''));
+        $precioRaw = trim((string) ($valores['precio'] ?? ''));
+        $descripcionCorta = trim((string) ($valores['descripcion_corta'] ?? ''));
+        $descripcion = trim((string) ($valores['descripcion'] ?? ''));
+        $imagen = trim((string) ($valores['imagen'] ?? ''));
+        $categoriaId = (int) ($valores['categoria_id'] ?? 0);
+
+        if ($nombre === '') {
+            $errores['nombre'] = 'El nombre es obligatorio.';
+        }
+
+        if ($categoriaId <= 0) {
+            $errores['categoria_id'] = 'Seleccioná una categoría.';
+        }
+
+        if ($precioRaw === '') {
+            $errores['precio'] = 'El precio es obligatorio.';
+        } else {
+            $precioNormalizado = str_replace(',', '.', $precioRaw);
+            if (!is_numeric($precioNormalizado) || (float) $precioNormalizado <= 0) {
+                $errores['precio'] = 'Ingresá un precio válido mayor a 0.';
+            }
+        }
+
+        if ($descripcionCorta === '') {
+            $errores['descripcion_corta'] = 'La descripción corta es obligatoria.';
+        }
+
+        if ($descripcion === '') {
+            $errores['descripcion'] = 'La descripción completa es obligatoria.';
+        }
+
+        if ($imagen === '') {
+            $errores['imagen'] = 'La ruta de la imagen es obligatoria.';
+        }
+
+        return $errores;
+    }
+
     public function crear(
         string $nombre,
         float $precio,

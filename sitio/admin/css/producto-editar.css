@@ -378,6 +378,17 @@ body.admin-editar {
   box-shadow: 0 0 0 3px rgba(107, 11, 11, 0.1);
 }
 
+.admin-editar__input--error,
+.admin-editar__select--error {
+  border-color: var(--edit-danger);
+}
+
+.admin-editar__input--error:focus,
+.admin-editar__select--error:focus {
+  border-color: var(--edit-danger);
+  box-shadow: 0 0 0 3px rgba(155, 28, 28, 0.12);
+}
+
 .admin-editar__textarea {
   min-height: 9rem;
   resize: vertical;
@@ -387,6 +398,14 @@ body.admin-editar {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+}
+
+.admin-editar__field-error {
+  margin: 0.35rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--edit-danger);
+  line-height: 1.4;
 }
 
 .admin-editar__hint {

@@ -50,11 +50,6 @@ class Usuario
         return $usuario === false ? null : $usuario;
     }
 
-    /**
-     * Listado de todos los usuarios (panel admin).
-     *
-     * @return list<self>
-     */
     public function todos(): array
     {
         $db = (new DBConexion)->getConexion();
