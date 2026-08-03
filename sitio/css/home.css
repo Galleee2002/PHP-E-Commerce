@@ -461,27 +461,38 @@
     }
 
     .home-benefits {
+        gap: 22px;
         margin-top: 38px;
         margin-bottom: 22px;
     }
 
     .home-benefits__grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
+        gap: 28px;
         border-bottom: none;
     }
 
     .home-benefit-card {
         grid-template-columns: 1fr;
         align-items: start;
-        padding: 6px 4px 0;
+        padding: 10px 8px 4px;
         border-top: none;
     }
 
     .home-benefit-card + .home-benefit-card {
         border-top: none;
         border-left: 1px solid var(--color-primary-dark-15);
-        padding-left: 24px;
+        padding-left: 32px;
+    }
+
+    .home-benefit-card__heading {
+        margin-top: 12px;
+        gap: 12px;
+    }
+
+    .home-benefit-card__text {
+        margin-top: 14px;
+        line-height: 1.7;
     }
 
     .home-benefit-card__icon {
@@ -603,16 +614,26 @@
     }
 
     .home-benefits {
+        gap: 26px;
         margin-top: 46px;
         margin-bottom: 28px;
     }
 
     .home-benefits__grid {
-        gap: 26px;
+        gap: 36px;
     }
 
     .home-benefit-card + .home-benefit-card {
-        padding-left: 28px;
+        padding-left: 40px;
+    }
+
+    .home-benefit-card__heading {
+        margin-top: 14px;
+    }
+
+    .home-benefit-card__text {
+        margin-top: 16px;
+        line-height: 1.75;
     }
 }
 
