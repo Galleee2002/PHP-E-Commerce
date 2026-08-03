@@ -56,35 +56,45 @@ $productoSeleccionado = (new Producto)->porId($idProducto);
                     <input type="hidden" name="accion" value="agregar-carrito">
                     <input type="hidden" name="producto_id" value="<?= (int) $productoSeleccionado->getId() ?>">
 
-                    <button class="btn btn--buy-now" type="submit">Añadir al carrito</button>
-
-                    <div class="qty-stepper" role="group" aria-label="Cantidad">
-                        <button
-                            class="qty-stepper__btn"
-                            type="button"
-                            data-qty-dec
-                            aria-label="Disminuir cantidad"
-                        >−</button>
-                        <label class="sr-only" for="cantidad">Cantidad</label>
-                        <input
-                            class="qty-stepper__value"
-                            type="number"
-                            id="cantidad"
-                            name="cantidad"
-                            value="1"
-                            min="1"
-                            max="99"
-                            readonly
-                            tabindex="-1"
-                            aria-live="polite"
-                        >
-                        <button
-                            class="qty-stepper__btn"
-                            type="button"
-                            data-qty-inc
-                            aria-label="Aumentar cantidad"
-                        >+</button>
+                    <div class="qty-field">
+                        <label class="qty-field__label" for="cantidad">Cantidad</label>
+                        <div class="qty-stepper" role="group" aria-label="Cantidad">
+                            <button
+                                class="qty-stepper__btn"
+                                type="button"
+                                data-qty-dec
+                                aria-label="Disminuir cantidad"
+                            >−</button>
+                            <input
+                                class="qty-stepper__value"
+                                type="number"
+                                id="cantidad"
+                                name="cantidad"
+                                value="1"
+                                min="1"
+                                max="99"
+                                readonly
+                                tabindex="-1"
+                                aria-live="polite"
+                            >
+                            <button
+                                class="qty-stepper__btn"
+                                type="button"
+                                data-qty-inc
+                                aria-label="Aumentar cantidad"
+                            >+</button>
+                        </div>
                     </div>
+
+                    <button class="btn btn--buy-now" type="submit">
+                        <svg class="btn__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                            <path d="M6 6 5 3H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="9" cy="20" r="1.5" fill="currentColor"/>
+                            <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
+                        </svg>
+                        Añadir al carrito
+                    </button>
                 </form>
             </div>
             <script>

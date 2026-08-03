@@ -75,7 +75,7 @@ body.admin-login {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 2.5rem 2.25rem;
   background-color: var(--admin-login-panel-dark);
   background-image:
@@ -98,7 +98,6 @@ body.admin-login {
   position: relative;
   z-index: 1;
   display: flex;
-  flex: 0 0 50%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
