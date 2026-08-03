@@ -17,7 +17,7 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260803-mobile4">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
     
 <body class="page">

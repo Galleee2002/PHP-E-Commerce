@@ -1,7 +1,7 @@
-@import url("base.css?v=20260803-mobile4");
-@import url("home.css?v=20260505-2");
-@import url("contacto.css?v=20260505-2");
-@import url("listado.css?v=20260505-2");
-@import url("detalle.css?v=20260721-2");
-@import url("cuenta.css?v=20260717-1");
-@import url("carrito.css?v=20260803-2");
+@import url("base.css");
+@import url("home.css");
+@import url("contacto.css");
+@import url("listado.css");
+@import url("detalle.css");
+@import url("cuenta.css");
+@import url("carrito.css");

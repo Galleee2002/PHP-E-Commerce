@@ -88,11 +88,6 @@ class Producto
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    /**
-     *
-     * @param array{nombre?: string, precio?: string, descripcion_corta?: string, descripcion?: string, imagen?: string, categoria_id?: int} $valores
-     * @return array<string, string> Errores indexados por nombre de campo
-     */
     public static function validarFormulario(array $valores): array
     {
         $errores = [];

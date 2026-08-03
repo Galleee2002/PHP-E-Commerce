@@ -107,7 +107,7 @@ $imagenPreview = $valoresEdicion['imagen'] !== ''
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/producto-editar.css?v=20260803-mobile4">
+    <link rel="stylesheet" href="css/producto-editar.css">
 </head>
 
 <body class="admin-editar">
