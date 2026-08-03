@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../clases/Producto.php';
 $producto = new Producto;
 $productos = $producto->todas();
 
-$usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
+$usuarioEmail = Usuario::emailEnSesion() ?? '';
 
 ?>
 <!DOCTYPE html>

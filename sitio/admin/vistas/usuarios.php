@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../clases/Usuario.php';
 $usuarioModel = new Usuario;
 $usuarios = $usuarioModel->todos();
 
-$usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
+$usuarioEmail = Usuario::emailEnSesion() ?? '';
 
 ?>
 <!DOCTYPE html>

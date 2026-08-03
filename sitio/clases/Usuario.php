@@ -7,9 +7,9 @@ class Usuario
     public const ROL_COMUN = 'comun';
     public const ROL_ADMIN = 'admin';
 
-    public const SESSION_KEY_ID = 'usuario_id';
-    public const SESSION_KEY_EMAIL = 'usuario_email';
-    public const SESSION_KEY_ROL = 'usuario_rol';
+    private const SESSION_KEY_ID = 'usuario_id';
+    private const SESSION_KEY_EMAIL = 'usuario_email';
+    private const SESSION_KEY_ROL = 'usuario_rol';
 
     private int $usuario_id = 0;
     private string $email = '';
@@ -143,6 +143,15 @@ class Usuario
         }
 
         return (int) $_SESSION[self::SESSION_KEY_ID];
+    }
+
+    public static function emailEnSesion(): ?string
+    {
+        if (!self::estaLogueado()) {
+            return null;
+        }
+
+        return (string) ($_SESSION[self::SESSION_KEY_EMAIL] ?? '');
     }
 
     public function getId(): int

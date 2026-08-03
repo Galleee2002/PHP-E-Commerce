@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 }
 
-$usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
+$usuarioEmail = Usuario::emailEnSesion() ?? '';
 $imagenPreview = $valoresEdicion['imagen'] !== ''
     ? '../' . $valoresEdicion['imagen']
     : '';

@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../../clases/Usuario.php';
 require_once __DIR__ . '/../../clases/Compra.php';
 
-$usuarioEmail = $_SESSION[Usuario::SESSION_KEY_EMAIL] ?? '';
+$usuarioEmail = Usuario::emailEnSesion() ?? '';
 
 $idUsuario = (int) ($_GET['id'] ?? 0);
 $usuario = null;
