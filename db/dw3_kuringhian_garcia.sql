@@ -34,7 +34,7 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`categoria_id`, `nombre`) VALUES
   (4, 'Cartas'),
-  (2, 'Cl??sico'),
+  (2, 'Clásico'),
   (1, 'Estrategia'),
   (5, 'Misterio'),
   (3, 'Rompecabezas');
@@ -57,12 +57,12 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `productos` (`producto_id`, `nombre`, `precio`, `descripcion_corta`, `descripcion`, `imagen`, `usuario_fk`, `fecha_alta`) VALUES
-  (1, 'T.E.G.', 46999.00, 'Plan t??ctico y conquista de territorios para jugar en grupo.', 'Juego de estrategia por turnos donde cada jugador busca dominar el mapa con decisiones de ataque y defensa.', 'imgs/teg.webp', 1, '2026-06-06 18:43:38'),
-  (2, 'Monopoly', 39999.00, 'Compra, venta y negociaci??n de propiedades para toda la familia.', 'Juego cl??sico donde el objetivo es administrar dinero, comprar calles y dejar sin fondos a los rivales.', 'imgs/monopoly.webp', 1, '2026-06-06 18:43:38'),
-  (3, 'Rompecabezas Starry Sky', 21999.00, 'Puzzle de 1000 piezas para disfrutar solo o en familia.', 'Rompecabezas inspirado en una obra cl??sica, ideal para practicar paciencia y concentraci??n.', 'imgs/rompecabezas.webp', 1, '2026-06-06 18:43:38'),
-  (4, 'No Lo Testeamos Ni Un Poco', 27999.00, 'Juego de cartas ca??tico y r??pido para reuniones con amigos.', 'Partidas din??micas con cartas impredecibles, ideal para grupos que buscan humor y diversi??n.', 'imgs/no_lo_testeamos_ni_un_poco.webp', 1, '2026-06-06 18:43:38'),
-  (5, 'Burako', 25999.00, 'Versi??n de buraco para 2 o m??s jugadores.', 'Juego de combinaciones y estrategia liviana donde gana quien administra mejor sus cartas.', 'imgs/burako.webp', 1, '2026-06-06 18:43:38'),
-  (6, 'Clue', 32999.00, 'Descubr?? al culpable, el arma y el lugar antes que los dem??s.', 'Juego de deducci??n y misterio donde ten??s que reunir pistas y razonar para resolver el crimen.', 'imgs/clue.webp', 1, '2026-06-06 18:43:38');
+  (1, 'T.E.G.', 46999.00, 'Plan táctico y conquista de territorios para jugar en grupo.', 'Juego de estrategia por turnos donde cada jugador busca dominar el mapa con decisiones de ataque, defensa y alianzas. Vas a repartir ejércitos, planificar movimientos y pelear por objetivos secretos mientras el tablero cambia de dueño a cada ronda. Ideal para noches largas con amigos: exige pensar con anticipación, negociar y adaptarse cuando el plan se complica.', 'imgs/teg.webp', 1, '2026-06-06 18:43:38'),
+  (2, 'Monopoly', 39999.00, 'Compra, venta y negociación de propiedades para toda la familia.', 'El clásico de compra y venta de propiedades donde administrás dinero, cerrás tratos y construís tu imperio inmobiliario. Cada vuelta por el tablero puede dejarte más cerca de la victoria o al borde de la quiebra, según cómo negocies y dónde caigas. Perfecto para jugar en familia o con amigos: combina suerte, estrategia liviana y mucha tensión en cada subasta.', 'imgs/monopoly.webp', 1, '2026-06-06 18:43:38'),
+  (3, 'Rompecabezas Starry Sky', 21999.00, 'Puzzle de 1000 piezas para disfrutar solo o en familia.', 'Rompecabezas de 1000 piezas inspirado en un cielo estrellado, pensado para armar con calma y disfrutar del proceso. Las formas y tonos te invitan a concentrarte, ordenar por colores y ver cómo la imagen toma forma poco a poco. Ideal para una tarde tranquila solo o en compañía: un plan relajado, sin apuro, que termina en una pieza lista para mostrar.', 'imgs/rompecabezas.webp', 1, '2026-06-06 18:43:38'),
+  (4, 'No Lo Testeamos Ni Un Poco', 27999.00, 'Juego de cartas caótico y rápido para reuniones con amigos.', 'Partidas cortas, reglas absurdas y cartas que dan vuelta la mesa en segundos. Cada ronda suma humor, decisiones rápidas y situaciones imposibles de anticipar, perfectas para grupos que buscan reírse sin pensarlo demasiado. Llevalo a juntadas, afters o noches improvisadas: se explica al toque y mantiene a todos enganchados hasta la última carta.', 'imgs/no_lo_testeamos_ni_un_poco.webp', 1, '2026-06-06 18:43:38'),
+  (5, 'Burako', 25999.00, 'Versión de buraco para 2 o más jugadores.', 'Juego de combinaciones y estrategia liviana basado en el buraco, donde gana quien administra mejor su mano y arma series o tríos a tiempo. Tenés que decidir cuándo arriesgar, cuándo retener fichas y cómo aprovechar lo que dejan los demás sobre la mesa. Buena opción para partidas de ritmo constante, fáciles de seguir y con espacio para mejorar a medida que jugás más.', 'imgs/burako.webp', 1, '2026-06-06 18:43:38'),
+  (6, 'Clue', 32999.00, 'Descubrí al culpable, el arma y el lugar antes que los demás.', 'Juego de deducción y misterio en el que tenés que descubrir quién cometió el crimen, con qué arma y en qué habitación. Vas moviéndote por la mansión, haciendo preguntas y tachando sospechosos hasta armar la hipótesis correcta. Ideal si te gusta pensar, observar detalles y competir contra el reloj (y contra el resto) para ser el primero en resolver el caso.', 'imgs/clue.webp', 1, '2026-06-06 18:43:38');
 
 DROP TABLE IF EXISTS `productos_tienen_categorias`;
 

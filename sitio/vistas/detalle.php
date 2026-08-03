@@ -42,27 +42,87 @@ $productoSeleccionado = (new Producto)->porId($idProducto);
 
             <section class="detail-article__section detail-article__section--description">
                 <h2 class="detail-article__section-title">Descripción</h2>
+                <p class="detail-article__text detail-article__text--lead"><?= htmlspecialchars($productoSeleccionado->getDescripcionCorta(), ENT_QUOTES, 'UTF-8') ?></p>
                 <p class="detail-article__text"><?= htmlspecialchars($productoSeleccionado->getDescripcion(), ENT_QUOTES, 'UTF-8') ?></p>
             </section>
 
             <div class="detail-actions">
-                <form class="detail-actions__form" method="post" action="index.php?seccion=detalle&amp;id=<?= (int) $productoSeleccionado->getId() ?>">
+                <form
+                    class="detail-actions__form"
+                    method="post"
+                    action="index.php?seccion=detalle&amp;id=<?= (int) $productoSeleccionado->getId() ?>"
+                    data-qty-form
+                >
                     <input type="hidden" name="accion" value="agregar-carrito">
                     <input type="hidden" name="producto_id" value="<?= (int) $productoSeleccionado->getId() ?>">
 
                     <button class="btn btn--buy-now" type="submit">Añadir al carrito</button>
 
-                    <label class="sr-only" for="cantidad">Cantidad</label>
-                    <input
-                        class="qty-stepper__value"
-                        type="number"
-                        id="cantidad"
-                        name="cantidad"
-                        value="1"
-                        min="1"
-                    >
+                    <div class="qty-stepper" role="group" aria-label="Cantidad">
+                        <button
+                            class="qty-stepper__btn"
+                            type="button"
+                            data-qty-dec
+                            aria-label="Disminuir cantidad"
+                        >−</button>
+                        <label class="sr-only" for="cantidad">Cantidad</label>
+                        <input
+                            class="qty-stepper__value"
+                            type="number"
+                            id="cantidad"
+                            name="cantidad"
+                            value="1"
+                            min="1"
+                            max="99"
+                            readonly
+                            tabindex="-1"
+                            aria-live="polite"
+                        >
+                        <button
+                            class="qty-stepper__btn"
+                            type="button"
+                            data-qty-inc
+                            aria-label="Aumentar cantidad"
+                        >+</button>
+                    </div>
                 </form>
             </div>
+            <script>
+                (function () {
+                    const form = document.querySelector('[data-qty-form]');
+                    if (!form) {
+                        return;
+                    }
+
+                    const input = form.querySelector('.qty-stepper__value');
+                    const btnDec = form.querySelector('[data-qty-dec]');
+                    const btnInc = form.querySelector('[data-qty-inc]');
+                    const min = 1;
+                    const max = 99;
+
+                    function getCantidad() {
+                        const n = parseInt(input.value, 10);
+                        return Number.isFinite(n) && n >= min ? n : min;
+                    }
+
+                    function setCantidad(n) {
+                        const cantidad = Math.min(max, Math.max(min, n));
+                        input.value = String(cantidad);
+                        btnDec.disabled = cantidad <= min;
+                        btnInc.disabled = cantidad >= max;
+                    }
+
+                    btnDec.addEventListener('click', function () {
+                        setCantidad(getCantidad() - 1);
+                    });
+
+                    btnInc.addEventListener('click', function () {
+                        setCantidad(getCantidad() + 1);
+                    });
+
+                    setCantidad(getCantidad());
+                })();
+            </script>
         </div>
     </article>
 </section>

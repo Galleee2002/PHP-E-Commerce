@@ -213,9 +213,10 @@
 }
 
 .detail-article__text--lead {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-size: 1.0625em;
     font-weight: 500;
+    line-height: 1.55;
     color: var(--color-soft-black);
 }
 

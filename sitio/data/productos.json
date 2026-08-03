@@ -5,7 +5,7 @@
     "precio": 46999,
     "categoria": "Estrategia",
     "descripcion_corta": "Plan táctico y conquista de territorios para jugar en grupo.",
-    "descripcion": "Juego de estrategia por turnos donde cada jugador busca dominar el mapa con decisiones de ataque y defensa.",
+    "descripcion": "Juego de estrategia por turnos donde cada jugador busca dominar el mapa con decisiones de ataque, defensa y alianzas. Vas a repartir ejércitos, planificar movimientos y pelear por objetivos secretos mientras el tablero cambia de dueño a cada ronda. Ideal para noches largas con amigos: exige pensar con anticipación, negociar y adaptarse cuando el plan se complica.",
     "imagen": "imgs/teg.webp"
   },
   {
@@ -14,7 +14,7 @@
     "precio": 39999,
     "categoria": "Clásico",
     "descripcion_corta": "Compra, venta y negociación de propiedades para toda la familia.",
-    "descripcion": "Juego clásico donde el objetivo es administrar dinero, comprar calles y dejar sin fondos a los rivales.",
+    "descripcion": "El clásico de compra y venta de propiedades donde administrás dinero, cerrás tratos y construís tu imperio inmobiliario. Cada vuelta por el tablero puede dejarte más cerca de la victoria o al borde de la quiebra, según cómo negocies y dónde caigas. Perfecto para jugar en familia o con amigos: combina suerte, estrategia liviana y mucha tensión en cada subasta.",
     "imagen": "imgs/monopoly.webp"
   },
   {
@@ -23,7 +23,7 @@
     "precio": 21999,
     "categoria": "Rompecabezas",
     "descripcion_corta": "Puzzle de 1000 piezas para disfrutar solo o en familia.",
-    "descripcion": "Rompecabezas inspirado en una obra clásica, ideal para practicar paciencia y concentración.",
+    "descripcion": "Rompecabezas de 1000 piezas inspirado en un cielo estrellado, pensado para armar con calma y disfrutar del proceso. Las formas y tonos te invitan a concentrarte, ordenar por colores y ver cómo la imagen toma forma poco a poco. Ideal para una tarde tranquila solo o en compañía: un plan relajado, sin apuro, que termina en una pieza lista para mostrar.",
     "imagen": "imgs/rompecabezas.webp"
   },
   {
@@ -32,7 +32,7 @@
     "precio": 27999,
     "categoria": "Cartas",
     "descripcion_corta": "Juego de cartas caótico y rápido para reuniones con amigos.",
-    "descripcion": "Partidas dinámicas con cartas impredecibles, ideal para grupos que buscan humor y diversión.",
+    "descripcion": "Partidas cortas, reglas absurdas y cartas que dan vuelta la mesa en segundos. Cada ronda suma humor, decisiones rápidas y situaciones imposibles de anticipar, perfectas para grupos que buscan reírse sin pensarlo demasiado. Llevalo a juntadas, afters o noches improvisadas: se explica al toque y mantiene a todos enganchados hasta la última carta.",
     "imagen": "imgs/no_lo_testeamos_ni_un_poco.webp"
   },
   {
@@ -41,7 +41,7 @@
     "precio": 25999,
     "categoria": "Cartas",
     "descripcion_corta": "Versión de buraco para 2 o más jugadores.",
-    "descripcion": "Juego de combinaciones y estrategia liviana donde gana quien administra mejor sus cartas.",
+    "descripcion": "Juego de combinaciones y estrategia liviana basado en el buraco, donde gana quien administra mejor su mano y arma series o tríos a tiempo. Tenés que decidir cuándo arriesgar, cuándo retener fichas y cómo aprovechar lo que dejan los demás sobre la mesa. Buena opción para partidas de ritmo constante, fáciles de seguir y con espacio para mejorar a medida que jugás más.",
     "imagen": "imgs/burako.webp"
   },
   {
@@ -50,7 +50,7 @@
     "precio": 32999,
     "categoria": "Misterio",
     "descripcion_corta": "Descubrí al culpable, el arma y el lugar antes que los demás.",
-    "descripcion": "Juego de deducción y misterio donde tenés que reunir pistas y razonar para resolver el crimen.",
+    "descripcion": "Juego de deducción y misterio en el que tenés que descubrir quién cometió el crimen, con qué arma y en qué habitación. Vas moviéndote por la mansión, haciendo preguntas y tachando sospechosos hasta armar la hipótesis correcta. Ideal si te gusta pensar, observar detalles y competir contra el reloj (y contra el resto) para ser el primero en resolver el caso.",
     "imagen": "imgs/clue.webp"
   }
 ]

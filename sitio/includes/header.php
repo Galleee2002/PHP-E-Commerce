@@ -41,16 +41,21 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
             </ul>
 
             <div class="site-nav__actions">
-                <?php if ($estaLogueado): ?>
-                    <details class="account-menu">
-                        <summary class="icon-link account-menu__toggle" aria-label="Menú de cuenta">
-                            <img class="icon-link__img" src="imgs/usuario.png" alt="">
-                        </summary>
-                        <div class="account-menu__panel">
+                <details class="account-menu">
+                    <summary class="icon-link account-menu__toggle" aria-label="Menú de cuenta">
+                        <img class="icon-link__img" src="imgs/usuario.png" alt="">
+                    </summary>
+                    <div class="account-menu__panel">
+                        <?php if ($estaLogueado): ?>
                             <a class="account-menu__link<?= $seccionActual === 'perfil' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=perfil">Mi perfil</a>
                             <a class="account-menu__link" href="index.php?seccion=salir">Cerrar sesión</a>
-                        </div>
-                    </details>
+                        <?php else: ?>
+                            <a class="account-menu__link<?= $seccionActual === 'registro' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=registro">Crear cuenta</a>
+                            <a class="account-menu__link<?= $seccionActual === 'iniciar-sesion' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=iniciar-sesion">Iniciar sesión</a>
+                        <?php endif; ?>
+                    </div>
+                </details>
+                <?php if ($estaLogueado): ?>
                     <?php
                     $ariaCarrito = $cantidadCarrito > 0
                         ? 'Ver carrito de compras (' . $cantidadCarrito . ' productos)'
@@ -62,9 +67,6 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
                             <span class="cart-badge" aria-hidden="true"><?= (int) $cantidadCarrito ?></span>
                         <?php endif; ?>
                     </a>
-                <?php else: ?>
-                    <a class="auth-text-link<?= $seccionActual === 'registro' ? ' auth-text-link--current' : '' ?>" href="index.php?seccion=registro">Registro</a>
-                    <a class="auth-text-link<?= $seccionActual === 'iniciar-sesion' ? ' auth-text-link--current' : '' ?>" href="index.php?seccion=iniciar-sesion">Iniciar sesión</a>
                 <?php endif; ?>
                 <?php if ($esAdmin): ?>
                     <a class="admin-link" href="admin/index.php?seccion=productos" aria-label="Ir al panel de administración">
