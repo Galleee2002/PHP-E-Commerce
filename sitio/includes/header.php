@@ -17,7 +17,7 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css?v=20260725-fase6">
+    <link rel="stylesheet" href="css/estilos.css?v=20260803-logout">
 </head>
     
 <body class="page">
@@ -48,7 +48,7 @@ $cantidadCarrito = (class_exists('Carrito') && isset($carrito) && $carrito insta
                     <div class="account-menu__panel">
                         <?php if ($estaLogueado): ?>
                             <a class="account-menu__link<?= $seccionActual === 'perfil' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=perfil">Mi perfil</a>
-                            <a class="account-menu__link" href="index.php?seccion=salir">Cerrar sesión</a>
+                            <a class="account-menu__link js-confirm-logout" href="index.php?seccion=salir">Cerrar sesión</a>
                         <?php else: ?>
                             <a class="account-menu__link<?= $seccionActual === 'registro' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=registro">Crear cuenta</a>
                             <a class="account-menu__link<?= $seccionActual === 'iniciar-sesion' ? ' account-menu__link--current' : '' ?>" href="index.php?seccion=iniciar-sesion">Iniciar sesión</a>

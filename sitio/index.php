@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (
         $accionCarrito === 'agregar-carrito'
         || $accionCarrito === 'quitar-carrito'
+        || $accionCarrito === 'actualizar-cantidad'
         || $accionCarrito === 'completar-compra'
     ) {
         if (!Usuario::estaLogueado()) {
@@ -80,6 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($accionCarrito === 'quitar-carrito') {
         $productoId = (int) ($_POST['producto_id'] ?? 0);
         $carrito->quitar($productoId);
+        header('Location: index.php?seccion=carrito');
+        exit;
+    }
+
+    if ($accionCarrito === 'actualizar-cantidad') {
+        $productoId = (int) ($_POST['producto_id'] ?? 0);
+        $cantidad = (int) ($_POST['cantidad'] ?? 1);
+        $carrito->actualizarCantidad($productoId, $cantidad);
         header('Location: index.php?seccion=carrito');
         exit;
     }

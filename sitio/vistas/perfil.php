@@ -22,7 +22,7 @@ $nombreCompleto = trim($usuarioPerfil->getNombre() . ' ' . $usuarioPerfil->getAp
         </dl>
 
         <div class="cuenta-form__actions">
-            <a class="cuenta-btn cuenta-btn--secondary" href="index.php?seccion=salir">Cerrar sesión</a>
+            <a class="cuenta-btn cuenta-btn--secondary js-confirm-logout" href="index.php?seccion=salir">Cerrar sesión</a>
         </div>
     </div>
 </section>

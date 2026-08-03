@@ -33,15 +33,37 @@ class Carrito
 
         if (isset($_SESSION[self::SESSION_KEY][$productoId])) {
             $_SESSION[self::SESSION_KEY][$productoId]['cantidad'] += $cantidad;
+            $_SESSION[self::SESSION_KEY][$productoId]['imagen'] = $producto->getImagen();
         } else {
             $_SESSION[self::SESSION_KEY][$productoId] = [
                 'cantidad' => $cantidad,
                 'nombre' => $producto->getNombre(),
                 'precio' => $producto->getPrecio(),
+                'imagen' => $producto->getImagen(),
             ];
         }
 
         return true;
+    }
+
+    public function actualizarCantidad(int $productoId, int $cantidad): void
+    {
+        $this->asegurarSesion();
+
+        if (!isset($_SESSION[self::SESSION_KEY][$productoId])) {
+            return;
+        }
+
+        if ($cantidad < 1) {
+            $this->quitar($productoId);
+            return;
+        }
+
+        if ($cantidad > 99) {
+            $cantidad = 99;
+        }
+
+        $_SESSION[self::SESSION_KEY][$productoId]['cantidad'] = $cantidad;
     }
 
     public function quitar(int $productoId): void
